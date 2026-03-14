@@ -20,12 +20,7 @@
 </head>
 <body>
 
-  <!-- ============================================================
-       UI LAYER — Fixed
-  ============================================================ -->
-  <!-- Header et nav sont des enfants directs du body (hors de tout stacking context)
-       pour que mix-blend-mode: difference blende contre le contenu réel de la page.
-       Le curseur utilise déjà ce principe et fonctionne parfaitement. -->
+ 
   <div class="ui-header">
       <div class="ui-header-name">
         <a href="#" id="scrollToTop" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
@@ -37,7 +32,6 @@
       </div>
     </div>
 
-    <!-- LEFT NAV — no background, floats from top -->
     <nav class="ui-nav" aria-label="Main navigation">
       <ul class="nav-list">
 
@@ -76,19 +70,13 @@
       </ul>
     </nav>
 
-  <!-- Cursor — outside ui-layer so mix-blend-mode: difference works
-       against the actual page content, not the ui-layer stacking context -->
   <div class="cursor" id="cursor">
     <div class="cursor-dot" id="cursorDot"></div>
   </div>
 
 
-  <!-- ============================================================
-       CONTENT LAYER — Scrollable
-  ============================================================ -->
   <main class="content-layer">
 
-    <!-- ─── HERO ──────────────────────────────────────────────── -->
     <section class="section" id="hero">
 
       <div class="hero-intro">
@@ -99,7 +87,6 @@ they remember.</p>
         <span class="hero-scroll-cta">[SCROLL TO EXPLORE]</span>
       </div>
 
-      <!-- Thumbnails — bottom right -->
       <div class="hero-thumbnails">
         <figure class="hero-thumb clip-mask">
           <img src="stingerss-bg.png" alt="Stingers" loading="lazy" />
@@ -111,7 +98,6 @@ they remember.</p>
         </figure>
       </div>
 
-      <!-- 3D Logo — centre du hero -->
       <div class="hero-logo" aria-hidden="true">
         <video autoplay loop muted playsinline>
           <source src="videos/0001-0250.webm" type="video/webm" />
@@ -122,7 +108,6 @@ they remember.</p>
     </section><!-- /hero -->
 
 
-    <!-- ─── INFO ──────────────────────────────────────────────── -->
     <section class="section" id="info">
 
       <div class="about-sticky-wrap">
@@ -175,8 +160,6 @@ they remember.</p>
       </div><!-- /info-content -->
     </section><!-- /info -->
 
-
-    <!-- ─── WORK ──────────────────────────────────────────────── -->
     <section class="section" id="work">
       <div class="work-header">
         <h2 class="section-eyebrow">02 — Selected Work</h2>
@@ -185,7 +168,6 @@ they remember.</p>
 
       <div class="projects-stack">
 
-        <!-- ─── STINGERSS — Premium hover card ──────────────────── -->
         <article class="project-card project-card--stingerss" id="proj-stingerss" data-color="#1a0a0f">
           <div class="project-card-inner">
 
@@ -208,7 +190,6 @@ they remember.</p>
           </div>
         </article>
 
-        <!-- ─── CUTSINNIT — Premium hover card ──────────────────── -->
         <article class="project-card project-card--cutsinnit" id="proj-cutsinnit" data-color="#0f0c07">
           <div class="project-card-inner">
 
@@ -233,7 +214,6 @@ they remember.</p>
     </section><!-- /work -->
 
 
-    <!-- ─── ARCHIVE ───────────────────────────────────────────── -->
     <section class="section" id="archive">
       <div class="archive-header">
         <h2 class="section-eyebrow">03 — Archive</h2>
@@ -242,7 +222,6 @@ they remember.</p>
     </section><!-- /archive -->
 
 
-    <!-- ─── CONTACT ───────────────────────────────────────────── -->
     <section class="section" id="contact">
       <div class="contact-inner">
 
@@ -278,7 +257,6 @@ they remember.</p>
   </main>
 
 
-  <!-- Intro loader -->
   <div class="loader" id="loader">
     <div class="loader-inner">
       <span class="loader-name">Antonin Le Cleï</span>
@@ -289,7 +267,6 @@ they remember.</p>
     </div>
   </div>
 
-  <!-- Portal overlay — Fixed full-viewport, animates clip-path on hero scroll -->
   <div id="hero-portal" aria-hidden="true">
     <div class="portal-about-wrap">
       <span id="portal-about">About</span>
