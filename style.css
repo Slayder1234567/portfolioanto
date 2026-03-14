@@ -1,0 +1,1152 @@
+/* ================================================================
+   ANTONIN LE CLEÏ — style.css v3
+   Δ Changes from v2:
+   · ui-name → font-weight: 400 (no bold)
+   · ui-header → gap: 6rem (more breathing room)
+   · hero-intro → left: calc(--edge - --nav-w) — aligns with nav
+   · #hero → overflow: visible (allows negative-left child)
+   · #about-transition → full-viewport sticky reveal panel
+   · Cursor styles: dot only (GSAP handles morphing)
+================================================================ */
+
+/* ────────────────────────────────────────────────────────────────
+   0. CUSTOM FONTS
+──────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Canela-ThinItalic-Trial';
+  src: url('Canela-ThinItalic-Trial.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Danymeka';
+  src: url('Danymeka-DEMO.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Danymeka';
+  src: url('Danymeka-Italic-DEMO.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   1. RESET
+──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: auto; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: 100%; object-fit: cover; }
+a   { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+/* ────────────────────────────────────────────────────────────────
+   2. DESIGN TOKENS
+──────────────────────────────────────────────────────────────── */
+:root {
+  --bg:          #0a0a0a;
+  --bg-white:    #f5f2ee;   /* Warm white for the reveal band */
+  --text:        #e8e8e8;
+  --text-muted:  #888888;
+  --text-dim:    #2a2a2a;
+  --accent:      #7c5cff;
+  --white:       #ffffff;
+  --border:      rgba(255, 255, 255, 0.07);
+
+  --font-mono:   'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+  --font-serif:  'Playfair Display', Georgia, serif;
+
+  --edge:        40px;      /* Symmetric: nav-left = header-right = 40px */
+  --nav-w:       140px;     /* Nav column width */
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:    0.22s;
+  --dur-med:     0.5s;
+  --dur-slow:    1s;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   3. SCROLLBAR
+──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* ────────────────────────────────────────────────────────────────
+   4. UI LAYER — Fixed elements (direct body children — no stacking context)
+──────────────────────────────────────────────────────────────── */
+
+/* ─ TOP-RIGHT HEADER ────────────────────────────────────────── */
+.ui-header {
+  position: fixed;
+  top: var(--edge);
+  right: var(--edge);
+  display: flex;
+  align-items: flex-start;
+  gap: 6rem;
+  pointer-events: auto;
+  mix-blend-mode: difference;
+  z-index: 9999;
+}
+
+.ui-header-name {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: right;
+}
+
+.ui-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: none;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.1em;
+}
+
+.ui-role {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #888888;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ui-header-time {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.ui-time,
+.ui-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─ LEFT NAV ─────────────────────────────────────────────────── */
+.ui-nav {
+  position: fixed;
+  top: var(--edge);
+  left: var(--edge);
+  width: var(--nav-w);
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  mix-blend-mode: difference;
+  z-index: 9999;
+}
+
+.nav-list { display: flex; flex-direction: column; gap: 0; }
+.nav-item { position: relative; }
+
+.nav-link {
+  display: inline-flex;      /* shrinks to text width — fill can't overflow */
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  transition: color var(--dur-fast);
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;          /* clips fill to text bounds */
+}
+
+/* Number — smaller font, top-aligned = superscript appearance */
+.nav-number {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-top: 1px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.nav-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.16em; /* replaces letter-spacing */
+}
+
+/* ── Staggered letter hover ─────────────────────────────── */
+.nav-char {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.nav-char-top {
+  display: block;
+  line-height: 1;
+  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-char-bot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  line-height: 1;
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-link:hover .nav-char-top,
+.ui-name:hover .nav-char-top { transform: translateY(-110%); }
+
+.nav-link:hover .nav-char-bot,
+.ui-name:hover .nav-char-bot { transform: translateY(0%); }
+
+.nav-char-space {
+  display: inline-block;
+  width: 0.45em; /* word space */
+}
+
+.nav-link:hover .nav-number,
+.nav-item.active .nav-number { color: #ffffff; }
+
+.nav-link:hover .nav-label,
+.nav-item.active .nav-label  { color: #ffffff; }
+
+/* Section progress — highlight tag behind text */
+.nav-number,
+.nav-label {
+  position: relative;
+  z-index: 1; /* always above the fill */
+}
+
+/* The bar IS the nav-link background — fills left→right */
+.nav-progress-bar {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.nav-item.active .nav-progress-bar { opacity: 1; }
+
+.nav-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.08s ease-out; /* smooth at fast scroll */
+}
+
+/* ────────────────────────────────────────────────────────────────
+   5. CURSOR — GSAP animates between dot and vertical bar
+──────────────────────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+/*
+  Default state: 7×7px circle
+  Text hover:    2×22px bar (borderRadius → 1px)
+  Link hover:    10×10px circle
+  GSAP animates all transitions
+*/
+.cursor-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--white);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: width, height, border-radius;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   6. CONTENT LAYER
+──────────────────────────────────────────────────────────────── */
+.content-layer {
+  margin-left: var(--nav-w);
+  /* No overflow hidden — allows hero-intro negative offset to show */
+}
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  padding: 100px var(--edge);
+}
+
+.section-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   7. HERO
+──────────────────────────────────────────────────────────────── */
+#hero {
+  overflow: visible;
+  padding: 0;
+  perspective: 1200px;
+  background: #ffffff;
+}
+
+/* Extend white background to cover the nav column (0–140px) */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: calc(-1 * var(--nav-w));
+  right: 0;
+  background: #ffffff;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* 3D Logo centré — flotte sur le blanc du hero */
+.hero-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(500px, 70vw, 1000px);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: multiply; /* blend sur le blanc du hero = fond vidéo disparaît */
+}
+
+.hero-logo video {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+/* Ghost headline */
+.hero-title {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: clamp(72px, 14vw, 200px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.06); /* Dark stroke for light bg */
+  white-space: nowrap;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-title-line { display: block; }
+.hero-title-line--italic { font-style: italic; font-weight: 400; text-align: right; }
+
+/*
+  Δ HERO INTRO ALIGNMENT
+  calc(--edge - --nav-w) = calc(40px - 140px) = -100px
+  → Within content-layer (which starts at 140px from viewport),
+    the text sits at: 140px + (−100px) = 40px from viewport.
+  → This is the same x-position as the nav's left edge.
+*/
+.hero-intro {
+  position: absolute;
+  bottom: var(--edge);
+  left: calc(var(--edge) - var(--nav-w));   /* Δ Aligns with nav left edge */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 380px;
+}
+
+.hero-intro-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #1a1a1a; /* Dark text on light bg */
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* [SCROLL TO EXPLORE] — brackets included in HTML, left-aligned */
+.hero-scroll-cta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.4); /* Muted dark on light bg */
+  align-self: flex-start;
+}
+
+/* Thumbnails */
+.hero-thumbnails {
+  position: absolute;
+  bottom: var(--edge);
+  right: var(--edge);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-thumb {
+  width: 120px;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+}
+
+.hero-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.hero-thumb:hover img { transform: scale(1.07); }
+
+.hero-thumb:nth-child(2) img {
+  object-fit: contain;
+  background: #0f0c07;
+}
+
+.hero-thumb figcaption {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--white);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   8. INFO / ABOUT — Dark section, portal reveal
+──────────────────────────────────────────────────────────────── */
+#info {
+  position: relative;
+  min-height: 200vh;
+  padding: 0;
+  background: #121212;
+}
+
+.about-sticky-wrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.info-content {
+  position: relative;
+  z-index: 10;
+  padding: 80px var(--edge) 100px;
+}
+
+#about-bg {
+  font-family: var(--font-serif);
+  font-size: clamp(100px, 18vw, 280px);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  color: #b2a4d4;
+  opacity: 1;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: opacity;
+  transform: translateX(-4vw);
+}
+
+.about-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding: 100px var(--edge);
+  align-items: start;
+}
+
+.about-images { position: relative; height: 780px; }
+
+.about-img {
+  position: absolute;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.about-img--1 { width:270px; height:370px; top:180px; left:80px; z-index:3; }
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.about-img:hover img { transform: scale(1.04); }
+.about-img--1:hover img { transform: none; cursor: default; }
+
+.about-text-block { padding-top: 40px; }
+
+.about-bio {
+  font-family: 'Canela-ThinItalic-Trial', serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 48px;
+  opacity: 0;
+}
+
+.services-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+
+.service-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--dur-fast);
+}
+
+.service-item:hover { border-color: rgba(124, 92, 255, 0.3); }
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  padding-top: 3px;
+  flex-shrink: 0;
+  min-width: 20px;
+}
+
+.service-title {
+  font-family: 'Canela-ThinItalic-Trial', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.service-desc {
+  font-family: 'Canela-ThinItalic-Trial', serif;
+  font-size: 20px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  opacity: 0;
+}
+
+.about-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   10. WORK
+──────────────────────────────────────────────────────────────── */
+#work { padding-top: 100px; min-height: 100vh; }
+
+.work-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.work-count { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+
+.projects-stack { position: relative; display: flex; flex-direction: column; gap: 160px; }
+
+.project-card { position: relative; width: 100%; overflow: hidden; }
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+
+.project-card-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+  z-index: 1;
+}
+
+.project-info {
+  position: relative;
+  z-index: 2;
+  padding: 36px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.project-tag {
+  position: absolute;
+  top: 28px;
+  left: 36px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.project-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5.5vw, 76px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.project-year { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 10px 20px;
+  border-radius: 100px;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+  flex-shrink: 0;
+}
+
+.project-link svg { width: 14px; height: 14px; transition: transform var(--dur-fast) var(--ease-out); }
+.project-link:hover { background: var(--accent); border-color: var(--accent); }
+.project-link:hover svg { transform: translate(3px, -3px); }
+.project-card + .project-card { margin-top: 2px; }
+
+/* ────────────────────────────────────────────────────────────────
+   10b. STINGERSS — Premium hover card
+──────────────────────────────────────────────────────────────── */
+
+/* Override inner height for the Stingerss card */
+.project-card--stingerss .project-card-inner {
+  height: 60vh;
+  background: #0d0408;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* Background image — blurred, darkened, fills card, zooms on hover */
+.project-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.project-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px) brightness(0.55);
+  transform-origin: center;
+}
+
+/* Video wrapper — centered, smaller than card, hidden by default */
+.project-video-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 65%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate(-50%, -45%) scale(0.95);
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.project-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Logo overlay — centered on video, fades out on hover */
+.stingerss-logo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 4, 8, 0.6);
+  z-index: 1;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stingerss-logo-overlay img {
+  width: 45%;
+  height: auto;
+  object-fit: contain;
+}
+
+.project-card--stingerss:hover .stingerss-logo-overlay {
+  opacity: 0;
+}
+
+/* Hover — bg zooms, video rises into view */
+.project-card--stingerss:hover .project-bg {
+  transform: scale(1.08);
+}
+
+.project-card--stingerss:hover .project-video-wrapper {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Stingerss info layout — title top-left, tag bottom-right */
+.project-info--stingerss {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 24px 28px;
+}
+
+.stingerss-title {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.stingerss-tag {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* ─── CUTSINNIT card ──────────────────────────────────────────── */
+.project-card--cutsinnit .project-card-inner {
+  position: relative;
+  height: 60vh;
+  background: #0f0c07;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Fond toujours visible — pas de blur */
+.project-card--cutsinnit .project-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card--cutsinnit .project-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px) brightness(0.55);
+  transition: filter 0.5s ease;
+}
+
+/* Vidéo par-dessus, cachée par défaut */
+.project-card--cutsinnit .project-video-wrapper {
+  z-index: 10;
+}
+
+/* Hover — fond zoome + s'assombrit, vidéo apparaît */
+.project-card--cutsinnit:hover .project-bg {
+  transform: scale(1.08);
+}
+
+.project-card--cutsinnit:hover .project-bg img {
+  filter: blur(3px) brightness(0.5);
+}
+
+.project-card--cutsinnit:hover .project-video-wrapper {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* CutsInnit info layout — title + tag bottom-right */
+.project-info--cutsinnit {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 24px 28px;
+}
+
+.cutsinnit-title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.cutsinnit-tag {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   11. ARCHIVE
+──────────────────────────────────────────────────────────────── */
+#archive { padding-top: 100px; min-height: 60vh; }
+.archive-header { margin-bottom: 48px; }
+
+.archive-subtitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  opacity: 0;
+}
+
+.archive-table { width: 100%; border-collapse: collapse; }
+.archive-table thead tr { border-bottom: 1px solid var(--border); }
+
+.archive-table th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 0;
+  padding-right: 40px;
+}
+
+.archive-row { border-bottom: 1px solid var(--border); transition: background var(--dur-fast); }
+.archive-row:hover { background: rgba(255,255,255,0.015); }
+
+.archive-row td {
+  font-family: var(--font-mono);
+  padding: 18px 0;
+  padding-right: 40px;
+  font-size: 12px;
+  color: var(--text);
+  vertical-align: middle;
+  transition: color var(--dur-fast);
+}
+
+.archive-row:hover td:nth-child(2) { color: var(--accent); }
+.archive-row td:first-child { color: var(--text-muted); font-size: 11px; }
+
+.archive-link {
+  font-size: 16px;
+  color: var(--text-muted);
+  display: inline-block;
+  transition: color var(--dur-fast), transform var(--dur-fast);
+}
+
+.archive-row:hover .archive-link { color: var(--accent); transform: translate(3px, -3px); }
+
+/* ────────────────────────────────────────────────────────────────
+   12. CONTACT
+──────────────────────────────────────────────────────────────── */
+#contact { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+
+.contact-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 100px var(--edge);
+  padding-bottom: 40px;
+}
+
+.contact-eyebrow {
+  margin-bottom: 64px;
+}
+
+.contact-main { flex: 1; }
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 9vw, 130px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.contact-title-line { display: block; overflow: hidden; }
+.contact-title--italic { font-style: italic; font-weight: 400; }
+
+.contact-links { margin-bottom: 36px; }
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 2.2vw, 30px);
+  font-weight: 400;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  transition: color var(--dur-fast), border-color var(--dur-fast);
+}
+
+.contact-email:hover { color: var(--accent); border-color: var(--accent); }
+
+.contact-email-arrow { font-size: 0.6em; transition: transform var(--dur-fast) var(--ease-out); }
+.contact-email:hover .contact-email-arrow { transform: translate(5px, -5px); }
+
+.contact-socials { margin-top: 32px; }
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--dur-fast);
+}
+
+.social-link:hover { color: var(--accent); }
+
+.site-footer {
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.site-footer p { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+/* ────────────────────────────────────────────────────────────────
+   13. LOADER
+──────────────────────────────────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.loader-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.5vw, 48px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text);
+}
+
+.loader-bar-wrap { width: 220px; height: 1px; background: var(--border); overflow: hidden; }
+
+.loader-bar { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+.loader-percent {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   14. PORTAL OVERLAY — Full-viewport, fixed, animates clip-path
+──────────────────────────────────────────────────────────────── */
+#hero-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: #121212;
+  clip-path: inset(50% 0 50% 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Offset the flex centre to match content-layer (margin-left: --nav-w).
+     Portal covers full 100vw but #about-bg lives in 100vw - --nav-w.
+     padding-left shifts the available flex area so both centres coincide. */
+  padding-left: var(--nav-w);
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+.portal-about-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#portal-about {
+  font-family: var(--font-serif);
+  font-size: clamp(100px, 18vw, 280px);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  color: #b2a4d4;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  transform: translateX(-4vw);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   15. UTILITIES
+──────────────────────────────────────────────────────────────── */
+.clip-mask { clip-path: inset(0 0 0 0); overflow: hidden; }
+
+/* ────────────────────────────────────────────────────────────────
+   15. RESPONSIVE
+──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :root { --nav-w: 0px; --edge: 24px; }
+
+  .ui-nav { display: none; }
+  .content-layer { margin-left: 0; }
+  .hero-intro { left: var(--edge); } /* Reset on mobile */
+
+  .about-content { grid-template-columns: 1fr; gap: 40px; }
+  .about-images { height: 360px; display: flex; gap: 12px; position: static; }
+  .about-img { position: static; flex: 1; height: 100%; width: auto; }
+  .about-img--3 { display: none; }
+}
+
+@media (max-width: 768px) {
+  .hero-thumbnails { display: none; }
+  .ui-header { top: 20px; right: 20px; gap: 24px; }
+  .contact-title { font-size: 40px; }
+  .archive-table th:nth-child(3), .archive-table th:nth-child(4),
+  .archive-row td:nth-child(3),  .archive-row td:nth-child(4) { display: none; }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   16. SELECTION & FOCUS
+──────────────────────────────────────────────────────────────── */
+::selection { background: var(--accent); color: var(--white); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
