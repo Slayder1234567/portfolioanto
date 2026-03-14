@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonin Le Cleï — Digital Designer</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       UI LAYER — Fixed
+  ============================================================ -->
+  <!-- Header et nav sont des enfants directs du body (hors de tout stacking context)
+       pour que mix-blend-mode: difference blende contre le contenu réel de la page.
+       Le curseur utilise déjà ce principe et fonctionne parfaitement. -->
+  <div class="ui-header">
+      <div class="ui-header-name">
+        <a href="#" id="scrollToTop" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
+        <span class="ui-role">DIGITAL DESIGNER</span>
+      </div>
+      <div class="ui-header-time">
+        <span class="ui-time" id="clockTime">--:-- --</span>
+        <span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>
+      </div>
+    </div>
+
+    <!-- LEFT NAV — no background, floats from top -->
+    <nav class="ui-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+
+        <li class="nav-item" data-section="info">
+          <a href="#info" class="nav-link">
+            <span class="nav-number">01</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">I</span><span class="nav-char-bot" style="transition-delay:0s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">F</span><span class="nav-char-bot" style="transition-delay:.04s">F</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="work">
+          <a href="#work" class="nav-link">
+            <span class="nav-number">02</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">W</span><span class="nav-char-bot" style="transition-delay:0s">W</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">O</span><span class="nav-char-bot" style="transition-delay:.02s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">R</span><span class="nav-char-bot" style="transition-delay:.04s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">K</span><span class="nav-char-bot" style="transition-delay:.06s">K</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="archive">
+          <a href="#archive" class="nav-link">
+            <span class="nav-number">03</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">R</span><span class="nav-char-bot" style="transition-delay:.02s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">C</span><span class="nav-char-bot" style="transition-delay:.04s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">H</span><span class="nav-char-bot" style="transition-delay:.06s">H</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">I</span><span class="nav-char-bot" style="transition-delay:.08s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.1s">V</span><span class="nav-char-bot" style="transition-delay:.1s">V</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">E</span><span class="nav-char-bot" style="transition-delay:.12s">E</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="contact">
+          <a href="#contact" class="nav-link">
+            <span class="nav-number">04</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">C</span><span class="nav-char-bot" style="transition-delay:0s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">O</span><span class="nav-char-bot" style="transition-delay:.02s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">N</span><span class="nav-char-bot" style="transition-delay:.04s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">T</span><span class="nav-char-bot" style="transition-delay:.06s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">A</span><span class="nav-char-bot" style="transition-delay:.08s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.1s">C</span><span class="nav-char-bot" style="transition-delay:.1s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">T</span><span class="nav-char-bot" style="transition-delay:.12s">T</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+  <!-- Cursor — outside ui-layer so mix-blend-mode: difference works
+       against the actual page content, not the ui-layer stacking context -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+  </div>
+
+
+  <!-- ============================================================
+       CONTENT LAYER — Scrollable
+  ============================================================ -->
+  <main class="content-layer">
+
+    <!-- ─── HERO ──────────────────────────────────────────────── -->
+    <section class="section" id="hero">
+
+      <div class="hero-intro">
+        <p class="hero-intro-text">Turning brand identity into immersive
+digital journeys. I create meaningful
+experiences that people don't just use,
+they remember.</p>
+        <span class="hero-scroll-cta">[SCROLL TO EXPLORE]</span>
+      </div>
+
+      <!-- Thumbnails — bottom right -->
+      <div class="hero-thumbnails">
+        <figure class="hero-thumb clip-mask">
+          <img src="stingerss-bg.png" alt="Stingers" loading="lazy" />
+          <figcaption>STINGERS</figcaption>
+        </figure>
+        <figure class="hero-thumb clip-mask">
+          <img src="cutsinnit-logo.png" alt="CutsInnit" loading="lazy" />
+          <figcaption>CUTSINNIT</figcaption>
+        </figure>
+      </div>
+
+      <!-- 3D Logo — centre du hero -->
+      <div class="hero-logo" aria-hidden="true">
+        <video autoplay loop muted playsinline>
+          <source src="videos/0001-0250.webm" type="video/webm" />
+        </video>
+      </div>
+
+
+    </section><!-- /hero -->
+
+
+    <!-- ─── INFO ──────────────────────────────────────────────── -->
+    <section class="section" id="info">
+
+      <div class="about-sticky-wrap">
+        <h2 id="about-bg" aria-hidden="true">About</h2>
+      </div>
+
+      <div class="info-content">
+        <div class="about-content">
+
+          <div class="about-images">
+            <figure class="about-img about-img--1 clip-mask" data-speed="0.85">
+              <img src="IMG_9430.jpg" alt="Profile" style="pointer-events:none;" />
+            </figure>
+          </div>
+
+          <div class="about-text-block">
+            <p class="about-bio">
+              French Front-End & Digital Designer based in Montreal.
+              I design and build high-fidelity web interfaces for
+              ambitious startups, agencies, and creative brands.
+            </p>
+
+            <div class="services-list">
+              <div class="service-item">
+                <span class="service-number">01</span>
+                <div class="service-body">
+                  <h3 class="service-title">Next-Gen Art Direction</h3>
+                  <p class="service-desc">Crafting premium visual identities and UI/UX. I blend creative intuition with AI-driven ideation to deliver striking designs that instantly elevate your brand's perceived value.</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <span class="service-number">02</span>
+                <div class="service-body">
+                  <h3 class="service-title">AI-Powered Engineering</h3>
+                  <p class="service-desc">Building lightning-fast, robust websites. By leveraging advanced AI models, I code pixel-perfect layouts and seamless GSAP animations with flawless execution in record time.</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <span class="service-number">03</span>
+                <div class="service-body">
+                  <h3 class="service-title">Digital Revamp & Conversion</h3>
+                  <p class="service-desc">Upgrading web platforms through rigorous design standards and code optimization. I align premium aesthetics with functional efficiency to drive meaningful user interactions.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div><!-- /about-content -->
+      </div><!-- /info-content -->
+    </section><!-- /info -->
+
+
+    <!-- ─── WORK ──────────────────────────────────────────────── -->
+    <section class="section" id="work">
+      <div class="work-header">
+        <h2 class="section-eyebrow">02 — Selected Work</h2>
+        <p class="work-count">(2026)</p>
+      </div>
+
+      <div class="projects-stack">
+
+        <!-- ─── STINGERSS — Premium hover card ──────────────────── -->
+        <article class="project-card project-card--stingerss" id="proj-stingerss" data-color="#1a0a0f">
+          <div class="project-card-inner">
+
+            <div class="project-bg">
+              <img src="stingerss-bg.png" alt="Stingerss Background" />
+            </div>
+
+            <div class="project-video-wrapper">
+              <div class="stingerss-logo-overlay">
+                <img src="stingers-logo.png" alt="Stingers Concordia" />
+              </div>
+              <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
+            </div>
+
+            <div class="project-info project-info--stingerss">
+              <h2 class="project-title stingerss-title">Stingers - Concordia</h2>
+              <span class="project-tag stingerss-tag">Web Design · Motion</span>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- ─── CUTSINNIT — Premium hover card ──────────────────── -->
+        <article class="project-card project-card--cutsinnit" id="proj-cutsinnit" data-color="#0f0c07">
+          <div class="project-card-inner">
+
+            <div class="project-bg">
+              <img src="cutsinnit-logo.png" alt="CutsInnit Background" />
+            </div>
+
+            <div class="project-video-wrapper">
+              <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
+            </div>
+
+            <div class="project-info project-info--cutsinnit">
+              <h2 class="project-title cutsinnit-title">CutsInnit</h2>
+              <span class="project-tag cutsinnit-tag">Web Design</span>
+            </div>
+
+          </div>
+        </article>
+
+
+      </div>
+    </section><!-- /work -->
+
+
+    <!-- ─── ARCHIVE ───────────────────────────────────────────── -->
+    <section class="section" id="archive">
+      <div class="archive-header">
+        <h2 class="section-eyebrow">03 — Archive</h2>
+        <p class="archive-subtitle">In Development</p>
+      </div>
+    </section><!-- /archive -->
+
+
+    <!-- ─── CONTACT ───────────────────────────────────────────── -->
+    <section class="section" id="contact">
+      <div class="contact-inner">
+
+        <div class="contact-eyebrow">
+          <span class="section-eyebrow">04 — Contact</span>
+        </div>
+
+        <div class="contact-main">
+          <h2 class="contact-title">
+            <span class="contact-title-line">Let's</span>
+            <span class="contact-title-line contact-title--italic"><em>collaborate.</em></span>
+          </h2>
+
+          <div class="contact-links">
+            <a href="mailto:antoninleclei.pro@gmail.com" class="contact-email magnetic">
+              antoninleclei.pro@gmail.com
+              <span class="contact-email-arrow">↗</span>
+            </a>
+          </div>
+
+          <div class="contact-socials">
+            <a href="https://www.linkedin.com/in/antonin-le-cle%C3%AF-0749b1301/" class="social-link" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <p>© 2026 Antonin Le Cleï — All rights reserved</p>
+        </footer>
+
+      </div>
+    </section><!-- /contact -->
+
+  </main>
+
+
+  <!-- Intro loader -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <span class="loader-name">Antonin Le Cleï</span>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+    </div>
+  </div>
+
+  <!-- Portal overlay — Fixed full-viewport, animates clip-path on hero scroll -->
+  <div id="hero-portal" aria-hidden="true">
+    <div class="portal-about-wrap">
+      <span id="portal-about">About</span>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
