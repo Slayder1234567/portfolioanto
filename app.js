@@ -119,6 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
       width: 2, height: 22, borderRadius: '1px',
       duration: 0.18, ease: 'power3.out',
     },
+    barLarge: {
+      width: 3, height: 44, borderRadius: '1px',
+      duration: 0.18, ease: 'power3.out',
+    },
     grow: {
       width: 11, height: 11, borderRadius: '50%',
       duration: 0.2, ease: 'power3.out',
@@ -144,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (TEXT_TAGS.has(el.tagName)) {
         // If this text element is inside a link, treat as clickable
         if (el.closest(CLICKABLE_SELECTOR)) return 'grow';
+        // Large bar for contact title
+        if (el.closest('.contact-title')) return 'barLarge';
         return 'bar';
       }
       el = el.parentElement;
