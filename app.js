@@ -150,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (el.closest(CLICKABLE_SELECTOR)) return 'grow';
         // Large bar only on "Let's collaborate." text
         if (el.classList && el.classList.contains('contact-title-line')) return 'barLarge';
+        // Skip contact-title h2 itself — only its children trigger bar
+        if (el.classList && el.classList.contains('contact-title')) return 'dot';
         return 'bar';
       }
       el = el.parentElement;
