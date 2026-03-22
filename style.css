@@ -990,6 +990,7 @@ ul, ol { list-style: none; }
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.03em;
+  width: fit-content;
   color: var(--text);
   margin-bottom: 48px;
   overflow: hidden;
