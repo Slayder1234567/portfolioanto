@@ -493,6 +493,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
+  // 15. PROJECT VIDEOS — restart on hover
+  // ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.project-card').forEach(card => {
+    const video = card.querySelector('video');
+    if (!video) return;
+    video.pause();
+    card.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+    });
+  });
+
+  // ─────────────────────────────────────────────────────────
   // REFRESH
   // ─────────────────────────────────────────────────────────
   window.addEventListener('load', () => ScrollTrigger.refresh());

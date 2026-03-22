@@ -361,7 +361,6 @@ ul, ol { list-style: none; }
   z-index: 1;
   pointer-events: none;
   user-select: none;
-  mix-blend-mode: multiply; /* blend sur le blanc du hero = fond vidéo disparaît */
 }
 
 .hero-logo video {
