@@ -450,6 +450,7 @@ ul, ol { list-style: none; }
   overflow: hidden;
   position: relative;
   cursor: none;
+  border-radius: 10px;
 }
 
 .hero-thumb img {
