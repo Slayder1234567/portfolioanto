@@ -1148,4 +1148,6 @@ ul, ol { list-style: none; }
    16. SELECTION & FOCUS
 ──────────────────────────────────────────────────────────────── */
 ::selection { background: var(--accent); color: var(--white); }
+.ui-header ::selection, .ui-nav ::selection { background: #7c5cff; color: #ffffff; mix-blend-mode: normal; }
+.ui-header-time ::selection { background: #7c5cff; color: #ffffff; mix-blend-mode: normal; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
