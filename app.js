@@ -501,21 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 15. HERO LOGO VIDEO — shorter pause between loops
-  // ─────────────────────────────────────────────────────────
-  const heroVideo = document.querySelector('.hero-logo video');
-  if (heroVideo) {
-    heroVideo.loop = false;
-    heroVideo.addEventListener('timeupdate', () => {
-      if (heroVideo.currentTime >= 3.2) {
-        heroVideo.currentTime = 0;
-        heroVideo.play();
-      }
-    });
-  }
-
-  // ─────────────────────────────────────────────────────────
-  // 16. PROJECT VIDEOS — restart on hover
+  // 15. PROJECT VIDEOS — restart on hover
   // ─────────────────────────────────────────────────────────
   document.querySelectorAll('.project-card').forEach(card => {
     const video = card.querySelector('video');
