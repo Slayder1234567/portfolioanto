@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (TEXT_TAGS.has(el.tagName)) {
         // If this text element is inside a link, treat as clickable
         if (el.closest(CLICKABLE_SELECTOR)) return 'grow';
-        // Large bar for contact title
-        if (el.closest('.contact-title')) return 'barLarge';
+        // Large bar for contact title lines only
+        if (el.classList && el.classList.contains('contact-title-line')) return 'barLarge';
         return 'bar';
       }
       el = el.parentElement;

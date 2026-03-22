@@ -993,7 +993,7 @@ ul, ol { list-style: none; }
   overflow: hidden;
 }
 
-.contact-title-line { display: block; overflow: hidden; }
+.contact-title-line { display: block; overflow: hidden; width: fit-content; }
 .contact-title--italic { font-style: italic; font-weight: 400; }
 
 .contact-links { margin-bottom: 36px; }
