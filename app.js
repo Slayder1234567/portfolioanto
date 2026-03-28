@@ -387,42 +387,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 10. WORK — Gilroy-style pinned scroll
+  // 10. WORK — Gilroy-style natural scroll
   // ─────────────────────────────────────────────────────────
-  const workSection    = document.getElementById('work');
-  const workBgs        = document.querySelectorAll('.work-bg');
-  const workMediaItems = document.querySelectorAll('.work-media-item');
-  const workInfoBlocks = document.querySelectorAll('.work-info-block');
-  const totalProjects  = workMediaItems.length;
-  let currentProject   = 0;
+  const workSection  = document.getElementById('work');
+  const workBgsWrap  = document.querySelector('.work-backgrounds');
+  const workBgs      = document.querySelectorAll('.work-bg');
+  const workProjects = document.querySelectorAll('.work-project');
 
-  function setActiveProject(index) {
-    if (index === currentProject) return;
-    currentProject = index;
-
-    workBgs.forEach((bg, i) => bg.classList.toggle('work-bg--active', i === index));
-    workMediaItems.forEach((item, i) => {
-      item.classList.toggle('work-media-item--active', i === index);
-      if (i < index) item.style.transform = 'translateY(-40px)';
-      else if (i > index) item.style.transform = 'translateY(40px)';
-      else item.style.transform = 'translateY(0)';
-    });
-    workInfoBlocks.forEach((block, i) => block.classList.toggle('work-info-block--active', i === index));
-  }
-
-  if (workSection && totalProjects > 0) {
+  // Show/hide the fixed blurred backgrounds only while in #work
+  if (workSection && workBgsWrap) {
     ScrollTrigger.create({
       trigger: workSection,
-      start: 'top top',
-      end: `+=${totalProjects * 100}%`,
-      onUpdate: (self) => {
-        const raw = self.progress * totalProjects;
-        const idx = Math.min(Math.floor(raw), totalProjects - 1);
-        setActiveProject(idx);
-      }
+      start: 'top 80%',
+      end: 'bottom 20%',
+      onEnter:     () => workBgsWrap.classList.add('visible'),
+      onLeave:     () => workBgsWrap.classList.remove('visible'),
+      onEnterBack: () => workBgsWrap.classList.add('visible'),
+      onLeaveBack: () => workBgsWrap.classList.remove('visible'),
     });
   }
 
+  // Crossfade backgrounds per project
+  workProjects.forEach((proj, i) => {
+    ScrollTrigger.create({
+      trigger: proj,
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter:     () => workBgs.forEach((bg, j) => bg.classList.toggle('work-bg--active', j === i)),
+      onEnterBack: () => workBgs.forEach((bg, j) => bg.classList.toggle('work-bg--active', j === i)),
+    });
+  });
+
+  // Reset body bg after work section
   ScrollTrigger.create({
     trigger: '#archive', start: 'top 55%',
     onEnter: () => gsap.to('body', { backgroundColor: '#0a0a0a', duration: 0.7 })
