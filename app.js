@@ -434,27 +434,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 11. ARCHIVE — Timeline progress + entry reveals
+  // 11. ARCHIVE — Timeline progress (smooth lerp) + entry reveals
   // ─────────────────────────────────────────────────────────
   const archiveLineFill = document.querySelector('.archive-line-fill');
   const archiveTimeline = document.querySelector('.archive-timeline');
 
   if (archiveLineFill && archiveTimeline) {
+    let archiveTarget = 0;
+    let archiveCurrent = 0;
+
     ScrollTrigger.create({
       trigger: archiveTimeline,
       start: 'top 80%',
       end: 'bottom 20%',
-      scrub: true,
       onUpdate: (self) => {
-        archiveLineFill.style.height = (self.progress * 100) + '%';
+        archiveTarget = self.progress * 100;
       }
     });
+
+    // Smooth lerp loop — runs every frame for ultra-fluid motion
+    function archiveLerp() {
+      archiveCurrent += (archiveTarget - archiveCurrent) * 0.06;
+      if (Math.abs(archiveTarget - archiveCurrent) < 0.01) archiveCurrent = archiveTarget;
+      archiveLineFill.style.height = archiveCurrent + '%';
+      requestAnimationFrame(archiveLerp);
+    }
+    requestAnimationFrame(archiveLerp);
   }
 
   document.querySelectorAll('.archive-entry').forEach((entry, i) => {
     gsap.from(entry, {
       opacity: 0, y: 30, duration: 0.8, ease: 'expo.out', delay: i * 0.05,
       scrollTrigger: { trigger: entry, start: 'top 85%' }
+    });
+  });
+
+  // Archive videos — pause by default, play on hover
+  document.querySelectorAll('.archive-entry-card').forEach(card => {
+    const video = card.querySelector('video');
+    if (!video) return;
+    video.pause();
+    card.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
     });
   });
 
