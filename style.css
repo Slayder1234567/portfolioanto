@@ -634,15 +634,13 @@ ul, ol { list-style: none; }
 #work {
   position: relative;
   padding-top: 0;
-  /* Break out of content-layer to cover full viewport */
-  margin-left: calc(var(--nav-w) * -1);
-  width: 100vw;
-  overflow: visible;
 }
 
 /* ─ Pinned container ───────────────────────────────────────── */
 .work-pin {
   position: relative;
+  /* Break out of content-layer to cover full viewport */
+  left: calc(var(--nav-w) * -1);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
