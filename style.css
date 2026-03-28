@@ -682,8 +682,8 @@ ul, ol { list-style: none; }
 .work-panel-media {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 40px;
+  justify-content: flex-end;
+  padding: 40px 60px 40px 40px;
 }
 
 .work-panel-media video {
