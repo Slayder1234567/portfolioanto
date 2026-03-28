@@ -102,6 +102,7 @@ ul, ol { list-style: none; }
   align-items: flex-start;
   gap: 6rem;
   pointer-events: auto;
+  mix-blend-mode: difference;
   z-index: 9999;
 }
 
@@ -162,6 +163,7 @@ ul, ol { list-style: none; }
   display: flex;
   flex-direction: column;
   pointer-events: auto;
+  mix-blend-mode: difference;
   z-index: 9999;
 }
 
