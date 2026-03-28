@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ScrollTrigger.create({
       trigger: archiveTimeline,
-      start: 'top top',
+      start: 'top 30%',
       end: 'bottom 20%',
       onUpdate: (self) => {
         archiveTarget = self.progress * 100;
