@@ -452,11 +452,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Collect dots and compute their relative positions within the timeline
+    const archiveDots = archiveTimeline.querySelectorAll('.archive-dot');
+
     // Smooth lerp loop — runs every frame for ultra-fluid motion
     function archiveLerp() {
       archiveCurrent += (archiveTarget - archiveCurrent) * 0.06;
       if (Math.abs(archiveTarget - archiveCurrent) < 0.01) archiveCurrent = archiveTarget;
       archiveLineFill.style.height = archiveCurrent + '%';
+
+      // Activate dots when the fill reaches them
+      const timelineRect = archiveTimeline.getBoundingClientRect();
+      const timelineH = archiveTimeline.offsetHeight;
+      archiveDots.forEach(dot => {
+        const dotTop = dot.getBoundingClientRect().top - timelineRect.top + 6;
+        const dotPct = (dotTop / timelineH) * 100;
+        if (archiveCurrent >= dotPct) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
       requestAnimationFrame(archiveLerp);
     }
     requestAnimationFrame(archiveLerp);

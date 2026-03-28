@@ -974,15 +974,21 @@ ul, ol { list-style: none; }
 }
 
 .archive-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--accent);
+  background: #444;
   flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(124, 92, 255, 0.4);
-  position: relative;
+  position: absolute;
+  right: -6px;
+  top: 20px;
   z-index: 2;
-  margin-left: auto;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.archive-dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(124, 92, 255, 0.4);
 }
 
 .archive-date {
