@@ -434,20 +434,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 11. ARCHIVE
+  // 11. ARCHIVE — Timeline progress + entry reveals
   // ─────────────────────────────────────────────────────────
-  const archiveSub = document.querySelector('.archive-subtitle');
-  if (archiveSub) {
-    gsap.set(archiveSub, { y: 10 });
-    gsap.to(archiveSub, {
-      opacity: 1, y: 0, duration: 0.8, ease: 'expo.out',
-      scrollTrigger: { trigger: archiveSub, start: 'top 85%' }
+  const archiveLineFill = document.querySelector('.archive-line-fill');
+  const archiveTimeline = document.querySelector('.archive-timeline');
+
+  if (archiveLineFill && archiveTimeline) {
+    ScrollTrigger.create({
+      trigger: archiveTimeline,
+      start: 'top 80%',
+      end: 'bottom 20%',
+      scrub: true,
+      onUpdate: (self) => {
+        archiveLineFill.style.height = (self.progress * 100) + '%';
+      }
     });
   }
 
-  gsap.from('.archive-row', {
-    opacity: 0, y: 14, stagger: 0.055, duration: 0.6, ease: 'expo.out',
-    scrollTrigger: { trigger: '.archive-table', start: 'top 80%' }
+  document.querySelectorAll('.archive-entry').forEach((entry, i) => {
+    gsap.from(entry, {
+      opacity: 0, y: 30, duration: 0.8, ease: 'expo.out', delay: i * 0.05,
+      scrollTrigger: { trigger: entry, start: 'top 85%' }
+    });
   });
 
   // ─────────────────────────────────────────────────────────
