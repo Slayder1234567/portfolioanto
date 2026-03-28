@@ -823,7 +823,7 @@ ul, ol { list-style: none; }
 .stingerss-title {
   font-family: 'Canela-ThinItalic-Trial', var(--font-serif);
   font-size: 22px;
-  font-weight: 100;
+  font-weight: 900;
   font-style: italic;
   letter-spacing: 0.06em;
   color: rgba(255, 255, 255, 0.75);
