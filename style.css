@@ -629,98 +629,108 @@ ul, ol { list-style: none; }
 }
 
 /* ────────────────────────────────────────────────────────────────
-   10. WORK — Gilroy-style natural scroll
+   10. WORK — Gilroy pinned stacking scroll
 ──────────────────────────────────────────────────────────────── */
 #work {
   position: relative;
   padding-top: 0;
 }
 
-/* ─ Fullscreen blurred backgrounds (fixed behind) ──────────── */
-.work-backgrounds {
-  position: fixed;
+/* ─ Ambient glow (blurred bg per project) ──────────────────── */
+.work-glow {
+  position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  overflow: hidden;
 }
 
-.work-backgrounds.visible {
-  opacity: 1;
-}
-
-.work-bg {
+.work-glow-layer {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 1s ease;
 }
 
-.work-bg--active {
+.work-glow-layer--active {
   opacity: 1;
 }
 
-.work-bg video {
+.work-glow-layer video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(30px) brightness(0.35) saturate(1.2);
-  transform: scale(1.15);
+  filter: blur(100px) brightness(0.3) saturate(1.3);
+  transform: scale(1.3);
 }
 
-/* ─ Each project block ─────────────────────────────────────── */
-.work-project {
+/* ─ Pinned container (full viewport) ───────────────────────── */
+.work-pin {
   position: relative;
   z-index: 1;
+  width: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 55% 45%;
-  min-height: 100vh;
+  overflow: hidden;
 }
 
-/* ─ Left: media (scrolls naturally) ────────────────────────── */
-.work-project-media {
+/* ─ Left: stacked slides ───────────────────────────────────── */
+.work-stack {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 40px 40px 0;
+  padding: 40px;
 }
 
-.work-project-media video {
+.work-slide {
+  position: absolute;
   width: 100%;
   max-width: 480px;
   aspect-ratio: 4 / 5;
-  object-fit: cover;
   border-radius: 6px;
+  overflow: hidden;
+  /* Slide 0 is visible; slides 1+ start hidden below via GSAP */
+}
+
+.work-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-/* ─ Right: info (sticky within project) ────────────────────── */
-.work-project-info {
+/* ─ Right: info panels ─────────────────────────────────────── */
+.work-details {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
+  align-items: center;
+  padding: 60px;
 }
 
-.work-project-info-inner {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0 60px;
+.work-detail {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
 }
 
-.work-project-number {
+.work-detail--active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.work-detail-number {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
   letter-spacing: 0.1em;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.work-project-title {
+.work-detail-title {
   font-family: 'Canela-ThinItalic-Trial', var(--font-serif);
   font-size: clamp(32px, 4vw, 56px);
   font-weight: 900;
@@ -728,22 +738,17 @@ ul, ol { list-style: none; }
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.01em;
+  margin-bottom: 40px;
 }
 
-/* Tags — sticky at the bottom of right column */
-.work-project-meta {
-  position: sticky;
-  bottom: 60px;
-  padding: 0 60px 0;
-}
-
-.work-project-tags {
+.work-detail-tags {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-top: 40px;
 }
 
-.work-project-tags span {
+.work-detail-tags span {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.14em;

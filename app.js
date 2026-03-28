@@ -387,36 +387,78 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 10. WORK — Gilroy-style natural scroll
+  // 10. WORK — Gilroy pinned stacking scroll
+  //
+  //  Pin the .work-pin container. For each transition:
+  //  ① New slide clips in from bottom (inset 100%→0%)
+  //  ② Old text fades out + up, new text fades in + up
+  //  ③ Glow layer crossfades
   // ─────────────────────────────────────────────────────────
-  const workSection  = document.getElementById('work');
-  const workBgsWrap  = document.querySelector('.work-backgrounds');
-  const workBgs      = document.querySelectorAll('.work-bg');
-  const workProjects = document.querySelectorAll('.work-project');
+  const workPin     = document.querySelector('.work-pin');
+  const workSlides  = gsap.utils.toArray('.work-slide');
+  const workDetails = gsap.utils.toArray('.work-detail');
+  const workGlows   = gsap.utils.toArray('.work-glow-layer');
+  const numSlides   = workSlides.length;
 
-  // Show/hide the fixed blurred backgrounds only while in #work
-  if (workSection && workBgsWrap) {
+  if (workPin && numSlides > 1) {
+
+    // Initial state: slide 0 visible, all others clipped from below
+    workSlides.forEach((slide, i) => {
+      if (i === 0) {
+        gsap.set(slide, { clipPath: 'inset(0% 0% 0% 0%)', zIndex: 1 });
+      } else {
+        gsap.set(slide, { clipPath: 'inset(100% 0% 0% 0%)', zIndex: i + 1 });
+      }
+    });
+
+    // Build master timeline — one transition per project pair
+    const workTL = gsap.timeline();
+
+    for (let i = 0; i < numSlides - 1; i++) {
+      const nextSlide  = workSlides[i + 1];
+      const currDetail = workDetails[i];
+      const nextDetail = workDetails[i + 1];
+      const currGlow   = workGlows[i];
+      const nextGlow   = workGlows[i + 1];
+
+      // ① Slide i+1 clips in from bottom, covering slide i
+      workTL.to(nextSlide, {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 1,
+        ease: 'none',
+      });
+
+      // ② Text crossfade (simultaneous with slide)
+      workTL.to(currDetail, {
+        opacity: 0, y: -20, duration: 0.4, ease: 'power2.in',
+      }, '<');
+      workTL.fromTo(nextDetail,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
+        '<+=0.3'
+      );
+
+      // ③ Glow crossfade
+      workTL.to(currGlow, { opacity: 0, duration: 0.6, ease: 'none' }, '<-=0.3');
+      workTL.to(nextGlow, { opacity: 1, duration: 0.6, ease: 'none' }, '<');
+
+      // Small pause between transitions if more projects
+      if (i < numSlides - 2) {
+        workTL.to({}, { duration: 0.5 });
+      }
+    }
+
+    // Pin and scrub the timeline
     ScrollTrigger.create({
-      trigger: workSection,
-      start: 'top 80%',
-      end: 'bottom 20%',
-      onEnter:     () => workBgsWrap.classList.add('visible'),
-      onLeave:     () => workBgsWrap.classList.remove('visible'),
-      onEnterBack: () => workBgsWrap.classList.add('visible'),
-      onLeaveBack: () => workBgsWrap.classList.remove('visible'),
+      trigger:    '#work',
+      pin:        workPin,
+      pinSpacing: true,
+      scrub:      0.8,
+      start:      'top top',
+      end:        `+=${numSlides * 100}%`,
+      animation:  workTL,
     });
   }
-
-  // Crossfade backgrounds per project
-  workProjects.forEach((proj, i) => {
-    ScrollTrigger.create({
-      trigger: proj,
-      start: 'top 60%',
-      end: 'bottom 40%',
-      onEnter:     () => workBgs.forEach((bg, j) => bg.classList.toggle('work-bg--active', j === i)),
-      onEnterBack: () => workBgs.forEach((bg, j) => bg.classList.toggle('work-bg--active', j === i)),
-    });
-  });
 
   // Reset body bg after work section
   ScrollTrigger.create({
