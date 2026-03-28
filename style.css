@@ -924,14 +924,14 @@ ul, ol { list-style: none; }
 .archive-timeline {
   position: relative;
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 90px 1fr;
   gap: 0;
 }
 
 /* ─ Vertical progress line ─────────────────────────────────── */
 .archive-line {
   position: absolute;
-  left: 126px;
+  left: 76px;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -959,7 +959,7 @@ ul, ol { list-style: none; }
 /* ─ Single entry ───────────────────────────────────────────── */
 .archive-entry {
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 90px 1fr;
   gap: 40px;
   align-items: start;
   position: relative;
@@ -980,7 +980,7 @@ ul, ol { list-style: none; }
   border-radius: 50%;
   background: #444;
   position: absolute;
-  left: 121px;
+  left: 71px;
   top: 20px;
   z-index: 3;
   transition: background 0.4s ease, box-shadow 0.4s ease;
