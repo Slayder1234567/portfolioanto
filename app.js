@@ -439,6 +439,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Freeze glow background videos at frame 0
+  document.querySelectorAll('.work-panel-glow video').forEach(v => {
+    v.currentTime = 0;
+    v.pause();
+  });
+
   // Reset body bg after work section
   ScrollTrigger.create({
     trigger: '#archive', start: 'top 55%',

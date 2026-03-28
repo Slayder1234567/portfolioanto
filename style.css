@@ -634,6 +634,9 @@ ul, ol { list-style: none; }
 #work {
   position: relative;
   padding-top: 0;
+  /* Break out of content-layer margin to cover full viewport */
+  margin-left: calc(var(--nav-w) * -1);
+  width: 100vw;
 }
 
 /* ─ Pinned container ───────────────────────────────────────── */
