@@ -387,75 +387,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 10. WORK — Gilroy pinned stacking scroll
+  // 10. WORK — Gilroy pinned full-page stacking
   //
-  //  Pin the .work-pin container. For each transition:
-  //  ① New slide clips in from bottom (inset 100%→0%)
-  //  ② Old text fades out + up, new text fades in + up
-  //  ③ Glow layer crossfades
+  //  Each .work-panel is a full-screen layer (glow + video + text).
+  //  Panel 0 is visible. Panel 1+ clip in from bottom, covering
+  //  everything beneath (background, video, text — the whole page).
   // ─────────────────────────────────────────────────────────
-  const workPin     = document.querySelector('.work-pin');
-  const workSlides  = gsap.utils.toArray('.work-slide');
-  const workDetails = gsap.utils.toArray('.work-detail');
-  const workGlows   = gsap.utils.toArray('.work-glow-layer');
-  const numSlides   = workSlides.length;
+  const workPin    = document.querySelector('.work-pin');
+  const workPanels = gsap.utils.toArray('.work-panel');
+  const numPanels  = workPanels.length;
 
-  if (workPin && numSlides > 1) {
+  if (workPin && numPanels > 1) {
 
-    // Initial state: slide 0 visible, all others clipped from below
-    workSlides.forEach((slide, i) => {
-      if (i === 0) {
-        gsap.set(slide, { clipPath: 'inset(0% 0% 0% 0%)', zIndex: 1 });
-      } else {
-        gsap.set(slide, { clipPath: 'inset(100% 0% 0% 0%)', zIndex: i + 1 });
-      }
+    // Initial state: panel 0 fully visible, rest clipped from below
+    workPanels.forEach((panel, i) => {
+      gsap.set(panel, {
+        clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)',
+        zIndex: i + 1,  // higher index = on top
+      });
     });
 
-    // Build master timeline — one transition per project pair
+    // Build master timeline
     const workTL = gsap.timeline();
 
-    for (let i = 0; i < numSlides - 1; i++) {
-      const nextSlide  = workSlides[i + 1];
-      const currDetail = workDetails[i];
-      const nextDetail = workDetails[i + 1];
-      const currGlow   = workGlows[i];
-      const nextGlow   = workGlows[i + 1];
+    for (let i = 0; i < numPanels - 1; i++) {
+      // Hold on current project before transitioning
+      workTL.to({}, { duration: 0.3 });
 
-      // ① Slide i+1 clips in from bottom, covering slide i
-      workTL.to(nextSlide, {
+      // Full panel clips in from bottom → covers everything
+      workTL.to(workPanels[i + 1], {
         clipPath: 'inset(0% 0% 0% 0%)',
         duration: 1,
         ease: 'none',
       });
 
-      // ② Text crossfade (simultaneous with slide)
-      workTL.to(currDetail, {
-        opacity: 0, y: -20, duration: 0.4, ease: 'power2.in',
-      }, '<');
-      workTL.fromTo(nextDetail,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
-        '<+=0.3'
-      );
-
-      // ③ Glow crossfade
-      workTL.to(currGlow, { opacity: 0, duration: 0.6, ease: 'none' }, '<-=0.3');
-      workTL.to(nextGlow, { opacity: 1, duration: 0.6, ease: 'none' }, '<');
-
-      // Small pause between transitions if more projects
-      if (i < numSlides - 2) {
-        workTL.to({}, { duration: 0.5 });
+      // Hold on new project
+      if (i < numPanels - 2) {
+        workTL.to({}, { duration: 0.3 });
       }
     }
 
-    // Pin and scrub the timeline
+    // Pin and scrub
     ScrollTrigger.create({
       trigger:    '#work',
       pin:        workPin,
       pinSpacing: true,
       scrub:      0.8,
       start:      'top top',
-      end:        `+=${numSlides * 100}%`,
+      end:        `+=${numPanels * 100}%`,
       animation:  workTL,
     });
   }

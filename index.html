@@ -171,43 +171,50 @@ they remember.</p>
 
     <section class="section" id="work">
 
-      <!-- ═══ Ambient glow: blurred bg per project ═══ -->
-      <div class="work-glow">
-        <div class="work-glow-layer work-glow-layer--active" data-index="0">
-          <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="work-glow-layer" data-index="1">
-          <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
-        </div>
-      </div>
-
       <!-- ═══ Pinned viewport ═══ -->
       <div class="work-pin">
 
-        <!-- Stacked slides (left) — each covers the previous -->
-        <div class="work-stack">
-          <div class="work-slide" data-index="0">
+        <!-- Each panel is a full-screen layer with its own glow + video + info -->
+        <div class="work-panel" data-index="0">
+          <div class="work-panel-glow">
             <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
           </div>
-          <div class="work-slide" data-index="1">
-            <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
+          <div class="work-panel-content">
+            <div class="work-panel-media">
+              <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="work-panel-info">
+              <div class="work-panel-info-main">
+                <span class="work-detail-number">[01]</span>
+                <h2 class="work-detail-title">Stingers</h2>
+              </div>
+              <div class="work-panel-info-meta">
+                <div class="work-detail-tags">
+                  <span>WEB DESIGN</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Info panels (right) — crossfade -->
-        <div class="work-details">
-          <div class="work-detail work-detail--active" data-index="0">
-            <span class="work-detail-number">[01]</span>
-            <h2 class="work-detail-title">Stingers</h2>
-            <div class="work-detail-tags">
-              <span>WEB DESIGN</span>
-            </div>
+        <div class="work-panel" data-index="1">
+          <div class="work-panel-glow">
+            <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
           </div>
-          <div class="work-detail" data-index="1">
-            <span class="work-detail-number">[02]</span>
-            <h2 class="work-detail-title">CutsInnit</h2>
-            <div class="work-detail-tags">
-              <span>WEB DESIGN</span>
+          <div class="work-panel-content">
+            <div class="work-panel-media">
+              <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="work-panel-info">
+              <div class="work-panel-info-main">
+                <span class="work-detail-number">[02]</span>
+                <h2 class="work-detail-title">CutsInnit</h2>
+              </div>
+              <div class="work-panel-info-meta">
+                <div class="work-detail-tags">
+                  <span>WEB DESIGN</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

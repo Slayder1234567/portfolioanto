@@ -629,33 +629,37 @@ ul, ol { list-style: none; }
 }
 
 /* ────────────────────────────────────────────────────────────────
-   10. WORK — Gilroy pinned stacking scroll
+   10. WORK — Gilroy pinned full-page stacking
 ──────────────────────────────────────────────────────────────── */
 #work {
   position: relative;
   padding-top: 0;
 }
 
-/* ─ Ambient glow (blurred bg per project) ──────────────────── */
-.work-glow {
+/* ─ Pinned container ───────────────────────────────────────── */
+.work-pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─ Full-screen panel (one per project) ────────────────────── */
+.work-panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ─ Ambient glow (blurred bg inside each panel) ───────────── */
+.work-panel-glow {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
 }
 
-.work-glow-layer {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.work-glow-layer--active {
-  opacity: 1;
-}
-
-.work-glow-layer video {
+.work-panel-glow video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -663,62 +667,50 @@ ul, ol { list-style: none; }
   transform: scale(1.3);
 }
 
-/* ─ Pinned container (full viewport) ───────────────────────── */
-.work-pin {
+/* ─ Content grid (video left, info right) ──────────────────── */
+.work-panel-content {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 55% 45%;
-  overflow: hidden;
 }
 
-/* ─ Left: stacked slides ───────────────────────────────────── */
-.work-stack {
-  position: relative;
+/* ─ Left: media ────────────────────────────────────────────── */
+.work-panel-media {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
 }
 
-.work-slide {
-  position: absolute;
+.work-panel-media video {
   width: 100%;
   max-width: 480px;
   aspect-ratio: 4 / 5;
-  border-radius: 6px;
-  overflow: hidden;
-  /* Slide 0 is visible; slides 1+ start hidden below via GSAP */
-}
-
-.work-slide video {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
+  border-radius: 6px;
   display: block;
 }
 
-/* ─ Right: info panels ─────────────────────────────────────── */
-.work-details {
-  position: relative;
+/* ─ Right: info ────────────────────────────────────────────── */
+.work-panel-info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   padding: 60px;
+  position: relative;
 }
 
-.work-detail {
+.work-panel-info-main {
+  /* vertically centered by flex parent */
+}
+
+.work-panel-info-meta {
   position: absolute;
-  opacity: 0;
-  transform: translateY(24px);
-  pointer-events: none;
-}
-
-.work-detail--active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  bottom: 60px;
+  left: 60px;
 }
 
 .work-detail-number {
@@ -738,14 +730,12 @@ ul, ol { list-style: none; }
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.01em;
-  margin-bottom: 40px;
 }
 
 .work-detail-tags {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 40px;
 }
 
 .work-detail-tags span {
