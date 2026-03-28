@@ -469,17 +469,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Archive videos — pause by default, play on hover
+  // Archive videos — bg plays always (muted loop), popup plays on hover
   document.querySelectorAll('.archive-entry-card').forEach(card => {
-    const video = card.querySelector('video');
-    if (!video) return;
-    video.pause();
+    const bgVideo = card.querySelector('.archive-card-bg video');
+    const popupVideo = card.querySelector('.archive-card-video-popup video');
+    if (bgVideo) bgVideo.play();
+    if (popupVideo) popupVideo.pause();
+
     card.addEventListener('mouseenter', () => {
-      video.currentTime = 0;
-      video.play();
+      if (popupVideo) {
+        popupVideo.currentTime = 0;
+        popupVideo.play();
+      }
     });
     card.addEventListener('mouseleave', () => {
-      video.pause();
+      if (popupVideo) popupVideo.pause();
     });
   });
 

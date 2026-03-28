@@ -992,53 +992,99 @@ ul, ol { list-style: none; }
   text-align: right;
 }
 
-/* ─ Right side: card ───────────────────────────────────────── */
+/* ─ Right side: card (Work-style hover reveal) ────────────── */
 .archive-entry-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: border-color var(--dur-fast), transform var(--dur-fast);
 }
 
-.archive-entry-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
-}
-
-.archive-card-video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+.archive-card-inner {
+  position: relative;
+  height: 50vh;
+  min-height: 340px;
+  border-radius: 12px;
   overflow: hidden;
-  background: #111;
 }
 
-.archive-card-video video {
+/* Background video — blurred + dimmed by default */
+.archive-card-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.7s var(--ease-out), filter 0.7s var(--ease-out);
+}
+
+.archive-card-bg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  filter: blur(12px) brightness(0.4);
+  transform: scale(1.1);
+  transition: filter 0.7s var(--ease-out);
 }
 
+.archive-entry-card:hover .archive-card-bg {
+  transform: scale(1.08);
+}
+
+.archive-entry-card:hover .archive-card-bg video {
+  filter: blur(16px) brightness(0.3);
+}
+
+/* Video popup — centered rectangle, hidden by default */
+.archive-card-video-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 65%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate(-50%, -45%) scale(0.95);
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.archive-card-video-popup video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.archive-entry-card:hover .archive-card-video-popup {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Info — bottom-left, over background */
 .archive-card-info {
-  padding: 20px 24px;
-}
-
-.archive-card-title {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-  letter-spacing: 0.02em;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 3;
 }
 
 .archive-card-tag {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  display: inline-block;
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.archive-card-title {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
 }
 
 /* ────────────────────────────────────────────────────────────────
