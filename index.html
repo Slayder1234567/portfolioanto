@@ -170,55 +170,54 @@ they remember.</p>
 
 
     <section class="section" id="work">
-      <div class="work-header">
-        <h2 class="section-eyebrow">02 — Selected Work</h2>
-        <p class="work-count">(2026)</p>
-      </div>
 
-      <div class="projects-stack">
+      <div class="work-pinned">
 
-        <article class="project-card project-card--stingerss" id="proj-stingerss" data-color="#1a0a0f">
-          <div class="project-card-inner">
+        <!-- Fullscreen blurred backgrounds (one per project) -->
+        <div class="work-backgrounds">
+          <div class="work-bg work-bg--active" data-index="0">
+            <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="work-bg" data-index="1">
+            <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
+          </div>
+        </div>
 
-            <div class="project-bg">
-              <img src="stingerss-bg.png" alt="Stingerss Background" />
-            </div>
-
-            <div class="project-video-wrapper">
-              <div class="stingerss-logo-overlay">
-                <img src="stingers-logo.png" alt="Stingers Concordia" />
-              </div>
+        <!-- Left: scrolling video showcase -->
+        <div class="work-media">
+          <div class="work-media-track">
+            <div class="work-media-item work-media-item--active" data-index="0">
               <video src="videos/stingerss.mp4" autoplay loop muted playsinline></video>
             </div>
-
-            <div class="project-info project-info--stingerss">
-              <h2 class="project-title stingerss-title">Stingers</h2>
-              <span class="project-tag stingerss-tag">Web Design</span>
-            </div>
-
-          </div>
-        </article>
-
-        <article class="project-card project-card--cutsinnit" id="proj-cutsinnit" data-color="#0f0c07">
-          <div class="project-card-inner">
-
-            <div class="project-bg">
-              <img src="cutsinnit-logo.png" alt="CutsInnit Background" />
-            </div>
-
-            <div class="project-video-wrapper">
+            <div class="work-media-item" data-index="1">
               <video src="videos/cutsinnit.mp4" autoplay loop muted playsinline></video>
             </div>
-
-            <div class="project-info project-info--cutsinnit">
-              <h2 class="project-title cutsinnit-title">CutsInnit</h2>
-              <span class="project-tag cutsinnit-tag">Web Design</span>
-            </div>
-
           </div>
-        </article>
+        </div>
+
+        <!-- Right: project info -->
+        <div class="work-info">
+          <div class="work-info-block work-info-block--active" data-index="0">
+            <span class="work-info-number">[01]</span>
+            <h2 class="work-info-title">Stingers</h2>
+          </div>
+          <div class="work-info-block" data-index="1">
+            <span class="work-info-number">[02]</span>
+            <h2 class="work-info-title">CutsInnit</h2>
+          </div>
+
+          <div class="work-info-meta">
+            <div class="work-info-tags">
+              <span>WEB DESIGN</span>
+            </div>
+          </div>
+        </div>
 
       </div>
+
+      <!-- Scroll spacer — height = number of projects × 100vh -->
+      <div class="work-scroll-spacer"></div>
+
     </section>
 
 

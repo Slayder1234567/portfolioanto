@@ -387,46 +387,41 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 10. WORK — Scrubbed clip-path reveals
+  // 10. WORK — Gilroy-style pinned scroll
   // ─────────────────────────────────────────────────────────
-  const cards = document.querySelectorAll('.project-card');
+  const workSection    = document.getElementById('work');
+  const workBgs        = document.querySelectorAll('.work-bg');
+  const workMediaItems = document.querySelectorAll('.work-media-item');
+  const workInfoBlocks = document.querySelectorAll('.work-info-block');
+  const totalProjects  = workMediaItems.length;
+  let currentProject   = 0;
 
-  cards.forEach((card, i) => {
-    const imgWrap = card.querySelector('.project-img-wrap');
-    const title   = card.querySelector('.project-title');
-    const tag     = card.querySelector('.project-tag');
-    const link    = card.querySelector('.project-link');
-    const bg      = card.dataset.color || '#0a0a0a';
+  function setActiveProject(index) {
+    if (index === currentProject) return;
+    currentProject = index;
 
-    if (i === 0) {
-      gsap.from(imgWrap, {
-        clipPath: 'inset(100% 0 0 0)', duration: 1.2, ease: 'expo.out',
-        scrollTrigger: { trigger: card, start: 'top 88%' }
-      });
-    } else {
-      gsap.fromTo(imgWrap,
-        { clipPath: 'inset(100% 0 0 0)' },
-        {
-          clipPath: 'inset(0% 0 0 0)', ease: 'none',
-          scrollTrigger: { trigger: card, start: 'top 78%', end: 'top 10%', scrub: 0.8 }
-        }
-      );
-    }
+    workBgs.forEach((bg, i) => bg.classList.toggle('work-bg--active', i === index));
+    workMediaItems.forEach((item, i) => {
+      item.classList.toggle('work-media-item--active', i === index);
+      if (i < index) item.style.transform = 'translateY(-40px)';
+      else if (i > index) item.style.transform = 'translateY(40px)';
+      else item.style.transform = 'translateY(0)';
+    });
+    workInfoBlocks.forEach((block, i) => block.classList.toggle('work-info-block--active', i === index));
+  }
 
+  if (workSection && totalProjects > 0) {
     ScrollTrigger.create({
-      trigger: card, start: 'top 50%', end: 'bottom 50%',
-      onEnter:     () => gsap.to('body', { backgroundColor: bg, duration: 0.7, ease: 'power2.out' }),
-      onLeaveBack: () => {
-        const prev = cards[i - 1];
-        gsap.to('body', { backgroundColor: prev ? prev.dataset.color : '#121212', duration: 0.7 });
+      trigger: workSection,
+      start: 'top top',
+      end: `+=${totalProjects * 100}%`,
+      onUpdate: (self) => {
+        const raw = self.progress * totalProjects;
+        const idx = Math.min(Math.floor(raw), totalProjects - 1);
+        setActiveProject(idx);
       }
     });
-
-    gsap.from([tag, title, link], {
-      opacity: 0, y: 20, stagger: 0.07, duration: 0.8, ease: 'expo.out',
-      scrollTrigger: { trigger: card, start: 'top 62%' }
-    });
-  });
+  }
 
   ScrollTrigger.create({
     trigger: '#archive', start: 'top 55%',
@@ -558,20 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─────────────────────────────────────────────────────────
-  // 15. PROJECT VIDEOS — restart on hover
+  // 15. (Reserved)
   // ─────────────────────────────────────────────────────────
-  document.querySelectorAll('.project-card').forEach(card => {
-    const video = card.querySelector('video');
-    if (!video) return;
-    video.pause();
-    card.addEventListener('mouseenter', () => {
-      video.currentTime = 0;
-      video.play();
-    });
-    card.addEventListener('mouseleave', () => {
-      video.pause();
-    });
-  });
 
   // ─────────────────────────────────────────────────────────
   // REFRESH

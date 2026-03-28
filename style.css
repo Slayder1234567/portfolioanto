@@ -629,289 +629,156 @@ ul, ol { list-style: none; }
 }
 
 /* ────────────────────────────────────────────────────────────────
-   10. WORK
+   10. WORK — Gilroy-style pinned scroll
 ──────────────────────────────────────────────────────────────── */
-#work { padding-top: 100px; min-height: 100vh; }
-
-.work-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 48px;
-}
-
-.work-count { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
-
-.projects-stack { position: relative; display: flex; flex-direction: column; gap: 160px; }
-
-.project-card { position: relative; width: 100%; overflow: hidden; }
-
-.project-card-inner {
+#work {
   position: relative;
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  border-radius: 3px;
+  padding-top: 0;
 }
 
-
-.project-card-inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+.work-pinned {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   z-index: 1;
 }
 
-.project-info {
-  position: relative;
-  z-index: 2;
-  padding: 36px;
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.work-scroll-spacer {
+  height: 200vh; /* (projects - 1) × 100vh */
+  pointer-events: none;
 }
 
-.project-tag {
-  position: absolute;
-  top: 28px;
-  left: 36px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 4px 12px;
-  border-radius: 100px;
-}
-
-.project-title {
-  font-family: var(--font-serif);
-  font-size: clamp(32px, 5.5vw, 76px);
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.project-year { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; }
-
-.project-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--white);
-  border: 1px solid rgba(255,255,255,0.25);
-  padding: 10px 20px;
-  border-radius: 100px;
-  transition: background var(--dur-fast), border-color var(--dur-fast);
-  flex-shrink: 0;
-}
-
-.project-link svg { width: 14px; height: 14px; transition: transform var(--dur-fast) var(--ease-out); }
-.project-link:hover { background: var(--accent); border-color: var(--accent); }
-.project-link:hover svg { transform: translate(3px, -3px); }
-.project-card + .project-card { margin-top: 2px; }
-
-/* ────────────────────────────────────────────────────────────────
-   10b. STINGERSS — Premium hover card
-──────────────────────────────────────────────────────────────── */
-
-/* Override inner height for the Stingerss card */
-.project-card--stingerss .project-card-inner {
-  height: 60vh;
-  background: #0d0408;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-/* Background image — blurred, darkened, fills card, zooms on hover */
-.project-bg {
+/* ─ Fullscreen blurred backgrounds ─────────────────────────── */
+.work-backgrounds {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
 }
 
-.project-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(4px) brightness(0.55);
-  transform-origin: center;
-}
-
-/* Video wrapper — centered, smaller than card, hidden by default */
-.project-video-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 65%;
-  aspect-ratio: 16 / 9;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 8px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translate(-50%, -45%) scale(0.95);
-  pointer-events: none;
-  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 2;
-}
-
-.project-video-wrapper video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Logo overlay — centered on video, fades out on hover */
-.stingerss-logo-overlay {
+.work-bg {
   position: absolute;
   inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.work-bg--active {
+  opacity: 1;
+}
+
+.work-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(30px) brightness(0.35) saturate(1.2);
+  transform: scale(1.15);
+}
+
+/* ─ Left: media showcase ───────────────────────────────────── */
+.work-media {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(13, 4, 8, 0.6);
-  z-index: 1;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.stingerss-logo-overlay img {
-  width: 45%;
-  height: auto;
-  object-fit: contain;
-}
-
-.project-card--stingerss:hover .stingerss-logo-overlay {
-  opacity: 0;
-}
-
-/* Hover — bg zooms, video rises into view */
-.project-card--stingerss:hover .project-bg {
-  transform: scale(1.08);
-}
-
-.project-card--stingerss:hover .project-video-wrapper {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Stingerss info layout — title top-left, tag bottom-right */
-.project-info--stingerss {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 4px;
-  padding: 24px 28px;
-}
-
-.stingerss-title {
-  font-family: 'Canela-ThinItalic-Trial', var(--font-serif);
-  font-size: 22px;
-  font-weight: 900;
-  font-style: italic;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.75);
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.stingerss-tag {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-}
-
-/* ─── CUTSINNIT card ──────────────────────────────────────────── */
-.project-card--cutsinnit .project-card-inner {
-  position: relative;
-  height: 60vh;
-  background: #0f0c07;
-  border-radius: 12px;
-  cursor: pointer;
+  padding: 60px;
   overflow: hidden;
 }
 
-/* Fond toujours visible — pas de blur */
-.project-card--cutsinnit .project-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+.work-media-track {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4 / 5;
 }
 
-.project-card--cutsinnit .project-bg img {
+.work-media-item {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-media-item--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-media-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(4px) brightness(0.55);
-  transition: filter 0.5s ease;
 }
 
-/* Vidéo par-dessus, cachée par défaut */
-.project-card--cutsinnit .project-video-wrapper {
-  z-index: 10;
-}
-
-/* Hover — fond zoome + s'assombrit, vidéo apparaît */
-.project-card--cutsinnit:hover .project-bg {
-  transform: scale(1.08);
-}
-
-.project-card--cutsinnit:hover .project-bg img {
-  filter: blur(3px) brightness(0.5);
-}
-
-.project-card--cutsinnit:hover .project-video-wrapper {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* CutsInnit info layout — title + tag bottom-right */
-.project-info--cutsinnit {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
+/* ─ Right: project info ────────────────────────────────────── */
+.work-info {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 4px;
-  padding: 24px 28px;
+  justify-content: center;
+  padding: 60px;
+  padding-right: 80px;
 }
 
-.cutsinnit-title {
+.work-info-block {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-info-block--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-info-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.work-info-title {
   font-family: 'Canela-ThinItalic-Trial', var(--font-serif);
-  font-size: 22px;
+  font-size: clamp(32px, 4vw, 56px);
   font-weight: 900;
   font-style: italic;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.75);
-  text-transform: uppercase;
-  margin: 0;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
-.cutsinnit-tag {
+/* Tags — bottom right of info column */
+.work-info-meta {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+}
+
+.work-info-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.work-info-tags span {
+  font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 
