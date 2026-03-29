@@ -443,18 +443,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       stingersWrap.addEventListener('mouseenter', () => {
         if (hoverTL) hoverTL.kill();
+        firstVideo.currentTime = 0;
         firstVideo.play();
         hoverTL = gsap.timeline();
-        // Single sweep: curtain slides left→right, hiding image and revealing video behind it
         hoverTL.set(firstCover, { clipPath: 'inset(0% 0% 0% 0%)' });
         hoverTL.fromTo(firstCurtain,
           { xPercent: -100 },
-          { xPercent: 100, duration: 0.7, ease: 'power2.inOut' }
+          { xPercent: 100, duration: 0.4, ease: 'power2.inOut' }
         );
-        // As curtain passes, clip the image away from left
         hoverTL.to(firstCover, {
           clipPath: 'inset(0% 0% 0% 100%)',
-          duration: 0.7,
+          duration: 0.4,
           ease: 'power2.inOut',
         }, '<');
       });
@@ -462,14 +461,13 @@ document.addEventListener('DOMContentLoaded', () => {
       stingersWrap.addEventListener('mouseleave', () => {
         if (hoverTL) hoverTL.kill();
         hoverTL = gsap.timeline();
-        // Reverse: curtain slides right→left, hiding video and revealing image
         hoverTL.fromTo(firstCurtain,
           { xPercent: 100 },
-          { xPercent: -100, duration: 0.7, ease: 'power2.inOut' }
+          { xPercent: -100, duration: 0.4, ease: 'power2.inOut' }
         );
         hoverTL.to(firstCover, {
           clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 0.7,
+          duration: 0.4,
           ease: 'power2.inOut',
         }, '<');
       });
@@ -488,16 +486,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       cutsinnitWrap.addEventListener('mouseenter', () => {
         if (cutsinnitHoverTL) cutsinnitHoverTL.kill();
+        cutsinnitVideo.currentTime = 0;
         cutsinnitVideo.play();
         cutsinnitHoverTL = gsap.timeline();
         cutsinnitHoverTL.set(cutsinnitCover, { clipPath: 'inset(0% 0% 0% 0%)' });
         cutsinnitHoverTL.fromTo(cutsinnitCurtain,
           { xPercent: -100 },
-          { xPercent: 100, duration: 0.7, ease: 'power2.inOut' }
+          { xPercent: 100, duration: 0.4, ease: 'power2.inOut' }
         );
         cutsinnitHoverTL.to(cutsinnitCover, {
           clipPath: 'inset(0% 0% 0% 100%)',
-          duration: 0.7,
+          duration: 0.4,
           ease: 'power2.inOut',
         }, '<');
       });
@@ -507,11 +506,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cutsinnitHoverTL = gsap.timeline();
         cutsinnitHoverTL.fromTo(cutsinnitCurtain,
           { xPercent: 100 },
-          { xPercent: -100, duration: 0.7, ease: 'power2.inOut' }
+          { xPercent: -100, duration: 0.4, ease: 'power2.inOut' }
         );
         cutsinnitHoverTL.to(cutsinnitCover, {
           clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 0.7,
+          duration: 0.4,
           ease: 'power2.inOut',
         }, '<');
       });
