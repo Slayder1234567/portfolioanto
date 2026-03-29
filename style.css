@@ -1193,8 +1193,28 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  .hero-thumbnails { display: none; }
-  .ui-header { top: 20px; right: 20px; gap: 24px; }
+  .hero-thumbnails {
+    display: flex;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    gap: 8px;
+  }
+  .hero-thumb {
+    width: auto;
+    flex: 1;
+    height: 60px;
+  }
+  .hero-thumb figcaption { font-size: 7px; }
+  .ui-header {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    gap: 0;
+    justify-content: space-between;
+  }
+  .ui-header-name { text-align: left; }
+  .ui-header-time { text-align: right; }
   .contact-title { font-size: 40px; }
   .archive-timeline { grid-template-columns: 1fr; }
   .archive-entry { grid-template-columns: 1fr; gap: 12px; }
