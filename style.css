@@ -818,7 +818,7 @@ ul, ol { list-style: none; }
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.14em;
-  color: var(--text-muted);
+  color: #ffffff;
   text-transform: uppercase;
 }
 
