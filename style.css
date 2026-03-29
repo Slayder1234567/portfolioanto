@@ -107,7 +107,8 @@ ul, ol { list-style: none; }
 
 .ui-header.on-light .ui-name,
 .ui-header.on-light .ui-role,
-.ui-header.on-light .ui-time { color: #1a1a1a; }
+.ui-header.on-light .ui-time,
+.ui-header.on-light .ui-date { color: #1a1a1a; }
 
 .ui-nav.on-light .nav-number,
 .ui-nav.on-light .nav-label { color: #1a1a1a; }
