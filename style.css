@@ -1230,6 +1230,7 @@ ul, ol { list-style: none; }
   .about-content { grid-template-columns: 1fr; gap: 40px; }
   .about-images { height: 360px; display: flex; gap: 12px; position: static; }
   .about-img { position: static; flex: 1; height: 100%; width: auto; }
+  .about-img img { object-fit: contain; }
   .about-img--3 { display: none; }
 }
 
