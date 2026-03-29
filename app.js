@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────────────
+  // 0a. MOBILE SPLASH SCREEN
+  // ─────────────────────────────────────────────────────────
+  const mobileSplash = document.getElementById('mobile-splash');
+  const mobileSplashBtn = document.getElementById('mobile-splash-btn');
+  if (mobileSplash && mobileSplashBtn) {
+    mobileSplashBtn.addEventListener('click', () => {
+      mobileSplash.classList.add('hidden');
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────
   // 0b. MOBILE MENU
   // ─────────────────────────────────────────────────────────
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
