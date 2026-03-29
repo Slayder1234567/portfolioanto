@@ -418,27 +418,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (stingersWrap && firstCover && firstCurtain && firstVideo) {
       gsap.set(firstCurtain, { xPercent: -100 });
+      gsap.set(firstCover, { clipPath: 'inset(0% 0% 0% 0%)' });
       let hoverTL = null;
 
       stingersWrap.addEventListener('mouseenter', () => {
         if (hoverTL) hoverTL.kill();
         firstVideo.play();
         hoverTL = gsap.timeline();
-        // Curtain enters from left + image clips away
-        hoverTL.to(firstCurtain, { xPercent: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
-        hoverTL.to(firstCover, { clipPath: 'inset(0% 0% 0% 100%)', duration: 0.4, ease: 'power2.inOut' }, 0);
-        // Curtain exits right, revealing video
-        hoverTL.to(firstCurtain, { xPercent: 100, duration: 0.4, ease: 'power2.inOut' });
+        // Single sweep: curtain slides left→right, hiding image and revealing video behind it
+        hoverTL.set(firstCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+        hoverTL.fromTo(firstCurtain,
+          { xPercent: -100 },
+          { xPercent: 100, duration: 0.7, ease: 'power2.inOut' }
+        );
+        // As curtain passes, clip the image away from left
+        hoverTL.to(firstCover, {
+          clipPath: 'inset(0% 0% 0% 100%)',
+          duration: 0.7,
+          ease: 'power2.inOut',
+        }, '<');
       });
 
       stingersWrap.addEventListener('mouseleave', () => {
         if (hoverTL) hoverTL.kill();
         hoverTL = gsap.timeline();
-        // Curtain enters from right + covers video
-        hoverTL.to(firstCurtain, { xPercent: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
-        // Curtain exits left, image comes back
-        hoverTL.to(firstCover, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'power2.inOut' }, 0.3);
-        hoverTL.to(firstCurtain, { xPercent: -100, duration: 0.4, ease: 'power2.inOut' }, 0.3);
+        // Reverse: curtain slides right→left, hiding video and revealing image
+        hoverTL.fromTo(firstCurtain,
+          { xPercent: 100 },
+          { xPercent: -100, duration: 0.7, ease: 'power2.inOut' }
+        );
+        hoverTL.to(firstCover, {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 0.7,
+          ease: 'power2.inOut',
+        }, '<');
       });
     }
 
