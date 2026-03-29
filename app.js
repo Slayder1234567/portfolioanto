@@ -413,11 +413,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build master timeline
     const workTL = gsap.timeline();
 
-    // Panel 0 curtain reveal at the start
-    const firstCurtain = workPanels[0].querySelector('.work-curtain');
-    if (firstCurtain) {
-      workTL.to(firstCurtain, {
-        xPercent: 100,
+    // Panel 0: fade out cover image to reveal video underneath
+    const firstCover = workPanels[0].querySelector('.work-cover-img');
+    const firstVideo = workPanels[0].querySelector('.work-media-wrap video');
+    if (firstCover) {
+      if (firstVideo) {
+        firstVideo.play();
+      }
+      workTL.to(firstCover, {
+        opacity: 0,
         duration: 0.5,
         ease: 'power2.inOut',
       });
