@@ -410,44 +410,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (curtain) gsap.set(curtain, { xPercent: 0 });
     });
 
-    // Set up cover image + curtain for panel 0 (Stingers)
+    // Panel 0 (Stingers): hover curtain reveal
+    const stingersWrap = workPanels[0].querySelector('.work-media-wrap');
     const firstCover = workPanels[0].querySelector('.work-cover-img');
     const firstCurtain = workPanels[0].querySelector('.work-curtain');
     const firstVideo = workPanels[0].querySelector('.work-media-wrap video');
-    if (firstCover) gsap.set(firstCover, { clipPath: 'inset(0% 0% 0% 0%)' });
-    if (firstCurtain) gsap.set(firstCurtain, { xPercent: -100 });
-    if (firstVideo) firstVideo.play();
+
+    if (stingersWrap && firstCover && firstCurtain && firstVideo) {
+      gsap.set(firstCurtain, { xPercent: -100 });
+      let hoverTL = null;
+
+      stingersWrap.addEventListener('mouseenter', () => {
+        if (hoverTL) hoverTL.kill();
+        firstVideo.play();
+        hoverTL = gsap.timeline();
+        // Curtain enters from left + image clips away
+        hoverTL.to(firstCurtain, { xPercent: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
+        hoverTL.to(firstCover, { clipPath: 'inset(0% 0% 0% 100%)', duration: 0.4, ease: 'power2.inOut' }, 0);
+        // Curtain exits right, revealing video
+        hoverTL.to(firstCurtain, { xPercent: 100, duration: 0.4, ease: 'power2.inOut' });
+      });
+
+      stingersWrap.addEventListener('mouseleave', () => {
+        if (hoverTL) hoverTL.kill();
+        hoverTL = gsap.timeline();
+        // Curtain enters from right + covers video
+        hoverTL.to(firstCurtain, { xPercent: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
+        // Curtain exits left, image comes back
+        hoverTL.to(firstCover, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'power2.inOut' }, 0.3);
+        hoverTL.to(firstCurtain, { xPercent: -100, duration: 0.4, ease: 'power2.inOut' }, 0.3);
+      });
+    }
 
     // Build master timeline
     const workTL = gsap.timeline();
-
-    // Panel 0: white curtain sweeps left→right, image clips away, video revealed
-    if (firstCover && firstCurtain) {
-      // Hold on the image first
-      workTL.to({}, { duration: 0.3 });
-
-      // Curtain enters from left + image clips from left simultaneously
-      workTL.to(firstCurtain, {
-        xPercent: 0,
-        duration: 0.5,
-        ease: 'power2.inOut',
-      }, 'curtain-in');
-      workTL.to(firstCover, {
-        clipPath: 'inset(0% 0% 0% 100%)',
-        duration: 0.5,
-        ease: 'power2.inOut',
-      }, 'curtain-in');
-
-      // Curtain exits to the right, revealing video
-      workTL.to(firstCurtain, {
-        xPercent: 100,
-        duration: 0.5,
-        ease: 'power2.inOut',
-      });
-
-      // Hold on the video
-      workTL.to({}, { duration: 0.3 });
-    }
 
     for (let i = 0; i < numPanels - 1; i++) {
       // Hold on current project before transitioning
