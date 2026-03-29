@@ -455,6 +455,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // Panel 1 (CutsInnit): hover curtain reveal (same as Stingers)
+    const cutsinnitWrap = workPanels[1].querySelector('.work-media-wrap');
+    const cutsinnitCover = workPanels[1].querySelector('.work-cover-img');
+    const cutsinnitCurtain = workPanels[1].querySelector('.work-curtain');
+    const cutsinnitVideo = workPanels[1].querySelector('.work-media-wrap video');
+
+    if (cutsinnitWrap && cutsinnitCover && cutsinnitCurtain && cutsinnitVideo) {
+      gsap.set(cutsinnitCurtain, { xPercent: -100 });
+      gsap.set(cutsinnitCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+      let cutsinnitHoverTL = null;
+
+      cutsinnitWrap.addEventListener('mouseenter', () => {
+        if (cutsinnitHoverTL) cutsinnitHoverTL.kill();
+        cutsinnitVideo.play();
+        cutsinnitHoverTL = gsap.timeline();
+        cutsinnitHoverTL.set(cutsinnitCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+        cutsinnitHoverTL.fromTo(cutsinnitCurtain,
+          { xPercent: -100 },
+          { xPercent: 100, duration: 0.7, ease: 'power2.inOut' }
+        );
+        cutsinnitHoverTL.to(cutsinnitCover, {
+          clipPath: 'inset(0% 0% 0% 100%)',
+          duration: 0.7,
+          ease: 'power2.inOut',
+        }, '<');
+      });
+
+      cutsinnitWrap.addEventListener('mouseleave', () => {
+        if (cutsinnitHoverTL) cutsinnitHoverTL.kill();
+        cutsinnitHoverTL = gsap.timeline();
+        cutsinnitHoverTL.fromTo(cutsinnitCurtain,
+          { xPercent: 100 },
+          { xPercent: -100, duration: 0.7, ease: 'power2.inOut' }
+        );
+        cutsinnitHoverTL.to(cutsinnitCover, {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 0.7,
+          ease: 'power2.inOut',
+        }, '<');
+      });
+    }
+
     // Build master timeline
     const workTL = gsap.timeline();
 
