@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navEl.classList.add('active');
       } else {
         navEl.classList.remove('active');
+        fill.style.width = '0%';
       }
     });
   });
