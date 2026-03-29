@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       onEnter:     () => { uiHeader.classList.add('on-light'); uiNav.classList.add('on-light'); },
       onLeave:     () => { uiHeader.classList.remove('on-light'); uiNav.classList.remove('on-light'); },
       onEnterBack: () => { uiHeader.classList.add('on-light'); uiNav.classList.add('on-light'); },
-      onLeaveBack: () => { uiHeader.classList.remove('on-light'); uiNav.classList.remove('on-light'); },
+      onLeaveBack: () => { uiHeader.classList.add('on-light'); uiNav.classList.add('on-light'); },
     });
     // Set initial state
     uiHeader.classList.add('on-light');
