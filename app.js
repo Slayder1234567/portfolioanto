@@ -380,17 +380,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const isMobile = window.innerWidth <= 768;
+
   document.querySelectorAll('.about-img').forEach(img => {
     const speed  = parseFloat(img.dataset.speed) || 1;
     const offset = (1 - speed) * 75;
 
-    gsap.fromTo(img,
-      { yPercent: offset * -1 },
-      {
-        yPercent: offset, ease: 'none',
-        scrollTrigger: { trigger: '#info', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
-      }
-    );
+    if (!isMobile) {
+      gsap.fromTo(img,
+        { yPercent: offset * -1 },
+        {
+          yPercent: offset, ease: 'none',
+          scrollTrigger: { trigger: '#info', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
+        }
+      );
+    }
 
     gsap.fromTo(img,
       { clipPath: 'inset(100% 0 0 0)' },

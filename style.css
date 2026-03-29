@@ -1195,6 +1195,12 @@ ul, ol { list-style: none; }
 
 @media (max-width: 768px) {
   .hero-thumbnails { display: none; }
+  .about-sticky-wrap {
+    position: relative;
+    height: auto;
+    min-height: 50vh;
+  }
+  #info { min-height: auto; }
   .ui-header {
     top: 14px;
     left: 46px;
