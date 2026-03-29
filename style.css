@@ -1258,8 +1258,12 @@ ul, ol { list-style: none; }
   .archive-date { position: static; display: flex; flex-direction: column; text-align: left; }
   .archive-date-year { display: block; }
   .archive-line { display: none; }
-  .work-media-wrap { max-width: 90vw; }
-  .work-panel-media { padding: 20px; justify-content: center; }
+  .work-panel-content { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .work-panel-info { order: -1; padding: 20px 24px 10px; text-align: center; align-items: center; }
+  .work-panel-info-main { text-align: center; }
+  .work-panel-info-meta { position: static; margin-top: 8px; }
+  .work-panel-media { padding: 10px 16px; justify-content: center; }
+  .work-media-wrap { max-width: 95vw; width: 95vw; }
 }
 
 /* ─ Mobile menu ────────────────────────────────────────────── */
