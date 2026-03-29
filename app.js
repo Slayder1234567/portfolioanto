@@ -639,6 +639,13 @@ document.addEventListener('DOMContentLoaded', () => {
           lenis.stop();
           window.scrollTo(0, targetScroll);
           ScrollTrigger.refresh();
+
+          // Ensure the target panel's curtain is fully off-screen
+          const targetPanel = workPanels[targetIndex];
+          if (targetPanel) {
+            const curtain = targetPanel.querySelector('.work-curtain');
+            if (curtain) gsap.set(curtain, { xPercent: 100 });
+          }
           // Small delay to let ScrollTrigger settle
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
