@@ -1255,7 +1255,7 @@ ul, ol { list-style: none; }
   .archive-entry { grid-template-columns: 1fr; gap: 12px; }
   .archive-entry-left { padding-top: 0; justify-content: flex-start; }
   .archive-dot { margin-left: 0; }
-  .archive-date { position: static; }
+  .archive-date { position: static; white-space: normal; width: min-content; text-align: left; }
   .archive-line { display: none; }
 }
 
