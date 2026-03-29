@@ -312,8 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─────────────────────────────────────────────────────────
   // 7. PORTAL OPENING
   // ─────────────────────────────────────────────────────────
-  const isMobile = window.innerWidth <= 768;
-
   const portalTL = gsap.timeline({
     scrollTrigger: {
       trigger:      '#hero',
@@ -321,15 +319,14 @@ document.addEventListener('DOMContentLoaded', () => {
       pinSpacing:   true,
       scrub:        1,
       start:        'top top',
-      end:          isMobile ? '+=80%' : '+=150%',
+      end:          '+=150%',
       anticipatePin: 1,
+      // onLeave intentionally absent — portal stays visible through the
+      // GSAP spacer zone so the user never sees the white hero.
+      // The portal is hidden only when #info reaches the viewport (below).
       onEnterBack: () => {
+        // Scrolling back into the hero pin zone — restore portal
         gsap.set('#hero-portal', { autoAlpha: 1 });
-      },
-      onLeave: () => {
-        // Immediately hide portal and switch bg when pin ends
-        gsap.set('#hero-portal', { autoAlpha: 0 });
-        gsap.set('body', { backgroundColor: '#121212' });
       },
     }
   });
@@ -347,6 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─────────────────────────────────────────────────────────
   // 7b. PORTAL HANDOFF — hide portal when #info reaches viewport top
+  //
+  //  At this exact moment the sticky #about-bg is visually identical
+  //  to #portal-about → the transition is invisible.
+  //  body bg is also set to #121212 so the nav column matches #info.
   // ─────────────────────────────────────────────────────────
   ScrollTrigger.create({
     trigger:     '#info',
@@ -356,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gsap.set('body', { backgroundColor: '#121212' });
     },
     onLeaveBack: () => {
+      // Scrolling back above #info — portal must cover the spacer again
       gsap.set('#hero-portal', { autoAlpha: 1 });
       gsap.set('body', { backgroundColor: 'var(--bg)' });
     },
@@ -382,15 +384,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const speed  = parseFloat(img.dataset.speed) || 1;
     const offset = (1 - speed) * 75;
 
-    if (!isMobile) {
-      gsap.fromTo(img,
-        { yPercent: offset * -1 },
-        {
-          yPercent: offset, ease: 'none',
-          scrollTrigger: { trigger: '#info', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
-        }
-      );
-    }
+    gsap.fromTo(img,
+      { yPercent: offset * -1 },
+      {
+        yPercent: offset, ease: 'none',
+        scrollTrigger: { trigger: '#info', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
+      }
+    );
 
     gsap.fromTo(img,
       { clipPath: 'inset(100% 0 0 0)' },

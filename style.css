@@ -1141,7 +1141,6 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   /* Offset the flex centre to match content-layer (margin-left: --nav-w).
      Portal covers full 100vw but #about-bg lives in 100vw - --nav-w.
      padding-left shifts the available flex area so both centres coincide. */
@@ -1196,12 +1195,6 @@ ul, ol { list-style: none; }
 
 @media (max-width: 768px) {
   .hero-thumbnails { display: none; }
-  .about-sticky-wrap {
-    position: relative;
-    height: auto;
-    min-height: 50vh;
-  }
-  #info { min-height: auto; }
   .ui-header {
     top: 14px;
     left: 46px;
