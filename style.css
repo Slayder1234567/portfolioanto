@@ -733,7 +733,7 @@ ul, ol { list-style: none; }
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  filter: blur(60px) brightness(0.25) saturate(1.3);
+  filter: blur(40px) brightness(0.25) saturate(1.3);
   transform: scale(1.3);
 }
 
