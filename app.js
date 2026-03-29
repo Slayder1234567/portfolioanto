@@ -619,9 +619,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!workST) return;
 
       // For panel 0: scroll to start of work section
-      // For panel 1+: scroll further into the pinned section
-      const panelProgress = targetIndex / numPanels;
-      const targetScroll = workST.start + (workST.end - workST.start) * panelProgress;
+      // For panel 1+: scroll past the full transition so the panel is fully revealed
+      const targetScroll = targetIndex === 0
+        ? workST.start
+        : workST.end;
 
       // Fade out
       const overlay = document.createElement('div');
