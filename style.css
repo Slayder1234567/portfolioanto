@@ -1196,13 +1196,18 @@ ul, ol { list-style: none; }
   .hero-thumbnails { display: none; }
   .ui-header {
     top: 20px;
-    left: 56px;
+    left: 66px;
     right: 20px;
     gap: 0;
     justify-content: space-between;
+    align-items: flex-start;
   }
   .ui-header-name { text-align: left; }
   .ui-header-time { text-align: right; }
+  .ui-name { font-size: 10px; }
+  .ui-role { font-size: 10px; }
+  .ui-time { font-size: 10px; }
+  .ui-date { font-size: 10px; }
   .contact-title { font-size: 40px; }
   .archive-timeline { grid-template-columns: 1fr; }
   .archive-entry { grid-template-columns: 1fr; gap: 12px; }
@@ -1220,26 +1225,39 @@ ul, ol { list-style: none; }
   left: 20px;
   z-index: 10001;
   background: none;
-  border: none;
+  border: 1.5px solid #ffffff;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 8px;
+  padding: 7px 6px;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
 }
 
 .menu-line {
   display: block;
-  width: 22px;
-  height: 2px;
+  width: 14px;
+  height: 1.5px;
   background: #ffffff;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .mobile-menu-btn.active .menu-line:first-child {
-  transform: translateY(3.5px) rotate(45deg);
+  transform: translateY(2.75px) rotate(45deg);
 }
 .mobile-menu-btn.active .menu-line:last-child {
-  transform: translateY(-3.5px) rotate(-45deg);
+  transform: translateY(-2.75px) rotate(-45deg);
+}
+
+/* On-light border */
+.mobile-menu-btn.on-light {
+  border-color: #1a1a1a;
+}
+.mobile-menu-btn.active {
+  border-color: #ffffff !important;
 }
 
 .mobile-menu-overlay {
