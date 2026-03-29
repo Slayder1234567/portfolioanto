@@ -1196,19 +1196,19 @@ ul, ol { list-style: none; }
 @media (max-width: 768px) {
   .hero-thumbnails { display: none; }
   .ui-header {
-    top: 20px;
-    left: 66px;
-    right: 20px;
+    top: 14px;
+    left: 46px;
+    right: 14px;
     gap: 0;
     justify-content: space-between;
     align-items: flex-start;
   }
   .ui-header-name { text-align: left; }
-  .ui-header-time { text-align: right; }
-  .ui-name { font-size: 10px; }
-  .ui-role { font-size: 10px; }
-  .ui-time { font-size: 10px; }
-  .ui-date { font-size: 10px; }
+  .ui-header-time { text-align: right; flex-shrink: 0; }
+  .ui-name { font-size: 9px; }
+  .ui-role { font-size: 9px; }
+  .ui-time { font-size: 9px; white-space: nowrap; }
+  .ui-date { font-size: 9px; white-space: nowrap; }
   .contact-title { font-size: 40px; }
   .archive-timeline { grid-template-columns: 1fr; }
   .archive-entry { grid-template-columns: 1fr; gap: 12px; }
