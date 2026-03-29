@@ -739,6 +739,7 @@ ul, ol { list-style: none; }
   object-fit: cover;
   z-index: 3;
   will-change: clip-path;
+  border-radius: 6px;
 }
 
 .work-curtain {
