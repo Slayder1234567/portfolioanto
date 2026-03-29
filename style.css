@@ -1226,23 +1226,37 @@ ul, ol { list-style: none; }
   left: 20px;
   z-index: 10001;
   background: none;
-  border: 1.5px solid #ffffff;
-  border-radius: 4px;
+  border: none;
   cursor: pointer;
-  padding: 7px 6px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  color: #ffffff;
+  height: 28px;
+}
+
+.btn-bracket {
+  width: 6px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-icon {
+  display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 28px;
+  padding: 0 4px;
 }
 
 .menu-line {
   display: block;
-  width: 14px;
+  width: 16px;
   height: 1.5px;
-  background: #ffffff;
+  background: currentColor;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -1251,14 +1265,6 @@ ul, ol { list-style: none; }
 }
 .mobile-menu-btn.active .menu-line:last-child {
   transform: translateY(-2.75px) rotate(-45deg);
-}
-
-/* On-light border */
-.mobile-menu-btn.on-light {
-  border-color: #1a1a1a;
-}
-.mobile-menu-btn.active {
-  border-color: #ffffff !important;
 }
 
 .mobile-menu-overlay {
@@ -1308,9 +1314,8 @@ ul, ol { list-style: none; }
 }
 
 /* On-light state for mobile menu button */
-.ui-header.on-light ~ .mobile-menu-btn .menu-line,
-.mobile-menu-btn.on-light .menu-line { background: #1a1a1a; }
-.mobile-menu-btn.active .menu-line { background: #ffffff !important; }
+.mobile-menu-btn.on-light { color: #1a1a1a; }
+.mobile-menu-btn.active { color: #ffffff !important; }
 
 @media (max-width: 1024px) {
   .mobile-menu-btn { display: flex; }
