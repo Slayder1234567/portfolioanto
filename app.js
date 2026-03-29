@@ -403,12 +403,25 @@ document.addEventListener('DOMContentLoaded', () => {
     workPanels.forEach((panel, i) => {
       gsap.set(panel, {
         clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)',
-        zIndex: i + 1,  // higher index = on top
+        zIndex: i + 1,
       });
+      // All curtains start closed
+      const curtain = panel.querySelector('.work-curtain');
+      if (curtain) gsap.set(curtain, { xPercent: 0 });
     });
 
     // Build master timeline
     const workTL = gsap.timeline();
+
+    // Panel 0 curtain reveal at the start
+    const firstCurtain = workPanels[0].querySelector('.work-curtain');
+    if (firstCurtain) {
+      workTL.to(firstCurtain, {
+        xPercent: 100,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      });
+    }
 
     for (let i = 0; i < numPanels - 1; i++) {
       // Hold on current project before transitioning
@@ -420,6 +433,16 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 1,
         ease: 'none',
       });
+
+      // Curtain reveal on the new panel
+      const curtain = workPanels[i + 1].querySelector('.work-curtain');
+      if (curtain) {
+        workTL.to(curtain, {
+          xPercent: 100,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        });
+      }
 
       // Hold on new project
       if (i < numPanels - 2) {
@@ -434,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
       pinSpacing: true,
       scrub:      0.8,
       start:      'top top',
-      end:        `+=${numPanels * 100}%`,
+      end:        `+=${numPanels * 120}%`,
       animation:  workTL,
     });
   }
