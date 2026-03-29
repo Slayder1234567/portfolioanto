@@ -1258,6 +1258,8 @@ ul, ol { list-style: none; }
   .archive-date { position: static; display: flex; flex-direction: column; text-align: left; }
   .archive-date-year { display: block; }
   .archive-line { display: none; }
+  .work-media-wrap { max-width: 90vw; }
+  .work-panel-media { padding: 20px; justify-content: center; }
 }
 
 /* ─ Mobile menu ────────────────────────────────────────────── */
