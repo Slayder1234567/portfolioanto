@@ -575,16 +575,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'none',
       });
 
-      // Curtain reveal on the new panel
-      const curtain = workPanels[i + 1].querySelector('.work-curtain');
-      if (curtain) {
-        workTL.to(curtain, {
-          xPercent: 100,
-          duration: 0.5,
-          ease: 'power2.inOut',
-        });
-      }
-
       // Hold on new project
       if (i < numPanels - 2) {
         workTL.to({}, { duration: 0.3 });
@@ -640,12 +630,6 @@ document.addEventListener('DOMContentLoaded', () => {
           window.scrollTo(0, targetScroll);
           ScrollTrigger.refresh();
 
-          // Ensure the target panel's curtain is fully off-screen
-          const targetPanel = workPanels[targetIndex];
-          if (targetPanel) {
-            const curtain = targetPanel.querySelector('.work-curtain');
-            if (curtain) gsap.set(curtain, { xPercent: 100 });
-          }
           // Small delay to let ScrollTrigger settle
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
