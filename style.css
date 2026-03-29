@@ -188,6 +188,7 @@ ul, ol { list-style: none; }
   position: relative;
   border-radius: 4px;
   overflow: hidden;          /* clips fill to text bounds */
+  background: transparent;
 }
 
 /* Number — smaller font, top-aligned = superscript appearance */
@@ -272,6 +273,7 @@ ul, ol { list-style: none; }
   transition: opacity var(--dur-fast);
   overflow: hidden;
   border-radius: 4px;
+  background: transparent;
 }
 
 .nav-item.active .nav-progress-bar { opacity: 1; }
