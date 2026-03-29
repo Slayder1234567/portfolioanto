@@ -717,6 +717,8 @@ ul, ol { list-style: none; }
   object-fit: contain;
   display: block;
   border-radius: 20px;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   margin: auto;
   position: absolute;
   top: 50%;
