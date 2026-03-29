@@ -1193,19 +1193,7 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  .hero-thumbnails {
-    display: flex;
-    bottom: 20px;
-    right: 20px;
-    left: 20px;
-    gap: 8px;
-  }
-  .hero-thumb {
-    width: auto;
-    flex: 1;
-    height: 60px;
-  }
-  .hero-thumb figcaption { font-size: 7px; }
+  .hero-thumbnails { display: none; }
   .ui-header {
     top: 20px;
     left: 20px;
