@@ -410,21 +410,43 @@ document.addEventListener('DOMContentLoaded', () => {
       if (curtain) gsap.set(curtain, { xPercent: 0 });
     });
 
+    // Set up cover image + curtain for panel 0 (Stingers)
+    const firstCover = workPanels[0].querySelector('.work-cover-img');
+    const firstCurtain = workPanels[0].querySelector('.work-curtain');
+    const firstVideo = workPanels[0].querySelector('.work-media-wrap video');
+    if (firstCover) gsap.set(firstCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+    if (firstCurtain) gsap.set(firstCurtain, { xPercent: -100 });
+    if (firstVideo) firstVideo.play();
+
     // Build master timeline
     const workTL = gsap.timeline();
 
-    // Panel 0: fade out cover image to reveal video underneath
-    const firstCover = workPanels[0].querySelector('.work-cover-img');
-    const firstVideo = workPanels[0].querySelector('.work-media-wrap video');
-    if (firstCover) {
-      if (firstVideo) {
-        firstVideo.play();
-      }
+    // Panel 0: white curtain sweeps left→right, image clips away, video revealed
+    if (firstCover && firstCurtain) {
+      // Hold on the image first
+      workTL.to({}, { duration: 0.3 });
+
+      // Curtain enters from left + image clips from left simultaneously
+      workTL.to(firstCurtain, {
+        xPercent: 0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      }, 'curtain-in');
       workTL.to(firstCover, {
-        opacity: 0,
+        clipPath: 'inset(0% 0% 0% 100%)',
+        duration: 0.5,
+        ease: 'power2.inOut',
+      }, 'curtain-in');
+
+      // Curtain exits to the right, revealing video
+      workTL.to(firstCurtain, {
+        xPercent: 100,
         duration: 0.5,
         ease: 'power2.inOut',
       });
+
+      // Hold on the video
+      workTL.to({}, { duration: 0.3 });
     }
 
     for (let i = 0; i < numPanels - 1; i++) {
