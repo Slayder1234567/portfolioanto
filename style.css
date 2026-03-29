@@ -105,6 +105,17 @@ ul, ol { list-style: none; }
   z-index: 9999;
 }
 
+.ui-header.on-light .ui-name,
+.ui-header.on-light .ui-role,
+.ui-header.on-light .ui-time { color: #1a1a1a; }
+
+.ui-nav.on-light .nav-number,
+.ui-nav.on-light .nav-label { color: #1a1a1a; }
+.ui-nav.on-light .nav-link:hover .nav-number,
+.ui-nav.on-light .nav-item.active .nav-number,
+.ui-nav.on-light .nav-link:hover .nav-label,
+.ui-nav.on-light .nav-item.active .nav-label { color: #1a1a1a; }
+
 .ui-header-name {
   display: flex;
   flex-direction: column;

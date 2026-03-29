@@ -24,6 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ─────────────────────────────────────────────────────────
+  // 0. HEADER/NAV LIGHT-MODE TOGGLE ON HERO
+  // ─────────────────────────────────────────────────────────
+  const uiHeader = document.querySelector('.ui-header');
+  const uiNav    = document.querySelector('.ui-nav');
+  if (uiHeader && uiNav) {
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      onEnter:     () => { uiHeader.classList.add('on-light'); uiNav.classList.add('on-light'); },
+      onLeave:     () => { uiHeader.classList.remove('on-light'); uiNav.classList.remove('on-light'); },
+      onEnterBack: () => { uiHeader.classList.add('on-light'); uiNav.classList.add('on-light'); },
+      onLeaveBack: () => { uiHeader.classList.remove('on-light'); uiNav.classList.remove('on-light'); },
+    });
+    // Set initial state
+    uiHeader.classList.add('on-light');
+    uiNav.classList.add('on-light');
+  }
+
+  // ─────────────────────────────────────────────────────────
   // 1. LOADER
   // ─────────────────────────────────────────────────────────
   initLoader();
