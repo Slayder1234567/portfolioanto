@@ -44,6 +44,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────────────
+  // 0b. MOBILE MENU
+  // ─────────────────────────────────────────────────────────
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+  if (mobileMenuBtn && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.classList.toggle('active');
+      mobileMenuOverlay.classList.toggle('open');
+    });
+
+    mobileMenuOverlay.querySelectorAll('.mobile-menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuOverlay.classList.remove('open');
+      });
+    });
+
+    // Sync on-light state with menu button
+    if (uiHeader) {
+      const syncMenuBtn = () => {
+        if (uiHeader.classList.contains('on-light')) {
+          mobileMenuBtn.classList.add('on-light');
+        } else {
+          mobileMenuBtn.classList.remove('on-light');
+        }
+      };
+      syncMenuBtn();
+      new MutationObserver(syncMenuBtn).observe(uiHeader, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────
   // 1. LOADER
   // ─────────────────────────────────────────────────────────
   initLoader();
