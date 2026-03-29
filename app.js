@@ -603,6 +603,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ─────────────────────────────────────────────────────────
+  // Δ HERO THUMBNAILS — Fade-navigate to work panels
+  // ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.hero-thumb[data-project]').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const targetIndex = parseInt(thumb.dataset.project, 10);
+      const workSection = document.getElementById('work');
+      if (!workSection) return;
+
+      // Calculate the scroll position for the target panel
+      const workST = ScrollTrigger.getAll().find(
+        st => st.trigger === workSection || st.vars.trigger === '#work'
+      );
+      if (!workST) return;
+
+      // For panel 0: scroll to start of work section
+      // For panel 1+: scroll further into the pinned section
+      const panelProgress = targetIndex / numPanels;
+      const targetScroll = workST.start + (workST.end - workST.start) * panelProgress;
+
+      // Fade out
+      const overlay = document.createElement('div');
+      Object.assign(overlay.style, {
+        position: 'fixed', inset: '0', background: '#000',
+        opacity: '0', zIndex: '9999', pointerEvents: 'none',
+      });
+      document.body.appendChild(overlay);
+
+      gsap.timeline()
+        .to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.in' })
+        .call(() => {
+          // Instant scroll (no smooth) to the target panel
+          lenis.stop();
+          window.scrollTo(0, targetScroll);
+          ScrollTrigger.refresh();
+          // Small delay to let ScrollTrigger settle
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              lenis.start();
+              // Fade in
+              gsap.to(overlay, {
+                opacity: 0, duration: 0.4, ease: 'power2.out',
+                onComplete: () => overlay.remove(),
+              });
+            });
+          });
+        });
+    });
+  });
+
   // Freeze glow background videos at frame 0
   document.querySelectorAll('.work-panel-glow video').forEach(v => {
     v.currentTime = 0;
