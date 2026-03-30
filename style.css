@@ -1254,6 +1254,7 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 768px) {
+  .cursor { display: none !important; }
   .hero-thumbnails { display: none; }
   .ui-header {
     top: 14px;
