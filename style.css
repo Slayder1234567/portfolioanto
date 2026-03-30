@@ -290,6 +290,10 @@ ul, ol { list-style: none; }
 /* ────────────────────────────────────────────────────────────────
    5. CURSOR — GSAP animates between dot and vertical bar
 ──────────────────────────────────────────────────────────────── */
+@media (pointer: coarse) {
+  .cursor { display: none !important; }
+}
+
 .cursor {
   position: fixed;
   top: 0;
@@ -1254,7 +1258,6 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  .cursor { display: none !important; }
   .hero-thumbnails { display: none; }
   .ui-header {
     top: 14px;
