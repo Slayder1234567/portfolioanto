@@ -1210,7 +1210,7 @@ ul, ol { list-style: none; }
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background: rgba(14, 14, 14, 0.75);
+    background: rgba(14, 14, 14, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: #fff;
