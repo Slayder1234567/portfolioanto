@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smooth: true,
     mouseMultiplier: 1.1,
-    touchMultiplier: 2,
+    touchMultiplier: 4,
   });
 
   gsap.ticker.add((time) => lenis.raf(time * 1000));
