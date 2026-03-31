@@ -1048,10 +1048,10 @@ ul, ol { list-style: none; }
 
 .contact-bg-logo {
   position: absolute;
-  right: -5%;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
-  width: clamp(400px, 55vw, 800px);
+  transform: translate(-50%, -50%);
+  width: clamp(600px, 90vw, 1200px);
   opacity: 0.08;
   pointer-events: none;
   user-select: none;
