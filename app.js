@@ -321,57 +321,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────────────
-  // 7. PORTAL OPENING
-  // ─────────────────────────────────────────────────────────
-  const portalTL = gsap.timeline({
-    scrollTrigger: {
-      trigger:      '#hero',
-      pin:          true,
-      pinSpacing:   true,
-      scrub:        1,
-      start:        'top top',
-      end:          '+=150%',
-      anticipatePin: 1,
-      // onLeave intentionally absent — portal stays visible through the
-      // GSAP spacer zone so the user never sees the white hero.
-      // The portal is hidden only when #info reaches the viewport (below).
-      onEnterBack: () => {
-        // Scrolling back into the hero pin zone — restore portal
-        gsap.set('#hero-portal', { autoAlpha: 1 });
-      },
-    }
-  });
-
-  portalTL
-    .fromTo('#hero-portal',
-      { clipPath: 'inset(50% 0 50% 0)' },
-      { clipPath: 'inset(0% 0 0% 0)', ease: 'none' }
-    )
-    .fromTo('#portal-about',
-      { opacity: 0 },
-      { opacity: 1, ease: 'power2.in' },
-      '<'
-    );
-
-  // ─────────────────────────────────────────────────────────
-  // 7b. PORTAL HANDOFF — hide portal when #info reaches viewport top
-  //
-  //  At this exact moment the sticky #about-bg is visually identical
-  //  to #portal-about → the transition is invisible.
-  //  body bg is also set to #121212 so the nav column matches #info.
+  // 7. BG COLOR TRANSITION — hero (white) → info (dark)
   // ─────────────────────────────────────────────────────────
   ScrollTrigger.create({
     trigger:     '#info',
-    start:       'top top',
-    onEnter:     () => {
-      gsap.set('#hero-portal', { autoAlpha: 0 });
-      gsap.set('body', { backgroundColor: '#121212' });
-    },
-    onLeaveBack: () => {
-      // Scrolling back above #info — portal must cover the spacer again
-      gsap.set('#hero-portal', { autoAlpha: 1 });
-      gsap.set('body', { backgroundColor: 'var(--bg)' });
-    },
+    start:       'top 80%',
+    end:         'top top',
+    onEnter:     () => { gsap.to('body', { backgroundColor: '#121212', duration: 0.4 }); },
+    onLeaveBack: () => { gsap.to('body', { backgroundColor: 'var(--bg)', duration: 0.4 }); },
   });
 
   // ─────────────────────────────────────────────────────────
