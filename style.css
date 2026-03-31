@@ -502,8 +502,9 @@ ul, ol { list-style: none; }
 ──────────────────────────────────────────────────────────────── */
 #info {
   position: relative;
-  min-height: 100vh;
+  min-height: 200vh;
   padding: 0;
+  background: #121212;
 }
 
 .about-sticky-wrap {
