@@ -373,11 +373,13 @@ ul, ol { list-style: none; }
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   width: clamp(500px, 70vw, 1000px);
   z-index: 1;
   pointer-events: none;
   user-select: none;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .hero-logo video {
