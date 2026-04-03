@@ -1223,49 +1223,7 @@ ul, ol { list-style: none; }
 /* ────────────────────────────────────────────────────────────────
    15. RESPONSIVE
 ──────────────────────────────────────────────────────────────── */
-#mobile-splash {
-  display: none;
-}
-
 @media (max-width: 1024px) {
-  #mobile-splash {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    background: rgba(14, 14, 14, 0.25);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #fff;
-    text-align: center;
-    padding: 40px;
-    font-family: 'Space Mono', monospace;
-  }
-  #mobile-splash.hidden { display: none; }
-  #mobile-splash p {
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 280px;
-    margin-bottom: 32px;
-    letter-spacing: 0.02em;
-  }
-  #mobile-splash-btn {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 12px 36px;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: border-color 0.3s;
-  }
-  #mobile-splash-btn:hover { border-color: #fff; }
-
   :root { --nav-w: 0px; --edge: 24px; }
 
   .ui-nav { display: none; }

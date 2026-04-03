@@ -43,16 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     uiNav.classList.add('on-light');
   }
 
-  // ─────────────────────────────────────────────────────────
-  // 0a. MOBILE SPLASH SCREEN
-  // ─────────────────────────────────────────────────────────
-  const mobileSplash = document.getElementById('mobile-splash');
-  const mobileSplashBtn = document.getElementById('mobile-splash-btn');
-  if (mobileSplash && mobileSplashBtn) {
-    mobileSplashBtn.addEventListener('click', () => {
-      mobileSplash.classList.add('hidden');
-    });
-  }
 
   // ─────────────────────────────────────────────────────────
   // 0b. MOBILE MENU
