@@ -551,6 +551,49 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // Panel 2 (Cincta): hover curtain reveal (same as Stingers & CutsInnit)
+    const cinctaWrap = workPanels[2] && workPanels[2].querySelector('.work-media-wrap');
+    const cinctaCover = workPanels[2] && workPanels[2].querySelector('.work-cover-img');
+    const cinctaCurtain = workPanels[2] && workPanels[2].querySelector('.work-curtain');
+    const cinctaVideo = workPanels[2] && workPanels[2].querySelector('.work-media-wrap video');
+
+    if (cinctaWrap && cinctaCover && cinctaCurtain && cinctaVideo) {
+      gsap.set(cinctaCurtain, { xPercent: -100 });
+      gsap.set(cinctaCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+      let cinctaHoverTL = null;
+
+      cinctaWrap.addEventListener('mouseenter', () => {
+        if (cinctaHoverTL) cinctaHoverTL.kill();
+        cinctaVideo.currentTime = 0;
+        cinctaVideo.play();
+        cinctaHoverTL = gsap.timeline();
+        cinctaHoverTL.set(cinctaCover, { clipPath: 'inset(0% 0% 0% 0%)' });
+        cinctaHoverTL.fromTo(cinctaCurtain,
+          { xPercent: -100 },
+          { xPercent: 100, duration: 0.4, ease: 'power2.inOut' }
+        );
+        cinctaHoverTL.to(cinctaCover, {
+          clipPath: 'inset(0% 0% 0% 100%)',
+          duration: 0.4,
+          ease: 'power2.inOut',
+        }, '<');
+      });
+
+      cinctaWrap.addEventListener('mouseleave', () => {
+        if (cinctaHoverTL) cinctaHoverTL.kill();
+        cinctaHoverTL = gsap.timeline();
+        cinctaHoverTL.fromTo(cinctaCurtain,
+          { xPercent: 100 },
+          { xPercent: -100, duration: 0.4, ease: 'power2.inOut' }
+        );
+        cinctaHoverTL.to(cinctaCover, {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 0.4,
+          ease: 'power2.inOut',
+        }, '<');
+      });
+    }
+
     // Build master timeline
     const workTL = gsap.timeline();
 
