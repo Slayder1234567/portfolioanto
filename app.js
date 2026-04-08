@@ -641,11 +641,11 @@ document.addEventListener('DOMContentLoaded', () => {
       );
       if (!workST) return;
 
-      // For panel 0: scroll to start of work section
-      // For panel 1+: scroll past the full transition so the panel is fully revealed
+      // Calculate scroll position proportionally for each panel index
+      const totalPanels = gsap.utils.toArray('.work-panel').length;
       const targetScroll = targetIndex === 0
         ? workST.start
-        : workST.end;
+        : workST.start + (workST.end - workST.start) * (targetIndex / (totalPanels - 1));
 
       // Fade out
       const overlay = document.createElement('div');
