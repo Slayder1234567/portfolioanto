@@ -669,6 +669,7 @@ ul, ol { list-style: none; }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background: #0a0a0a;
 }
 
 /* ─ Ambient glow (blurred bg inside each panel) ───────────── */
