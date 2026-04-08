@@ -132,7 +132,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (scrollToTopEl) {
     scrollToTopEl.addEventListener('click', e => {
       e.preventDefault();
-      lenis.scrollTo(0, { duration: 1.6, easing: t => 1 - Math.pow(1 - t, 4) });
+      const overlay = document.createElement('div');
+      Object.assign(overlay.style, {
+        position: 'fixed', inset: '0', background: '#000',
+        opacity: '0', zIndex: '9999', pointerEvents: 'none',
+      });
+      document.body.appendChild(overlay);
+      gsap.timeline()
+        .to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.in' })
+        .call(() => {
+          lenis.stop();
+          window.scrollTo(0, 0);
+          ScrollTrigger.refresh();
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              lenis.start();
+              gsap.to(overlay, {
+                opacity: 0, duration: 0.4, ease: 'power2.out',
+                onComplete: () => overlay.remove(),
+              });
+            });
+          });
+        });
     });
   }
 
