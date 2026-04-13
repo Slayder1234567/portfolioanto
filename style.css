@@ -451,20 +451,17 @@ ul, ol { list-style: none; }
   align-self: flex-start;
 }
 
-/* --> Projects CTA — top centre of hero */
+/* --> Projects CTA — above hero thumbnails */
 .hero-projects-cta {
-  position: absolute;
-  top: var(--edge);
-  left: 50%;
-  transform: translateX(-50%);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
   color: #1a1a1a;
   letter-spacing: 0.1em;
   text-decoration: none;
-  z-index: 2;
   white-space: nowrap;
+  align-self: flex-end;
+  margin-bottom: 6px;
 }
 .hero-projects-cta:hover { opacity: 0.5; }
 
