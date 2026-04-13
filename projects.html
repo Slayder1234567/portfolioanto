@@ -13,12 +13,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    if (sessionStorage.getItem('fromHome')) {
-      document.documentElement.classList.add('enter-right');
-      sessionStorage.removeItem('fromHome');
-    }
-  </script>
 
   <style>
     body { background: #ffffff; color: #1a1a1a; }
@@ -95,15 +89,6 @@
   <script>
     window.addEventListener('load', () => {
 
-      // ── BACK — exit animation ───────────────────────────────
-      document.querySelector('.projects-back').addEventListener('click', e => {
-        e.preventDefault();
-        sessionStorage.setItem('fromProjects', '1');
-        gsap.to(document.documentElement, {
-          x: '100vw', duration: 0.45, ease: 'power2.inOut',
-          onComplete: () => { window.location.href = 'index.html'; }
-        });
-      });
 
       // ── Clock ──────────────────────────────────────────────
       function updateClock() {

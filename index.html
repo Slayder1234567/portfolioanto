@@ -25,12 +25,6 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 
   <link rel="stylesheet" href="style.css" />
-  <script>
-    if (sessionStorage.getItem('fromProjects')) {
-      document.documentElement.classList.add('enter-left');
-      sessionStorage.removeItem('fromProjects');
-    }
-  </script>
 </head>
 <body>
 
@@ -483,20 +477,5 @@ they remember.</p>
 
   <script src="app.js" defer></script>
 
-  <script>
-    window.addEventListener('load', () => {
-      const projectsBtn = document.querySelector('.hero-projects-cta');
-      if (projectsBtn) {
-        projectsBtn.addEventListener('click', e => {
-          e.preventDefault();
-          sessionStorage.setItem('fromHome', '1');
-          gsap.to(document.documentElement, {
-            x: '-100vw', duration: 0.45, ease: 'power2.inOut',
-            onComplete: () => { window.location.href = 'projects.html'; }
-          });
-        });
-      }
-    });
-  </script>
 </body>
 </html>

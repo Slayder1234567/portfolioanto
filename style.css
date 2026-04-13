@@ -10,20 +10,6 @@
 ================================================================ */
 
 /* ────────────────────────────────────────────────────────────────
-   PAGE TRANSITIONS — horizontal slide
-──────────────────────────────────────────────────────────────── */
-@keyframes page-enter-right {
-  from { transform: translateX(100vw); }
-  to   { transform: translateX(0); }
-}
-@keyframes page-enter-left {
-  from { transform: translateX(-100vw); }
-  to   { transform: translateX(0); }
-}
-html.enter-right { animation: page-enter-right 0.45s cubic-bezier(0.77, 0, 0.175, 1) both; }
-html.enter-left  { animation: page-enter-left  0.45s cubic-bezier(0.77, 0, 0.175, 1) both; }
-
-/* ────────────────────────────────────────────────────────────────
    0. CUSTOM FONTS
 ──────────────────────────────────────────────────────────────── */
 @font-face {
