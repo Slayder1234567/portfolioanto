@@ -454,7 +454,7 @@ ul, ol { list-style: none; }
 /* → PROJECTS CTA — top right of hero */
 .hero-projects-cta {
   position: absolute;
-  top: calc(var(--edge) + 250px);
+  top: calc(var(--edge) + 260px);
   right: var(--edge);
   font-family: var(--font-mono);
   font-size: 12px;
