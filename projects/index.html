@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Antonin Le Cleï</title>
+  <link rel="icon" type="image/png" href="../favicon-circle.png" />
+  <link rel="apple-touch-icon" href="../favicon-circle.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <script>document.documentElement.classList.add('entering');</script>
+
+  <style>
+    body { background: #ffffff; color: #1a1a1a; }
+
+    .projects-page {
+      margin-left: var(--nav-w);
+      padding: 140px var(--edge) 80px;
+      min-height: 100vh;
+    }
+
+    .projects-back {
+      position: fixed;
+      top: var(--edge);
+      left: var(--edge);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #1a1a1a;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .projects-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .project-content { width: 100%; }
+
+    @media (max-width: 1024px) {
+      .projects-page { margin-left: 0; padding: 100px var(--edge) 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ui-header">
+    <div class="ui-header-name">
+      <a href="/" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
+      <span class="ui-role">DIGITAL DESIGNER</span>
+    </div>
+    <div class="ui-header-time">
+      <span class="ui-time" id="clockTime">--:-- --</span>
+      <span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>
+    </div>
+  </div>
+
+  <div class="page-overlay"></div>
+
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+  </div>
+
+  <a href="/" class="projects-back"><span style="font-size:28px">←</span> <span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">B</span><span class="nav-char-bot" style="transition-delay:0s">B</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">A</span><span class="nav-char-bot" style="transition-delay:.02s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">C</span><span class="nav-char-bot" style="transition-delay:.04s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">K</span><span class="nav-char-bot" style="transition-delay:.06s">K</span></span></a>
+
+  <main class="projects-page">
+
+    <p class="projects-title">Projects</p>
+
+    <div class="project-content">
+      <!-- Ajoute ton projet ici -->
+    </div>
+
+  </main>
+
+  <script>
+    window.addEventListener('load', () => {
+
+      // ── BACK / ANTONIN LE CLEÏ — fondu noir vers /
+      ['.projects-back', '.ui-name'].forEach(sel => {
+        document.querySelector(sel)?.addEventListener('click', e => {
+          e.preventDefault();
+          gsap.to('.page-overlay', {
+            opacity: 1, duration: 0.3, ease: 'power2.in',
+            onComplete: () => { window.location.href = '/'; }
+          });
+        });
+      });
+
+      // ── Clock ──────────────────────────────────────────────
+      function updateClock() {
+        const now = new Date();
+        const h = now.getHours() % 12 || 12;
+        const m = String(now.getMinutes()).padStart(2,'0');
+        const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+        const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+        const d = String(now.getDate()).padStart(2,'0');
+        const mon = months[now.getMonth()];
+        const y = now.getFullYear();
+        const t = document.getElementById('clockTime');
+        const dt = document.getElementById('clockDate');
+        if (t) t.textContent = `${h}:${m} ${ampm}`;
+        if (dt) dt.textContent = `${d} ${mon} ${y} [CA]`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // ── Light mode header ──────────────────────────────────
+      document.querySelector('.ui-header')?.classList.add('on-light');
+
+      // ── Custom cursor ──────────────────────────────────────
+      const cursorEl  = document.getElementById('cursor');
+      const cursorDot = document.getElementById('cursorDot');
+
+      document.addEventListener('mousemove', e => {
+        gsap.set(cursorEl, { x: e.clientX, y: e.clientY });
+        updateCursorState(e.target);
+      });
+      document.addEventListener('mouseleave', () => gsap.to(cursorDot, { opacity: 0, duration: 0.2 }));
+      document.addEventListener('mouseenter', () => gsap.to(cursorDot, { opacity: 1, duration: 0.2 }));
+
+      const STATES = {
+        dot:  { width: 7,  height: 7,  borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+        bar:  { width: 2,  height: 22, borderRadius: '1px', duration: 0.18, ease: 'power3.out' },
+        grow: { width: 11, height: 11, borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+      };
+      let activeCursorState = 'dot';
+      const TEXT_TAGS = new Set(['P','H1','H2','H3','H4','H5','H6','SPAN','LI']);
+      const CLICKABLE = 'a, button, label';
+
+      function getDesiredState(target) {
+        let el = target;
+        while (el && el !== document.documentElement) {
+          if (el.matches && el.matches(CLICKABLE)) return 'grow';
+          if (TEXT_TAGS.has(el.tagName)) {
+            if (el.closest(CLICKABLE)) return 'grow';
+            return 'bar';
+          }
+          el = el.parentElement;
+        }
+        return 'dot';
+      }
+      function updateCursorState(target) {
+        const desired = getDesiredState(target);
+        if (desired === activeCursorState) return;
+        activeCursorState = desired;
+        gsap.to(cursorDot, STATES[desired]);
+      }
+
+    });
+  </script>
+
+</body>
+</html>
