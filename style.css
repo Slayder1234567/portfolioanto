@@ -456,9 +456,6 @@ ul, ol { list-style: none; }
   position: absolute;
   top: calc(var(--edge) + 270px);
   right: var(--edge);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
@@ -466,10 +463,8 @@ ul, ol { list-style: none; }
   letter-spacing: 0.1em;
   text-decoration: none;
   white-space: nowrap;
-  line-height: 1;
   z-index: 2;
 }
-.hero-projects-cta span { line-height: 1; vertical-align: middle; }
 .hero-projects-cta:hover { opacity: 0.5; }
 
 /* Thumbnails */
