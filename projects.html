@@ -13,6 +13,12 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    if (sessionStorage.getItem('fromHome')) {
+      document.documentElement.classList.add('enter-right');
+      sessionStorage.removeItem('fromHome');
+    }
+  </script>
 
   <style>
     body { background: #ffffff; color: #1a1a1a; }
@@ -89,23 +95,12 @@
   <script>
     window.addEventListener('load', () => {
 
-      // ── Entry animation — coming from home ─────────────────
-      if (sessionStorage.getItem('fromHome')) {
-        sessionStorage.removeItem('fromHome');
-        document.documentElement.style.overflow = 'hidden';
-        gsap.from(['main.projects-page', '.ui-header', '.projects-back'], {
-          x: '100vw', duration: 0.6, ease: 'power2.inOut',
-          onComplete: () => { document.documentElement.style.overflow = ''; }
-        });
-      }
-
       // ── BACK — exit animation ───────────────────────────────
       document.querySelector('.projects-back').addEventListener('click', e => {
         e.preventDefault();
-        document.documentElement.style.overflow = 'hidden';
         sessionStorage.setItem('fromProjects', '1');
-        gsap.to(['main.projects-page', '.ui-header', '.projects-back'], {
-          x: '100vw', duration: 0.6, ease: 'power2.inOut',
+        gsap.to(document.documentElement, {
+          x: '100vw', duration: 0.45, ease: 'power2.inOut',
           onComplete: () => { window.location.href = 'index.html'; }
         });
       });

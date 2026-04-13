@@ -25,6 +25,12 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 
   <link rel="stylesheet" href="style.css" />
+  <script>
+    if (sessionStorage.getItem('fromProjects')) {
+      document.documentElement.classList.add('enter-left');
+      sessionStorage.removeItem('fromProjects');
+    }
+  </script>
 </head>
 <body>
 
@@ -479,25 +485,13 @@ they remember.</p>
 
   <script>
     window.addEventListener('load', () => {
-      // Entry animation — coming back from projects page
-      if (sessionStorage.getItem('fromProjects')) {
-        sessionStorage.removeItem('fromProjects');
-        document.documentElement.style.overflow = 'hidden';
-        gsap.from(['.content-layer', '.ui-header', '.ui-nav'], {
-          x: '-100vw', duration: 0.6, ease: 'power2.inOut',
-          onComplete: () => { document.documentElement.style.overflow = ''; }
-        });
-      }
-
-      // Exit animation — going to projects page
       const projectsBtn = document.querySelector('.hero-projects-cta');
       if (projectsBtn) {
         projectsBtn.addEventListener('click', e => {
           e.preventDefault();
-          document.documentElement.style.overflow = 'hidden';
           sessionStorage.setItem('fromHome', '1');
-          gsap.to(['.content-layer', '.ui-header', '.ui-nav'], {
-            x: '-100vw', duration: 0.6, ease: 'power2.inOut',
+          gsap.to(document.documentElement, {
+            x: '-100vw', duration: 0.45, ease: 'power2.inOut',
             onComplete: () => { window.location.href = 'projects.html'; }
           });
         });
