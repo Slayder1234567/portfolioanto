@@ -85,26 +85,76 @@
   </main>
 
   <script>
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      const h = now.getHours() % 12 || 12;
-      const m = String(now.getMinutes()).padStart(2,'0');
-      const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
-      const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
-      const d = String(now.getDate()).padStart(2,'0');
-      const mon = months[now.getMonth()];
-      const y = now.getFullYear();
-      const t = document.getElementById('clockTime');
-      const dt = document.getElementById('clockDate');
-      if (t) t.textContent = `${h}:${m} ${ampm}`;
-      if (dt) dt.textContent = `${d} ${mon} ${y} [CA]`;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
+    window.addEventListener('load', () => {
 
-    // Light mode header
-    document.querySelector('.ui-header')?.classList.add('on-light');
+      // ── Clock ──────────────────────────────────────────────
+      function updateClock() {
+        const now = new Date();
+        const h = now.getHours() % 12 || 12;
+        const m = String(now.getMinutes()).padStart(2,'0');
+        const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+        const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+        const d = String(now.getDate()).padStart(2,'0');
+        const mon = months[now.getMonth()];
+        const y = now.getFullYear();
+        const t = document.getElementById('clockTime');
+        const dt = document.getElementById('clockDate');
+        if (t) t.textContent = `${h}:${m} ${ampm}`;
+        if (dt) dt.textContent = `${d} ${mon} ${y} [CA]`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // ── Light mode header ──────────────────────────────────
+      document.querySelector('.ui-header')?.classList.add('on-light');
+      document.querySelector('.ui-nav')?.classList.add('on-light');
+
+      // ── Custom cursor ──────────────────────────────────────
+      const cursorEl  = document.getElementById('cursor');
+      const cursorDot = document.getElementById('cursorDot');
+
+      document.addEventListener('mousemove', e => {
+        gsap.set(cursorEl, { x: e.clientX, y: e.clientY });
+        updateCursorState(e.target);
+      });
+      document.addEventListener('mouseleave', () => {
+        gsap.to(cursorDot, { opacity: 0, duration: 0.2 });
+      });
+      document.addEventListener('mouseenter', () => {
+        gsap.to(cursorDot, { opacity: 1, duration: 0.2 });
+      });
+
+      const STATES = {
+        dot:  { width: 7,  height: 7,  borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+        bar:  { width: 2,  height: 22, borderRadius: '1px', duration: 0.18, ease: 'power3.out' },
+        grow: { width: 11, height: 11, borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+      };
+
+      let activeCursorState = 'dot';
+      const TEXT_TAGS = new Set(['P','H1','H2','H3','H4','H5','H6','SPAN','LI']);
+      const CLICKABLE = 'a, button, label';
+
+      function getDesiredState(target) {
+        let el = target;
+        while (el && el !== document.documentElement) {
+          if (el.matches && el.matches(CLICKABLE)) return 'grow';
+          if (TEXT_TAGS.has(el.tagName)) {
+            if (el.closest(CLICKABLE)) return 'grow';
+            return 'bar';
+          }
+          el = el.parentElement;
+        }
+        return 'dot';
+      }
+
+      function updateCursorState(target) {
+        const desired = getDesiredState(target);
+        if (desired === activeCursorState) return;
+        activeCursorState = desired;
+        gsap.to(cursorDot, STATES[desired]);
+      }
+
+    });
   </script>
 
 </body>
