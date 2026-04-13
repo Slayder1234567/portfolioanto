@@ -461,7 +461,7 @@ ul, ol { list-style: none; }
   text-decoration: none;
   white-space: nowrap;
   align-self: flex-end;
-  margin-bottom: 6px;
+  margin-bottom: 20px;
 }
 .hero-projects-cta:hover { opacity: 0.5; }
 
