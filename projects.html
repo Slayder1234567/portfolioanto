@@ -24,17 +24,20 @@
     }
 
     .projects-back {
+      position: fixed;
+      top: var(--edge);
+      left: var(--edge);
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
       font-size: 12px;
-      color: var(--text-muted);
+      color: #1a1a1a;
       text-decoration: none;
       letter-spacing: 0.1em;
-      margin-bottom: 80px;
+      z-index: 100;
     }
-    .projects-back:hover { color: var(--text); }
+    .projects-back:hover { opacity: 0.5; }
 
     .projects-title {
       font-family: var(--font-mono);
@@ -72,9 +75,9 @@
     <div class="cursor-dot" id="cursorDot"></div>
   </div>
 
-  <main class="projects-page">
+  <a href="index.html" class="projects-back">← BACK</a>
 
-    <a href="index.html" class="projects-back">← BACK</a>
+  <main class="projects-page">
 
     <p class="projects-title">Projects</p>
 
