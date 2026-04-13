@@ -251,10 +251,14 @@ ul, ol { list-style: none; }
 }
 
 .nav-link:hover .nav-char-top,
-.ui-name:hover .nav-char-top { transform: translateY(-110%); }
+.ui-name:hover .nav-char-top,
+.hero-projects-cta:hover .nav-char-top,
+.projects-back:hover .nav-char-top { transform: translateY(-110%); }
 
 .nav-link:hover .nav-char-bot,
-.ui-name:hover .nav-char-bot { transform: translateY(0%); }
+.ui-name:hover .nav-char-bot,
+.hero-projects-cta:hover .nav-char-bot,
+.projects-back:hover .nav-char-bot { transform: translateY(0%); }
 
 .nav-char-space {
   display: inline-block;
@@ -474,7 +478,6 @@ ul, ol { list-style: none; }
   white-space: nowrap;
   z-index: 2;
 }
-.hero-projects-cta:hover { opacity: 0.5; }
 
 /* Thumbnails */
 .hero-thumbnails {
