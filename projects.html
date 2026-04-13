@@ -13,6 +13,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('fade-in');</script>
 
   <style>
     body { background: #ffffff; color: #1a1a1a; }
@@ -89,6 +90,15 @@
   <script>
     window.addEventListener('load', () => {
 
+
+      // ── BACK — fade out ────────────────────────────────────
+      document.querySelector('.projects-back').addEventListener('click', e => {
+        e.preventDefault();
+        gsap.to(document.documentElement, {
+          opacity: 0, duration: 0.3, ease: 'power2.in',
+          onComplete: () => { window.location.href = 'index.html'; }
+        });
+      });
 
       // ── Clock ──────────────────────────────────────────────
       function updateClock() {

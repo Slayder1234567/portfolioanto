@@ -25,6 +25,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 
   <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('fade-in');</script>
 </head>
 <body>
 
@@ -476,6 +477,16 @@ they remember.</p>
   </div>
 
   <script src="app.js" defer></script>
-
+  <script>
+    window.addEventListener('load', () => {
+      document.querySelector('.hero-projects-cta').addEventListener('click', e => {
+        e.preventDefault();
+        gsap.to(document.documentElement, {
+          opacity: 0, duration: 0.3, ease: 'power2.in',
+          onComplete: () => { window.location.href = 'projects.html'; }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
