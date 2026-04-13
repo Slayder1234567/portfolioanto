@@ -25,7 +25,7 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 
   <link rel="stylesheet" href="style.css" />
-  <script>document.documentElement.classList.add('fade-in');</script>
+  <script>document.documentElement.classList.add('entering');</script>
 </head>
 <body>
 
@@ -103,6 +103,8 @@
 
       </ul>
     </nav>
+
+  <div class="page-overlay"></div>
 
   <div class="cursor" id="cursor">
     <div class="cursor-dot" id="cursorDot"></div>
@@ -481,8 +483,8 @@ they remember.</p>
     window.addEventListener('load', () => {
       document.querySelector('.hero-projects-cta').addEventListener('click', e => {
         e.preventDefault();
-        gsap.to(document.documentElement, {
-          opacity: 0, duration: 0.3, ease: 'power2.in',
+        gsap.to('.page-overlay', {
+          opacity: 1, duration: 0.3, ease: 'power2.in',
           onComplete: () => { window.location.href = 'projects.html'; }
         });
       });

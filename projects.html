@@ -13,7 +13,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <link rel="stylesheet" href="style.css" />
-  <script>document.documentElement.classList.add('fade-in');</script>
+  <script>document.documentElement.classList.add('entering');</script>
 
   <style>
     body { background: #ffffff; color: #1a1a1a; }
@@ -69,6 +69,8 @@
     </div>
   </div>
 
+  <div class="page-overlay"></div>
+
   <div class="cursor" id="cursor">
     <div class="cursor-dot" id="cursorDot"></div>
   </div>
@@ -92,8 +94,8 @@
       // ── BACK — fade out ────────────────────────────────────
       document.querySelector('.projects-back').addEventListener('click', e => {
         e.preventDefault();
-        gsap.to(document.documentElement, {
-          opacity: 0, duration: 0.3, ease: 'power2.in',
+        gsap.to('.page-overlay', {
+          opacity: 1, duration: 0.3, ease: 'power2.in',
           onComplete: () => { window.location.href = 'index.html'; }
         });
       });

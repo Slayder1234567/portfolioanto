@@ -10,13 +10,23 @@
 ================================================================ */
 
 /* ────────────────────────────────────────────────────────────────
-   PAGE TRANSITIONS — fade
+   PAGE TRANSITIONS — black overlay
 ──────────────────────────────────────────────────────────────── */
-@keyframes page-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
+  opacity: 1;
+  pointer-events: none;
 }
-html.fade-in { animation: page-fade-in 0.35s ease both; }
+@keyframes overlay-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+html.entering .page-overlay {
+  animation: overlay-out 0.4s ease forwards;
+}
 
 /* ────────────────────────────────────────────────────────────────
    0. CUSTOM FONTS
