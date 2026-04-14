@@ -1181,6 +1181,19 @@ ul, ol { list-style: none; }
 
 .site-footer p { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); width: fit-content; }
 
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+.footer-docs-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.footer-docs-link:hover { color: var(--text); }
+
 /* ────────────────────────────────────────────────────────────────
    13. LOADER
 ──────────────────────────────────────────────────────────────── */
