@@ -78,16 +78,50 @@
       margin: 36px 0;
     }
 
-    .proj-desc {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      line-height: 1.8;
-      color: #444;
-      max-width: 620px;
-      margin-bottom: 48px;
+    /* ── Overview (metadata + text) ── */
+    .proj-overview {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 64px;
+      margin-bottom: 64px;
     }
 
-    /* ── Metrics ── */
+    .proj-meta {
+      padding-top: 4px;
+    }
+
+    .proj-meta-item {
+      margin-bottom: 28px;
+    }
+
+    .proj-meta-key {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: #bbb;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .proj-meta-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    .proj-body p {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 22px;
+    }
+
+    .proj-body p:last-child { margin-bottom: 0; }
+
+    /* ── Documents section label ── */
     .proj-section-label {
       font-family: var(--font-mono);
       font-size: 9px;
@@ -96,87 +130,6 @@
       text-transform: uppercase;
       margin-bottom: 16px;
     }
-
-    .proj-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid #e0e0e0;
-      margin-bottom: 56px;
-    }
-
-    .proj-metric {
-      padding: 24px 20px;
-      border-right: 1px solid #e0e0e0;
-    }
-    .proj-metric:last-child { border-right: none; }
-
-    .proj-metric-value {
-      font-family: var(--font-serif);
-      font-size: 26px;
-      font-weight: 700;
-      color: #1a1a1a;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .proj-metric-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #999;
-      text-transform: uppercase;
-    }
-
-    /* ── Scenarios ── */
-    .proj-scenarios {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid #e0e0e0;
-      margin-bottom: 56px;
-    }
-
-    .proj-scenario {
-      padding: 22px 20px;
-      border-right: 1px solid #e0e0e0;
-    }
-    .proj-scenario:last-child { border-right: none; }
-    .proj-scenario--base { background: #1a1a1a; }
-
-    .proj-scenario-name {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #888;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .proj-scenario-irr {
-      font-family: var(--font-serif);
-      font-size: 28px;
-      font-weight: 700;
-      color: #1a1a1a;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .proj-scenario--base .proj-scenario-irr { color: #fff; }
-
-    .proj-scenario-sub {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: #bbb;
-    }
-
-    .proj-scenario-npv {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #888;
-      margin-top: 10px;
-      display: block;
-    }
-    .proj-scenario--base .proj-scenario-npv { color: #aaa; }
 
     /* ── Documents ── */
     .proj-docs {
@@ -245,16 +198,12 @@
 
     @media (max-width: 1024px) {
       .proj-page { margin-left: 0; padding: 100px var(--edge) 60px; }
-      .proj-metrics { grid-template-columns: repeat(2, 1fr); }
-      .proj-metrics .proj-metric:nth-child(2) { border-right: none; }
-      .proj-metrics .proj-metric:nth-child(3),
-      .proj-metrics .proj-metric:nth-child(4) { border-top: 1px solid #e0e0e0; }
+      .proj-overview { grid-template-columns: 160px 1fr; gap: 0 40px; }
     }
 
     @media (max-width: 680px) {
-      .proj-scenarios { grid-template-columns: 1fr; }
-      .proj-scenario { border-right: none; border-bottom: 1px solid #333; }
-      .proj-scenario:last-child { border-bottom: none; }
+      .proj-overview { grid-template-columns: 1fr; }
+      .proj-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin-bottom: 32px; }
       .proj-docs { grid-template-columns: 1fr; }
     }
   </style>
@@ -292,56 +241,69 @@
 
       <div class="proj-divider"></div>
 
-      <p class="proj-desc">
-        Full investment analysis of a multi-residential income property in Montréal.
-        The study covers property valuation, market fundamentals, three-scenario DCF modelling
-        (pessimistic / base / optimistic), capital stack structuring, and risk-adjusted
-        return analysis — with a levered IRR of <strong>11.73%</strong> against an equity
-        hurdle of 8.27% in the base case.
-      </p>
+      <!-- Overview: metadata + body text -->
+      <div class="proj-overview">
 
-      <!-- Key metrics -->
-      <p class="proj-section-label">Key Metrics — Base Case</p>
-      <div class="proj-metrics">
-        <div class="proj-metric">
-          <span class="proj-metric-value">$2.685M</span>
-          <span class="proj-metric-label">Purchase Price</span>
+        <div class="proj-meta">
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Type</span>
+            <span class="proj-meta-val">Real Estate<br>Investment Analysis</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Course</span>
+            <span class="proj-meta-val">FINA 210 — Finance<br>John Molson School<br>of Business</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Role</span>
+            <span class="proj-meta-val">Financial Analyst<br>Co-Author</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Team</span>
+            <span class="proj-meta-val">Antonin Le Cleï<br>A. Benchelabi<br>H. Cronin</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Year</span>
+            <span class="proj-meta-val">Winter 2026</span>
+          </div>
         </div>
-        <div class="proj-metric">
-          <span class="proj-metric-value">11.73%</span>
-          <span class="proj-metric-label">Levered IRR</span>
-        </div>
-        <div class="proj-metric">
-          <span class="proj-metric-value">+$165K</span>
-          <span class="proj-metric-label">Levered NPV</span>
-        </div>
-        <div class="proj-metric">
-          <span class="proj-metric-value">4.43%</span>
-          <span class="proj-metric-label">Cap Rate</span>
-        </div>
-      </div>
 
-      <!-- Scenarios -->
-      <p class="proj-section-label">Return Scenarios — Levered IRR</p>
-      <div class="proj-scenarios">
-        <div class="proj-scenario">
-          <p class="proj-scenario-name">Pessimistic</p>
-          <span class="proj-scenario-irr">6.71%</span>
-          <span class="proj-scenario-sub">Levered IRR</span>
-          <span class="proj-scenario-npv">NPV — $97,934</span>
+        <div class="proj-body">
+          <p>
+            For this project, my two partners and I acted as a real estate investment team pitching
+            a live deal to a panel of professors. We selected a multi-residential income property
+            at 4874–4896 Rue Drolet in Montréal's Plateau-Mont-Royal neighbourhood — a $2,685,000
+            asking price, fully tenanted, requiring zero renovation. Our goal was to determine
+            whether the acquisition generated adequate risk-adjusted returns for equity investors,
+            and to structure a compelling investment case from scratch.
+          </p>
+          <p>
+            I led the financial modelling work. We built a full three-scenario DCF model in Excel —
+            pessimistic, base case, and optimistic — each with distinct assumptions on revenue
+            growth, expense escalation, mortgage terms, and exit capitalization rate. I calculated
+            levered and unlevered IRRs and NPVs for each scenario, benchmarked them against
+            custom hurdle rates derived from WACC and cost-of-equity calculations, and
+            stress-tested the model against realistic market deterioration. In the base case,
+            the investment delivers a levered IRR of 11.73% against an equity hurdle of 8.27%,
+            generating a positive levered NPV of +$165,008.
+          </p>
+          <p>
+            Beyond the numbers, we conducted a rigorous market analysis of the Plateau-Mont-Royal
+            submarket — vacancy rates, average market rents, comparable cap rate transactions,
+            housing start trends, and macroeconomic indicators including the FOMC rate trajectory
+            and Canadian CPI rent inflation. We profiled the neighbourhood's tenant demographic in
+            detail: income levels, age distribution, education, and occupancy patterns — all of
+            which fed directly into our revenue growth assumptions and vacancy allowances.
+          </p>
+          <p>
+            We structured the deal as a limited partnership with a 65% senior mortgage, 17.5% GP
+            equity (our team), and 17.5% LP equity from outside investors — a total capitalization
+            of $2,738,700. We defined investor terms, modelled the Year 5 balloon payment, and
+            presented the full risk identification and mitigation framework. The final deliverable
+            was a 21-slide investor pitch deck and a 10-section written report, both of which are
+            available to download below.
+          </p>
         </div>
-        <div class="proj-scenario proj-scenario--base">
-          <p class="proj-scenario-name">Base Case ★</p>
-          <span class="proj-scenario-irr">11.73%</span>
-          <span class="proj-scenario-sub">Levered IRR</span>
-          <span class="proj-scenario-npv">NPV +$165,008</span>
-        </div>
-        <div class="proj-scenario">
-          <p class="proj-scenario-name">Optimistic</p>
-          <span class="proj-scenario-irr">17.79%</span>
-          <span class="proj-scenario-sub">Levered IRR</span>
-          <span class="proj-scenario-npv">NPV +$199,776</span>
-        </div>
+
       </div>
 
       <!-- Documents -->
