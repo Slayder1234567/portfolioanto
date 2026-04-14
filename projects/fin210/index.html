@@ -502,6 +502,7 @@
         loading.style.opacity = '1';
         viewer.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        gsap.to(cursorDot, { opacity: 0, duration: 0.15 });
 
         gsap.set(modal, { scale: 0.96, opacity: 0 });
         gsap.to(viewer, { opacity: 1, duration: 0.25, ease: 'power2.out' });
@@ -519,6 +520,7 @@
             viewer.classList.remove('is-open');
             frame.src = '';
             document.body.style.overflow = '';
+            gsap.to(cursorDot, { opacity: 1, duration: 0.15 });
           }
         });
       }
