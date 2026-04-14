@@ -444,9 +444,9 @@
       <p class="proj-section-label">Project Documents</p>
       <div class="proj-docs">
 
-        <button class="proj-doc" data-file="/FIN210/FIN210_Real_Estate_Project.docx" data-type="Word Document" data-name="Investment Report">
-          <span class="proj-doc-type">Word Document</span>
-          <span class="proj-doc-icon">[ W ]</span>
+        <button class="proj-doc" data-file="/FIN210/FIN210_Real_Estate_Project.pdf" data-type="PDF Document" data-name="Investment Report">
+          <span class="proj-doc-type">PDF Document</span>
+          <span class="proj-doc-icon">[ P ]</span>
           <span class="proj-doc-name">Investment Report</span>
           <span class="proj-doc-desc">Full 10-section research report covering property overview, market analysis, tenant demographics, scenario assumptions, capital stack, return analysis, and risk mitigation.</span>
           <span class="proj-doc-open">→ Open</span>
@@ -489,7 +489,10 @@
 
       function openViewer(fileRelPath, type, name) {
         const fileUrl = window.location.origin + fileRelPath;
-        const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
+        const isPdf = fileRelPath.toLowerCase().endsWith('.pdf');
+        const viewerUrl = isPdf
+          ? fileUrl
+          : 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
 
         viewType.textContent = type;
         viewName.textContent = name;
