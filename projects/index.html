@@ -46,236 +46,155 @@
       margin-bottom: 60px;
     }
 
-    .project-content { width: 100%; }
+    .project-list { width: 100%; max-width: 900px; }
 
-    /* ── Project Entry ── */
-    .project-entry {
-      max-width: 900px;
+    /* ── Project Card ── */
+    .project-card {
+      display: block;
+      text-decoration: none;
+      color: #1a1a1a;
+      border: 1px solid #e0e0e0;
+      padding: 40px 44px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
     }
 
-    .proj-index {
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1a1a1a;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+      z-index: 0;
+    }
+
+    .project-card:hover::before { transform: scaleY(1); }
+    .project-card:hover { border-color: #1a1a1a; }
+
+    .project-card > * { position: relative; z-index: 1; }
+
+    .pc-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .pc-index {
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.2em;
       color: #999;
-      margin-bottom: 18px;
+      transition: color 0.25s;
     }
 
-    .proj-title {
+    .pc-tags {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pc-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: #bbb;
+      text-transform: uppercase;
+      border: 1px solid #e0e0e0;
+      padding: 3px 8px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .project-card:hover .pc-index,
+    .project-card:hover .pc-tag { color: #666; border-color: #444; }
+
+    .pc-title {
       font-family: var(--font-serif);
-      font-size: clamp(36px, 5vw, 62px);
+      font-size: clamp(30px, 4vw, 50px);
       font-weight: 700;
       line-height: 1.05;
       color: #1a1a1a;
-      margin: 0 0 10px;
+      margin: 0 0 6px;
+      transition: color 0.25s;
     }
 
-    .proj-title em {
+    .pc-title em {
       font-style: italic;
       font-weight: 400;
     }
 
-    .proj-address {
+    .project-card:hover .pc-title { color: #ffffff; }
+
+    .pc-sub {
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      color: #888;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #999;
       text-transform: uppercase;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
+      transition: color 0.25s;
     }
 
-    .proj-divider {
+    .project-card:hover .pc-sub { color: #666; }
+
+    .pc-divider {
       width: 100%;
       height: 1px;
-      background: #e0e0e0;
-      margin: 36px 0;
+      background: #e8e8e8;
+      margin: 24px 0;
+      transition: background 0.25s;
     }
 
-    .proj-desc {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      line-height: 1.8;
-      color: #444;
-      max-width: 620px;
-      margin-bottom: 48px;
+    .project-card:hover .pc-divider { background: #333; }
+
+    .pc-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    /* ── Metrics ── */
-    .proj-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid #e0e0e0;
-      margin-bottom: 56px;
-    }
-
-    .proj-metric {
-      padding: 24px 20px;
-      border-right: 1px solid #e0e0e0;
-    }
-    .proj-metric:last-child { border-right: none; }
-
-    .proj-metric-value {
-      font-family: var(--font-serif);
-      font-size: 26px;
-      font-weight: 700;
-      color: #1a1a1a;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .proj-metric-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #999;
-      text-transform: uppercase;
-    }
-
-    /* ── Scenarios ── */
-    .proj-section-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      color: #999;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .proj-scenarios {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid #e0e0e0;
-      margin-bottom: 56px;
-    }
-
-    .proj-scenario {
-      padding: 22px 20px;
-      border-right: 1px solid #e0e0e0;
-    }
-    .proj-scenario:last-child { border-right: none; }
-    .proj-scenario--base { background: #1a1a1a; }
-
-    .proj-scenario-name {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #888;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .proj-scenario--base .proj-scenario-name { color: #888; }
-
-    .proj-scenario-irr {
-      font-family: var(--font-serif);
-      font-size: 28px;
-      font-weight: 700;
-      color: #1a1a1a;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .proj-scenario--base .proj-scenario-irr { color: #fff; }
-
-    .proj-scenario-sub {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: #bbb;
-    }
-    .proj-scenario--base .proj-scenario-sub { color: #888; }
-
-    .proj-scenario-npv {
+    .pc-desc {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: #888;
-      margin-top: 10px;
-      display: block;
-    }
-    .proj-scenario--base .proj-scenario-npv { color: #aaa; }
-
-    /* ── Documents ── */
-    .proj-docs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 0;
+      line-height: 1.75;
+      color: #666;
+      max-width: 520px;
+      transition: color 0.25s;
     }
 
-    .proj-doc {
-      border: 1px solid #e0e0e0;
-      padding: 28px 24px;
-      text-decoration: none;
+    .project-card:hover .pc-desc { color: #aaa; }
+
+    .pc-cta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
       color: #1a1a1a;
+      text-transform: uppercase;
+      white-space: nowrap;
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: border-color 0.2s, background 0.2s;
-      position: relative;
-      overflow: hidden;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.25s;
     }
 
-    .proj-doc:hover {
-      border-color: #1a1a1a;
-      background: #fafafa;
+    .pc-cta-arrow {
+      font-size: 20px;
+      transition: transform 0.25s;
     }
 
-    .proj-doc-type {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      color: #bbb;
-      text-transform: uppercase;
-    }
-
-    .proj-doc-icon {
-      font-family: var(--font-mono);
-      font-size: 22px;
-      color: #1a1a1a;
-      line-height: 1;
-    }
-
-    .proj-doc-name {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a1a;
-      line-height: 1.2;
-    }
-
-    .proj-doc-desc {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      line-height: 1.7;
-      color: #888;
-      flex: 1;
-    }
-
-    .proj-doc-dl {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      color: #1a1a1a;
-      text-transform: uppercase;
-      margin-top: 8px;
-    }
-
-    .proj-doc:hover .proj-doc-dl { text-decoration: underline; }
+    .project-card:hover .pc-cta { color: #ffffff; }
+    .project-card:hover .pc-cta-arrow { transform: translateX(4px); }
 
     @media (max-width: 1024px) {
       .projects-page { margin-left: 0; padding: 100px var(--edge) 60px; }
-      .proj-metrics { grid-template-columns: repeat(2, 1fr); }
-      .proj-metrics .proj-metric:nth-child(2) { border-right: none; }
-      .proj-metrics .proj-metric:nth-child(3),
-      .proj-metrics .proj-metric:nth-child(4) { border-top: 1px solid #e0e0e0; }
     }
 
-    @media (max-width: 680px) {
-      .proj-metrics { grid-template-columns: 1fr 1fr; }
-      .proj-scenarios { grid-template-columns: 1fr; }
-      .proj-scenario { border-right: none; border-bottom: 1px solid #333; }
-      .proj-scenario:last-child { border-bottom: none; }
-      .proj-scenario--base .proj-scenario { border-bottom-color: #333; }
-      .proj-docs { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      .project-card { padding: 28px 24px; }
+      .pc-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
 </head>
@@ -304,101 +223,31 @@
 
     <p class="projects-title">Projects</p>
 
-    <div class="project-content">
+    <div class="project-list">
 
-      <article class="project-entry">
-
-        <p class="proj-index">[01]</p>
-
-        <h1 class="proj-title">Real Estate<br><em>Investment Financing</em></h1>
-
-        <p class="proj-address">4874–4896 Rue Drolet, Montréal &nbsp;·&nbsp; Plateau-Mont-Royal / Mile End &nbsp;·&nbsp; FINA 210 — Winter 2026</p>
-
-        <div class="proj-divider"></div>
-
-        <p class="proj-desc">
-          Full investment analysis of a multi-residential income property in Montréal.
-          The study covers property valuation, market fundamentals, three-scenario DCF modelling
-          (pessimistic / base / optimistic), capital stack structuring, and risk-adjusted
-          return analysis — with a levered IRR of <strong>11.73%</strong> against an equity
-          hurdle of 8.27% in the base case.
-        </p>
-
-        <!-- Key metrics -->
-        <p class="proj-section-label">Key Metrics — Base Case</p>
-        <div class="proj-metrics">
-          <div class="proj-metric">
-            <span class="proj-metric-value">$2.685M</span>
-            <span class="proj-metric-label">Purchase Price</span>
-          </div>
-          <div class="proj-metric">
-            <span class="proj-metric-value">11.73%</span>
-            <span class="proj-metric-label">Levered IRR</span>
-          </div>
-          <div class="proj-metric">
-            <span class="proj-metric-value">+$165K</span>
-            <span class="proj-metric-label">Levered NPV</span>
-          </div>
-          <div class="proj-metric">
-            <span class="proj-metric-value">4.43%</span>
-            <span class="proj-metric-label">Cap Rate</span>
+      <a class="project-card" href="/projects/fin210">
+        <div class="pc-top">
+          <span class="pc-index">[01]</span>
+          <div class="pc-tags">
+            <span class="pc-tag">Finance</span>
+            <span class="pc-tag">Real Estate</span>
+            <span class="pc-tag">FINA 210</span>
           </div>
         </div>
 
-        <!-- Scenarios -->
-        <p class="proj-section-label">Return Scenarios — Levered IRR</p>
-        <div class="proj-scenarios">
-          <div class="proj-scenario">
-            <p class="proj-scenario-name">Pessimistic</p>
-            <span class="proj-scenario-irr">6.71%</span>
-            <span class="proj-scenario-sub">Levered IRR</span>
-            <span class="proj-scenario-npv">NPV — $97,934</span>
-          </div>
-          <div class="proj-scenario proj-scenario--base">
-            <p class="proj-scenario-name">Base Case ★</p>
-            <span class="proj-scenario-irr">11.73%</span>
-            <span class="proj-scenario-sub">Levered IRR</span>
-            <span class="proj-scenario-npv">NPV +$165,008</span>
-          </div>
-          <div class="proj-scenario">
-            <p class="proj-scenario-name">Optimistic</p>
-            <span class="proj-scenario-irr">17.79%</span>
-            <span class="proj-scenario-sub">Levered IRR</span>
-            <span class="proj-scenario-npv">NPV +$199,776</span>
-          </div>
+        <h2 class="pc-title">Real Estate<br><em>Investment Financing</em></h2>
+        <p class="pc-sub">4874–4896 Rue Drolet, Montréal &nbsp;·&nbsp; Winter 2026</p>
+
+        <div class="pc-divider"></div>
+
+        <div class="pc-bottom">
+          <p class="pc-desc">
+            Multi-residential income property analysis — 3-scenario DCF model,
+            capital stack structuring, levered IRR 11.73%, NPV +$165K.
+          </p>
+          <span class="pc-cta">View Project <span class="pc-cta-arrow">→</span></span>
         </div>
-
-        <!-- Documents -->
-        <p class="proj-section-label">Project Documents</p>
-        <div class="proj-docs">
-
-          <a href="../FIN210/FIN210_Real_Estate_Project.docx" download class="proj-doc">
-            <span class="proj-doc-type">Word Document</span>
-            <span class="proj-doc-icon">[ W ]</span>
-            <span class="proj-doc-name">Investment Report</span>
-            <span class="proj-doc-desc">Full 10-section research report covering property overview, market analysis, tenant demographics, scenario assumptions, capital stack, return analysis, and risk mitigation.</span>
-            <span class="proj-doc-dl">↓ Download .docx</span>
-          </a>
-
-          <a href="../FIN210/Project Model-FINAL (1).xlsx" download class="proj-doc">
-            <span class="proj-doc-type">Excel Spreadsheet</span>
-            <span class="proj-doc-icon">[ X ]</span>
-            <span class="proj-doc-name">Financial Model</span>
-            <span class="proj-doc-desc">Three-scenario DCF model with full pro-forma income statements, mortgage amortization schedule, levered & unlevered cash flows, IRR, NPV, and WACC calculations.</span>
-            <span class="proj-doc-dl">↓ Download .xlsx</span>
-          </a>
-
-          <a href="../FIN210/RealEstate_Pitch_FINAL (1).pptx" download class="proj-doc">
-            <span class="proj-doc-type">PowerPoint Deck</span>
-            <span class="proj-doc-icon">[ P ]</span>
-            <span class="proj-doc-name">Investor Pitch</span>
-            <span class="proj-doc-desc">21-slide investor presentation covering the property, market opportunity, financial assumptions, capital structure, return scenarios, and the investment thesis.</span>
-            <span class="proj-doc-dl">↓ Download .pptx</span>
-          </a>
-
-        </div>
-
-      </article>
+      </a>
 
     </div>
 
@@ -415,6 +264,16 @@
             opacity: 1, duration: 0.3, ease: 'power2.in',
             onComplete: () => { window.location.href = '/'; }
           });
+        });
+      });
+
+      // ── Project card — fondu noir vers sous-page
+      document.querySelector('.project-card')?.addEventListener('click', e => {
+        e.preventDefault();
+        const href = e.currentTarget.getAttribute('href');
+        gsap.to('.page-overlay', {
+          opacity: 1, duration: 0.3, ease: 'power2.in',
+          onComplete: () => { window.location.href = href; }
         });
       });
 
