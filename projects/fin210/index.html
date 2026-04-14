@@ -488,8 +488,10 @@
       const closeBtn  = document.getElementById('docViewerClose');
 
       function openViewer(fileRelPath, type, name) {
-        const fileUrl = window.location.origin + fileRelPath;
         const isPdf = fileRelPath.toLowerCase().endsWith('.pdf');
+        const fileUrl = isPdf
+          ? window.location.origin + fileRelPath
+          : 'https://raw.githubusercontent.com/Slayder1234567/portfolioanto/main' + fileRelPath;
         const viewerUrl = isPdf
           ? fileUrl
           : 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
