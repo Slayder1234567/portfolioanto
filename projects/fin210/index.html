@@ -489,9 +489,10 @@
 
       function openViewer(fileRelPath, type, name) {
         const isPdf = fileRelPath.toLowerCase().endsWith('.pdf');
+        const encodedPath = fileRelPath.split('/').map(seg => encodeURIComponent(seg)).join('/');
         const fileUrl = isPdf
           ? window.location.origin + fileRelPath
-          : 'https://raw.githubusercontent.com/Slayder1234567/portfolioanto/main' + fileRelPath;
+          : 'https://raw.githubusercontent.com/Slayder1234567/portfolioanto/main' + encodedPath;
         const viewerUrl = isPdf
           ? fileUrl
           : 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
