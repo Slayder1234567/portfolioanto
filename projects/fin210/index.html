@@ -547,7 +547,7 @@
       ['.proj-back', '.ui-name'].forEach(sel => {
         document.querySelector(sel)?.addEventListener('click', e => {
           e.preventDefault();
-          const href = sel === '.ui-name' ? '../../index.html' : '../index.html';
+          const href = sel === '.ui-name' ? '../../' : '../';
           gsap.to('.page-overlay', {
             opacity: 1, duration: 0.3, ease: 'power2.in',
             onComplete: () => { window.location.href = href; }
