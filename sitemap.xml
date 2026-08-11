@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.antoninleclei.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/" />
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/" />
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/projects/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/projects/standia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/standia/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/standia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/standia/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/standia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/standia/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/standia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/standia/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/projects/fin210/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/fin210/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/fin210/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/fin210/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/fin210/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/fin210/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/fin210/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/fin210/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/experiences/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/experiences/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/experiences/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/experiences/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/experiences/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/experiences/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/experiences/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/experiences/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/experiences/digitad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/experiences/digitad/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/experiences/digitad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/experiences/digitad/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/experiences/digitad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/experiences/digitad/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/experiences/digitad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/experiences/digitad/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/documents/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/documents/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/documents/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/documents/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/documents/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/documents/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/documents/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/documents/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -242,10 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─────────────────────────────────────────────────────────
-  // 4. CLOCK — time + date, English months
+  // 4. CLOCK — time + date, month names follow <html lang>
   // ─────────────────────────────────────────────────────────
-  const MONTHS = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE',
-                  'JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+  const MONTHS_BY_LANG = {
+    en: ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE',
+         'JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],
+    fr: ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN',
+         'JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'],
+  };
+  const MONTHS = MONTHS_BY_LANG[document.documentElement.lang] || MONTHS_BY_LANG.en;
 
   const timeEl = document.getElementById('clockTime');
   const dateEl = document.getElementById('clockDate');
@@ -668,34 +673,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ? workST.start
         : workST.start + (workST.end - workST.start) * (targetIndex / (totalPanels - 1));
 
-      // Fade out
-      const overlay = document.createElement('div');
-      Object.assign(overlay.style, {
-        position: 'fixed', inset: '0', background: '#000',
-        opacity: '0', zIndex: '9999', pointerEvents: 'none',
-      });
-      document.body.appendChild(overlay);
+      // Jump to the panel behind the shutters — same transition as a page nav.
+      const jump = () => {
+        lenis.stop();
+        window.scrollTo(0, targetScroll);
+        ScrollTrigger.refresh();
+        requestAnimationFrame(() => requestAnimationFrame(() => lenis.start()));
+      };
 
-      gsap.timeline()
-        .to(overlay, { opacity: 1, duration: 0.4, ease: 'power2.in' })
-        .call(() => {
-          // Instant scroll (no smooth) to the target panel
-          lenis.stop();
-          window.scrollTo(0, targetScroll);
-          ScrollTrigger.refresh();
-
-          // Small delay to let ScrollTrigger settle
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              lenis.start();
-              // Fade in
-              gsap.to(overlay, {
-                opacity: 0, duration: 0.4, ease: 'power2.out',
-                onComplete: () => overlay.remove(),
-              });
-            });
-          });
-        });
+      if (window.pageTransition) window.pageTransition.coverThen(jump);
+      else jump();
     });
   });
 

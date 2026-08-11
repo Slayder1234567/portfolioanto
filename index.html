@@ -3,16 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Antonin Le Cleï — Digital Designer</title>
+  <title>Antonin Le Cleï | Web Designer &amp; Developer in Montreal</title>
+  <meta name="description" content="Freelance web designer and front-end developer in Montreal. I design and build high-end websites in Webflow, Shopify and custom code — from brand to launch." />
+  <meta name="author" content="Antonin Le Cleï" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.antoninleclei.com/" />
+  <link rel="alternate" hreflang="en-ca" href="https://www.antoninleclei.com/" />
+  <link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/" />
+  <link rel="alternate" hreflang="fr-ca" href="https://www.antoninleclei.com/fr/" />
+  <link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Antonin Le Cleï" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:locale:alternate" content="fr_CA" />
+  <meta property="og:title" content="Antonin Le Cleï | Web Designer &amp; Developer in Montreal" />
+  <meta property="og:description" content="Freelance web designer and front-end developer in Montreal. I design and build high-end websites in Webflow, Shopify and custom code — from brand to launch." />
+  <meta property="og:url" content="https://www.antoninleclei.com/" />
+  <meta property="og:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Antonin Le Cleï | Web Designer &amp; Developer in Montreal" />
+  <meta name="twitter:description" content="Freelance web designer and front-end developer in Montreal. I design and build high-end websites in Webflow, Shopify and custom code — from brand to launch." />
+  <meta name="twitter:image" content="https://www.antoninleclei.com/ImageeeA.png" />
   <link rel="icon" type="image/png" href="favicon-circle.png" />
   <link rel="apple-touch-icon" href="favicon-circle.png" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Antonin Le Cleï",
-    "url": "https://www.antoninleclei.com"
+    "@type": "ProfilePage",
+    "url": "https://www.antoninleclei.com/",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Antonin Le Cleï",
+      "jobTitle": "Web Designer & Front-End Developer",
+      "url": "https://www.antoninleclei.com",
+      "image": "https://www.antoninleclei.com/ImageeeA.png",
+      "email": "antoninleclei.pro@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montréal",
+        "addressRegion": "QC",
+        "addressCountry": "CA"
+      },
+      "knowsAbout": ["Web Design", "Front-End Development", "UI/UX Design", "Webflow", "Shopify", "GSAP Animation", "SEO", "Art Direction"],
+      "sameAs": ["https://www.linkedin.com/in/antonin-le-cle%C3%AF-0749b1301/"]
+    }
   }
   </script>
 
@@ -24,10 +64,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 
-  <link rel="stylesheet" href="style.css" />
-  <script>document.documentElement.classList.add('entering');</script>
+  <link rel="stylesheet" href="style.css?v=2" />
+  <script>try{if(sessionStorage.getItem('shutterNav'))document.documentElement.classList.add('t-cover');}catch(e){}</script>
 </head>
 <body>
+
+  <!-- Page transition shutters -->
+  <div data-transition-wrap class="transition" aria-hidden="true">
+    <div data-transition-panel class="transition__panel">
+      <div data-transition-shutter class="transition__shutter"></div>
+    </div>
+  </div>
+
 
 
   <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
@@ -63,6 +111,11 @@
       <div class="ui-header-time">
         <span class="ui-time" id="clockTime">--:-- --</span>
         <span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>
+        <div class="ui-lang" role="group" aria-label="Language">
+          <a href="/" aria-current="true" hreflang="en" title="Français">EN</a>
+          <span class="ui-lang-sep">/</span>
+          <a href="/fr/" hreflang="fr" title="Voir le site en français">FR</a>
+        </div>
       </div>
     </div>
 
@@ -104,8 +157,6 @@
       </ul>
     </nav>
 
-  <div class="page-overlay"></div>
-
   <div class="cursor" id="cursor">
     <div class="cursor-dot" id="cursorDot"></div>
   </div>
@@ -124,6 +175,8 @@ they remember.</p>
       </div>
 
       <a href="projects/" class="hero-projects-cta"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">P</span><span class="nav-char-bot" style="transition-delay:0s">P</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">R</span><span class="nav-char-bot" style="transition-delay:.02s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">O</span><span class="nav-char-bot" style="transition-delay:.04s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">J</span><span class="nav-char-bot" style="transition-delay:.06s">J</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">E</span><span class="nav-char-bot" style="transition-delay:.08s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">C</span><span class="nav-char-bot" style="transition-delay:.10s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">T</span><span class="nav-char-bot" style="transition-delay:.12s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">S</span><span class="nav-char-bot" style="transition-delay:.14s">S</span></span> <span style="font-size:28px">→</span></a>
+
+      <a href="/experiences" class="hero-experiences-cta"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">E</span><span class="nav-char-bot" style="transition-delay:0s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">X</span><span class="nav-char-bot" style="transition-delay:.02s">X</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">P</span><span class="nav-char-bot" style="transition-delay:.04s">P</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">E</span><span class="nav-char-bot" style="transition-delay:.06s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">R</span><span class="nav-char-bot" style="transition-delay:.08s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">E</span><span class="nav-char-bot" style="transition-delay:.12s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">N</span><span class="nav-char-bot" style="transition-delay:.14s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">C</span><span class="nav-char-bot" style="transition-delay:.16s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">E</span><span class="nav-char-bot" style="transition-delay:.18s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">S</span><span class="nav-char-bot" style="transition-delay:.20s">S</span></span> <span style="font-size:28px">→</span></a>
 
       <div class="hero-thumbnails">
         <figure class="hero-thumb clip-mask" data-project="0" style="cursor:pointer">
@@ -167,31 +220,32 @@ they remember.</p>
 
           <div class="about-text-block">
             <p class="about-bio">
-              Freelance Front-End Developer & UI/UX Designer based in Montreal.
-              I design and build high-fidelity web interfaces for
-              ambitious startups, agencies, and creative brands.
+              Freelance web designer & front-end developer based in Montreal.
+              I design, build, and ship complete websites — from brand identity
+              to a live, optimized product — for startups, agencies,
+              and creative brands.
             </p>
 
             <div class="services-list">
               <div class="service-item">
                 <span class="service-number">01</span>
                 <div class="service-body">
-                  <h3 class="service-title">UI/UX Design & Art Direction</h3>
-                  <p class="service-desc">Crafting premium visual identities and seamless UI/UX. I blend creative intuition with AI-driven ideation to deliver striking designs that instantly elevate your brand's perceived value.</p>
+                  <h3 class="service-title">AI-Driven Design & Art Direction</h3>
+                  <p class="service-desc">I design premium interfaces and brand visuals, using Claude and AI tooling I've mastered to move from concept to polished UI without losing the craft. Original, on-brand work — produced fast and with intent.</p>
                 </div>
               </div>
               <div class="service-item">
                 <span class="service-number">02</span>
                 <div class="service-body">
-                  <h3 class="service-title">Creative Front-End Development</h3>
-                  <p class="service-desc">Building lightning-fast, robust websites. By leveraging modern frameworks and AI tools, I code pixel-perfect layouts and seamless GSAP animations with flawless execution in record time.</p>
+                  <h3 class="service-title">Webflow, Shopify & Front-End Build</h3>
+                  <p class="service-desc">I build and ship production sites in Webflow — structured and scaled with Relume — Shopify storefronts for e-commerce, and hand-coded front-ends when a project calls for it. Pixel-accurate layouts with motion crafted in GSAP and other animation libraries.</p>
                 </div>
               </div>
               <div class="service-item">
                 <span class="service-number">03</span>
                 <div class="service-body">
-                  <h3 class="service-title">Digital Revamp, SEO & CRO</h3>
-                  <p class="service-desc">Upgrading web platforms through rigorous design standards, technical SEO, and Conversion Rate Optimization (CRO). I align premium aesthetics with functional efficiency to boost your search visibility and turn traffic into meaningful user interactions.</p>
+                  <h3 class="service-title">SEO, Meta & Conversion</h3>
+                  <p class="service-desc">Technical SEO, correctly configured meta fields and structured data, and conversion-focused decisions across the build. Your site ranks, previews cleanly when shared, and turns traffic into real clients.</p>
                 </div>
               </div>
             </div>
@@ -298,123 +352,58 @@ they remember.</p>
         <h2 class="section-eyebrow">03 — Archive</h2>
       </div>
 
-      <div class="archive-timeline">
+      <div class="typo-scroll" data-typo-scroll-init data-typo-scroll-infinite="false">
+        <div class="typo-scroll__list" data-typo-scroll-list>
 
-        <div class="archive-line">
-          <div class="archive-line-fill"></div>
-        </div>
-
-        <div class="archive-entries">
-
-          <article class="archive-entry">
-            <div class="archive-entry-left">
-              <span class="archive-dot"></span>
-              <span class="archive-date"><span class="archive-date-month">April</span> <span class="archive-date-year">2026</span></span>
-            </div>
-            <div class="archive-entry-card">
-              <div class="archive-card-inner">
-                <div class="archive-card-bg">
-                  <video src="videos/siteyoan.mp4" loop muted playsinline></video>
-                </div>
-                <div class="archive-card-video-popup">
-                  <video src="videos/siteyoan.mp4" loop muted playsinline></video>
-                </div>
-                <span class="archive-card-cta">Click to view</span>
-                <div class="archive-card-info">
-                  <span class="archive-card-tag">WEB DESIGN</span>
-                  <h3 class="archive-card-title">Concordia Student Project</h3>
-                </div>
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Concordia Student Project">
+              <h3 class="typo-scroll__h">Concordia Project</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="videos/siteyoan.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ APRIL 2026 ]</p>
               </div>
-            </div>
-          </article>
+            </a>
+          </div>
 
-          <article class="archive-entry">
-            <div class="archive-entry-left">
-              <span class="archive-dot"></span>
-              <span class="archive-date"><span class="archive-date-month">April</span> <span class="archive-date-year">2026</span></span>
-            </div>
-            <div class="archive-entry-card">
-              <div class="archive-card-inner">
-                <div class="archive-card-bg">
-                  <video src="videos/videocincta.mp4" loop muted playsinline></video>
-                </div>
-                <div class="archive-card-video-popup">
-                  <video src="videos/videocincta.mp4" loop muted playsinline></video>
-                </div>
-                <span class="archive-card-cta">Click to view</span>
-                <div class="archive-card-info">
-                  <span class="archive-card-tag">WEB DESIGN</span>
-                  <h3 class="archive-card-title">Cincta</h3>
-                </div>
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Cincta">
+              <h3 class="typo-scroll__h">Cincta</h3>
+              <div class="typo-scroll__media is--1-1">
+                <video class="typo-scroll__img" src="videos/videocincta.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ APRIL 2026 ]</p>
               </div>
-            </div>
-          </article>
+            </a>
+          </div>
 
-          <article class="archive-entry">
-            <div class="archive-entry-left">
-              <span class="archive-dot"></span>
-              <span class="archive-date"><span class="archive-date-month">March</span> <span class="archive-date-year">2026</span></span>
-            </div>
-            <div class="archive-entry-card">
-              <div class="archive-card-inner">
-                <div class="archive-card-bg">
-                  <video src="videos/kh-nail-bar.mp4" loop muted playsinline></video>
-                </div>
-                <div class="archive-card-video-popup">
-                  <video src="videos/kh-nail-bar.mp4" loop muted playsinline></video>
-                </div>
-                <span class="archive-card-cta">Click to view</span>
-                <div class="archive-card-info">
-                  <span class="archive-card-tag">WEB DESIGN</span>
-                  <h3 class="archive-card-title">Kh Nail Bar</h3>
-                </div>
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Kh Nail Bar">
+              <h3 class="typo-scroll__h">Kh Nail Bar</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="videos/kh-nail-bar.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ MARCH 2026 ]</p>
               </div>
-            </div>
-          </article>
+            </a>
+          </div>
 
-          <article class="archive-entry">
-            <div class="archive-entry-left">
-              <span class="archive-dot"></span>
-              <span class="archive-date"><span class="archive-date-month">February</span> <span class="archive-date-year">2026</span></span>
-            </div>
-            <div class="archive-entry-card">
-              <div class="archive-card-inner">
-                <div class="archive-card-bg">
-                  <video src="videos/stingers-archive.mp4" loop muted playsinline></video>
-                </div>
-                <div class="archive-card-video-popup">
-                  <video src="videos/stingers-archive.mp4" loop muted playsinline></video>
-                </div>
-                <span class="archive-card-cta">Click to view</span>
-                <div class="archive-card-info">
-                  <span class="archive-card-tag">WEB DESIGN</span>
-                  <h3 class="archive-card-title">Stingers</h3>
-                </div>
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Stingers">
+              <h3 class="typo-scroll__h">Stingers</h3>
+              <div class="typo-scroll__media is--1-1">
+                <video class="typo-scroll__img" src="videos/stingers-archive.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ FEBRUARY 2026 ]</p>
               </div>
-            </div>
-          </article>
+            </a>
+          </div>
 
-          <article class="archive-entry">
-            <div class="archive-entry-left">
-              <span class="archive-dot"></span>
-              <span class="archive-date"><span class="archive-date-month">January</span> <span class="archive-date-year">2026</span></span>
-            </div>
-            <div class="archive-entry-card">
-              <div class="archive-card-inner">
-                <div class="archive-card-bg">
-                  <video src="videos/cutsinnit-archive.mp4" loop muted playsinline></video>
-                </div>
-                <div class="archive-card-video-popup">
-                  <video src="videos/cutsinnit-archive.mp4" loop muted playsinline></video>
-                </div>
-                <span class="archive-card-cta">Click to view</span>
-                <div class="archive-card-info">
-                  <span class="archive-card-tag">WEB DESIGN</span>
-                  <h3 class="archive-card-title">CutsInnit</h3>
-                </div>
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="CutsInnit">
+              <h3 class="typo-scroll__h">CutsInnit</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="videos/cutsinnit-archive.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ JANUARY 2026 ]</p>
               </div>
-            </div>
-          </article>
+            </a>
+          </div>
 
         </div>
       </div>
@@ -481,17 +470,8 @@ they remember.</p>
     </div>
   </div>
 
+  <script src="transition.js" defer></script>
   <script src="app.js" defer></script>
-  <script>
-    window.addEventListener('load', () => {
-      document.querySelector('.hero-projects-cta').addEventListener('click', e => {
-        e.preventDefault();
-        gsap.to('.page-overlay', {
-          opacity: 1, duration: 0.3, ease: 'power2.in',
-          onComplete: () => { window.location.href = 'projects/'; }
-        });
-      });
-    });
-  </script>
+  <script src="typo-scroll.js" defer></script>
 </body>
 </html>

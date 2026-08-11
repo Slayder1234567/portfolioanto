@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonin Le Cleï | Web Designer &amp; Développeur à Montréal</title>
+  <meta name="description" content="Web designer et développeur front-end freelance à Montréal. Je conçois et développe des sites web haut de gamme en Webflow, Shopify et code sur mesure." />
+  <meta name="author" content="Antonin Le Cleï" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.antoninleclei.com/fr/" />
+  <link rel="alternate" hreflang="en-ca" href="https://www.antoninleclei.com/" />
+  <link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/" />
+  <link rel="alternate" hreflang="fr-ca" href="https://www.antoninleclei.com/fr/" />
+  <link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Antonin Le Cleï" />
+  <meta property="og:locale" content="fr_CA" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta property="og:title" content="Antonin Le Cleï | Web Designer &amp; Développeur à Montréal" />
+  <meta property="og:description" content="Web designer et développeur front-end freelance à Montréal. Je conçois et développe des sites web haut de gamme en Webflow, Shopify et code sur mesure." />
+  <meta property="og:url" content="https://www.antoninleclei.com/fr/" />
+  <meta property="og:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Antonin Le Cleï | Web Designer &amp; Développeur à Montréal" />
+  <meta name="twitter:description" content="Web designer et développeur front-end freelance à Montréal. Je conçois et développe des sites web haut de gamme en Webflow, Shopify et code sur mesure." />
+  <meta name="twitter:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+  <link rel="icon" type="image/png" href="/favicon-circle.png" />
+  <link rel="apple-touch-icon" href="/favicon-circle.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": "https://www.antoninleclei.com/fr/",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Antonin Le Cleï",
+      "jobTitle": "Web Designer & Développeur Front-End",
+      "url": "https://www.antoninleclei.com",
+      "image": "https://www.antoninleclei.com/ImageeeA.png",
+      "email": "antoninleclei.pro@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montréal",
+        "addressRegion": "QC",
+        "addressCountry": "CA"
+      },
+      "knowsAbout": ["Web Design", "Développement Front-End", "Design UI/UX", "Webflow", "Shopify", "GSAP Animation", "SEO", "Art Direction"],
+      "sameAs": ["https://www.linkedin.com/in/antonin-le-cle%C3%AF-0749b1301/"]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+  <link rel="stylesheet" href="/style.css?v=2" />
+  <script>try{if(sessionStorage.getItem('shutterNav'))document.documentElement.classList.add('t-cover');}catch(e){}</script>
+</head>
+<body>
+
+  <!-- Page transition shutters -->
+  <div data-transition-wrap class="transition" aria-hidden="true">
+    <div data-transition-panel class="transition__panel">
+      <div data-transition-shutter class="transition__shutter"></div>
+    </div>
+  </div>
+
+
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu">
+    <div class="btn-bracket">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 4 12" fill="none">
+        <path d="M4 1H1V11H4" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+      </svg>
+    </div>
+    <div class="btn-icon">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </div>
+    <div class="btn-bracket">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 4 12" fill="none">
+        <path d="M0 1H3V11H0" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+      </svg>
+    </div>
+  </button>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <ul class="mobile-menu-list">
+      <li><a href="#info" class="mobile-menu-link"><span class="mobile-menu-num">01</span> INFOS</a></li>
+      <li><a href="#work" class="mobile-menu-link"><span class="mobile-menu-num">02</span> RÉALISATIONS</a></li>
+      <li><a href="#archive" class="mobile-menu-link"><span class="mobile-menu-num">03</span> ARCHIVES</a></li>
+      <li><a href="#contact" class="mobile-menu-link"><span class="mobile-menu-num">04</span> CONTACT</a></li>
+    </ul>
+  </div>
+
+  <div class="ui-header">
+      <div class="ui-header-name">
+        <a href="#" id="scrollToTop" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
+        <span class="ui-role">DIGITAL DESIGNER</span>
+      </div>
+      <div class="ui-header-time">
+        <span class="ui-time" id="clockTime">--:-- --</span>
+        <span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>
+        <div class="ui-lang" role="group" aria-label="Langue">
+          <a href="/fr/" hreflang="en" title="View this site in English">EN</a>
+          <span class="ui-lang-sep">/</span>
+          <a href="/fr/" aria-current="true" hreflang="fr" title="Français">FR</a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="ui-nav" aria-label="Navigation principale">
+      <ul class="nav-list">
+
+        <li class="nav-item" data-section="info">
+          <a href="#info" class="nav-link">
+            <span class="nav-number">01</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">I</span><span class="nav-char-bot" style="transition-delay:0s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">F</span><span class="nav-char-bot" style="transition-delay:.04s">F</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">S</span><span class="nav-char-bot" style="transition-delay:.08s">S</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="work">
+          <a href="#work" class="nav-link">
+            <span class="nav-number">02</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">R</span><span class="nav-char-bot" style="transition-delay:0s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">É</span><span class="nav-char-bot" style="transition-delay:.02s">É</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">A</span><span class="nav-char-bot" style="transition-delay:.04s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">L</span><span class="nav-char-bot" style="transition-delay:.06s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">I</span><span class="nav-char-bot" style="transition-delay:.08s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">S</span><span class="nav-char-bot" style="transition-delay:.10s">S</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">A</span><span class="nav-char-bot" style="transition-delay:.12s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">T</span><span class="nav-char-bot" style="transition-delay:.14s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">I</span><span class="nav-char-bot" style="transition-delay:.16s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">O</span><span class="nav-char-bot" style="transition-delay:.18s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">N</span><span class="nav-char-bot" style="transition-delay:.20s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">S</span><span class="nav-char-bot" style="transition-delay:.22s">S</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="archive">
+          <a href="#archive" class="nav-link">
+            <span class="nav-number">03</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">R</span><span class="nav-char-bot" style="transition-delay:.02s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">C</span><span class="nav-char-bot" style="transition-delay:.04s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">H</span><span class="nav-char-bot" style="transition-delay:.06s">H</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">I</span><span class="nav-char-bot" style="transition-delay:.08s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">V</span><span class="nav-char-bot" style="transition-delay:.10s">V</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">E</span><span class="nav-char-bot" style="transition-delay:.12s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">S</span><span class="nav-char-bot" style="transition-delay:.14s">S</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-section="contact">
+          <a href="#contact" class="nav-link">
+            <span class="nav-number">04</span>
+            <span class="nav-label"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">C</span><span class="nav-char-bot" style="transition-delay:0s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">O</span><span class="nav-char-bot" style="transition-delay:.02s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">N</span><span class="nav-char-bot" style="transition-delay:.04s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">T</span><span class="nav-char-bot" style="transition-delay:.06s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">A</span><span class="nav-char-bot" style="transition-delay:.08s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">C</span><span class="nav-char-bot" style="transition-delay:.10s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">T</span><span class="nav-char-bot" style="transition-delay:.12s">T</span></span></span>
+            <span class="nav-progress-bar"><span class="nav-progress-fill"></span></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+  </div>
+
+
+  <main class="content-layer">
+
+    <section class="section" id="hero">
+
+      <div class="hero-intro">
+        <p class="hero-intro-text">Transformer une identité de marque en
+parcours numériques immersifs. Je crée des
+expériences que l'on ne fait pas qu'utiliser,
+on s'en souvient.</p>
+        <span class="hero-scroll-cta">[DÉFILEZ POUR EXPLORER]</span>
+      </div>
+
+      <a href="/fr/realisations/" class="hero-projects-cta"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">R</span><span class="nav-char-bot" style="transition-delay:0s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">É</span><span class="nav-char-bot" style="transition-delay:.02s">É</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">A</span><span class="nav-char-bot" style="transition-delay:.04s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">L</span><span class="nav-char-bot" style="transition-delay:.06s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">I</span><span class="nav-char-bot" style="transition-delay:.08s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">S</span><span class="nav-char-bot" style="transition-delay:.10s">S</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">A</span><span class="nav-char-bot" style="transition-delay:.12s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">T</span><span class="nav-char-bot" style="transition-delay:.14s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">I</span><span class="nav-char-bot" style="transition-delay:.16s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">O</span><span class="nav-char-bot" style="transition-delay:.18s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">N</span><span class="nav-char-bot" style="transition-delay:.20s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">S</span><span class="nav-char-bot" style="transition-delay:.22s">S</span></span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">R</span><span class="nav-char-bot" style="transition-delay:.02s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">O</span><span class="nav-char-bot" style="transition-delay:.04s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">J</span><span class="nav-char-bot" style="transition-delay:.06s">J</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">E</span><span class="nav-char-bot" style="transition-delay:.08s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">C</span><span class="nav-char-bot" style="transition-delay:.10s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">T</span><span class="nav-char-bot" style="transition-delay:.12s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">S</span><span class="nav-char-bot" style="transition-delay:.14s">S</span></span> <span style="font-size:28px">→</span></a>
+
+      <a href="/fr/experiences/" class="hero-experiences-cta"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">E</span><span class="nav-char-bot" style="transition-delay:0s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">X</span><span class="nav-char-bot" style="transition-delay:.02s">X</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">P</span><span class="nav-char-bot" style="transition-delay:.04s">P</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">É</span><span class="nav-char-bot" style="transition-delay:.06s">É</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">R</span><span class="nav-char-bot" style="transition-delay:.08s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">E</span><span class="nav-char-bot" style="transition-delay:.12s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">N</span><span class="nav-char-bot" style="transition-delay:.14s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">C</span><span class="nav-char-bot" style="transition-delay:.16s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">E</span><span class="nav-char-bot" style="transition-delay:.18s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">S</span><span class="nav-char-bot" style="transition-delay:.20s">S</span></span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">X</span><span class="nav-char-bot" style="transition-delay:.02s">X</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">P</span><span class="nav-char-bot" style="transition-delay:.04s">P</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">E</span><span class="nav-char-bot" style="transition-delay:.06s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">R</span><span class="nav-char-bot" style="transition-delay:.08s">R</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">E</span><span class="nav-char-bot" style="transition-delay:.12s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">N</span><span class="nav-char-bot" style="transition-delay:.14s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">C</span><span class="nav-char-bot" style="transition-delay:.16s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">E</span><span class="nav-char-bot" style="transition-delay:.18s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">S</span><span class="nav-char-bot" style="transition-delay:.20s">S</span></span> <span style="font-size:28px">→</span></a>
+
+      <div class="hero-thumbnails">
+        <figure class="hero-thumb clip-mask" data-project="0" style="cursor:pointer">
+          <img src="/stingerss-bg.png" alt="Stingers" loading="lazy" />
+          <figcaption>STINGERS</figcaption>
+        </figure>
+        <figure class="hero-thumb clip-mask" data-project="1" style="cursor:pointer">
+          <img src="/cutsinnit-logo.png" alt="CutsInnit" loading="lazy" />
+          <figcaption>CUTSINNIT</figcaption>
+        </figure>
+        <figure class="hero-thumb clip-mask" data-project="2" style="cursor:pointer">
+          <img src="/videos/logo.jpeg" alt="Cincta" loading="lazy" />
+          <figcaption>CINCTA</figcaption>
+        </figure>
+      </div>
+
+      <div class="hero-logo" aria-hidden="true">
+        <video autoplay loop muted playsinline style="background: transparent;">
+          <source src="/videos/0001-0250-alpha.mp4" type="video/mp4" />
+          <source src="/videos/0001-0250.webm" type="video/webm" />
+        </video>
+      </div>
+
+    </section>
+
+
+    <section class="section" id="info">
+
+      <div class="about-sticky-wrap">
+        <h2 id="about-bg" aria-hidden="true">À propos</h2>
+      </div>
+
+      <div class="info-content">
+        <div class="about-content">
+
+          <div class="about-images">
+            <figure class="about-img about-img--1 clip-mask" data-speed="0.85">
+              <img src="/IMG_9430.jpg" alt="Profile" style="pointer-events:none;" />
+            </figure>
+          </div>
+
+          <div class="about-text-block">
+            <p class="about-bio">Web designer et développeur front-end freelance basé à Montréal. Je conçois, développe et mets en ligne des sites web complets — de l'identité de marque au produit optimisé et en production — pour des startups, des agences et des marques créatives.</p>
+
+            <div class="services-list">
+              <div class="service-item">
+                <span class="service-number">01</span>
+                <div class="service-body">
+                  <h3 class="service-title">Design & direction artistique assistés par IA</h3>
+                  <p class="service-desc">Je conçois des interfaces haut de gamme et des visuels de marque, en m'appuyant sur Claude et les outils IA que je maîtrise pour passer du concept à une interface aboutie sans rien perdre du métier. Un travail original et fidèle à la marque — produit vite et avec intention.</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <span class="service-number">02</span>
+                <div class="service-body">
+                  <h3 class="service-title">Développement Webflow, Shopify & front-end</h3>
+                  <p class="service-desc">Je développe et mets en production des sites Webflow — structurés et industrialisés avec Relume — des boutiques Shopify pour l'e-commerce, et des front-ends codés à la main quand le projet l'exige. Des mises en page au pixel près, animées avec GSAP et d'autres librairies d'animation.</p>
+                </div>
+              </div>
+              <div class="service-item">
+                <span class="service-number">03</span>
+                <div class="service-body">
+                  <h3 class="service-title">SEO, métadonnées & conversion</h3>
+                  <p class="service-desc">SEO technique, balises meta et données structurées correctement configurées, et des choix orientés conversion à chaque étape du projet. Votre site se positionne, s'affiche proprement au partage, et transforme le trafic en vrais clients.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="work">
+
+
+      <div class="work-pin">
+
+
+        <div class="work-panel" data-index="0">
+          <div class="work-panel-glow">
+            <img src="/stingers-c-logo.jpg" alt="Stingers" />
+          </div>
+          <div class="work-panel-content">
+            <div class="work-panel-media">
+              <div class="work-media-wrap">
+                <video src="/videos/stingerss.mp4" loop muted playsinline></video>
+                <div class="work-curtain"></div>
+                <img src="/stingers-c-logo.jpg" alt="Stingers" class="work-cover-img" />
+              </div>
+            </div>
+            <div class="work-panel-info">
+              <div class="work-panel-info-main">
+                <span class="work-detail-number">[01]</span>
+                <h2 class="work-detail-title">Stingers</h2>
+              </div>
+              <div class="work-panel-info-meta">
+                <div class="work-detail-tags">
+                  <span>WEB DESIGN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-panel" data-index="1">
+          <div class="work-panel-glow">
+            <img src="/cutsinnit-cover.png" alt="CutsInnit" />
+          </div>
+          <div class="work-panel-content">
+            <div class="work-panel-media">
+              <div class="work-media-wrap">
+                <video src="/videos/cutsinnit.mp4" loop muted playsinline></video>
+                <div class="work-curtain"></div>
+                <img src="/cutsinnit-cover.png" alt="CutsInnit" class="work-cover-img" />
+              </div>
+            </div>
+            <div class="work-panel-info">
+              <div class="work-panel-info-main">
+                <span class="work-detail-number">[02]</span>
+                <h2 class="work-detail-title">CutsInnit</h2>
+              </div>
+              <div class="work-panel-info-meta">
+                <div class="work-detail-tags">
+                  <span>WEB DESIGN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-panel" data-index="2">
+          <div class="work-panel-glow">
+            <img src="/videos/logo.jpeg" alt="Cincta" />
+          </div>
+          <div class="work-panel-content">
+            <div class="work-panel-media">
+              <div class="work-media-wrap">
+                <video src="/videos/videocincta.mp4" loop muted playsinline></video>
+                <div class="work-curtain"></div>
+                <img src="/videos/logo.jpeg" alt="Cincta" class="work-cover-img" />
+              </div>
+            </div>
+            <div class="work-panel-info">
+              <div class="work-panel-info-main">
+                <span class="work-detail-number">[03]</span>
+                <h2 class="work-detail-title">Cincta</h2>
+              </div>
+              <div class="work-panel-info-meta">
+                <div class="work-detail-tags">
+                  <span>WEB DESIGN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <section class="section" id="archive">
+      <div class="archive-header">
+        <h2 class="section-eyebrow">03 — Archives</h2>
+      </div>
+
+      <div class="typo-scroll" data-typo-scroll-init data-typo-scroll-infinite="false">
+        <div class="typo-scroll__list" data-typo-scroll-list>
+
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Projet étudiant Concordia">
+              <h3 class="typo-scroll__h">Projet Concordia</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="/videos/siteyoan.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ AVRIL 2026 ]</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Cincta">
+              <h3 class="typo-scroll__h">Cincta</h3>
+              <div class="typo-scroll__media is--1-1">
+                <video class="typo-scroll__img" src="/videos/videocincta.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ AVRIL 2026 ]</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Kh Nail Bar">
+              <h3 class="typo-scroll__h">Kh Nail Bar</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="/videos/kh-nail-bar.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ MARS 2026 ]</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="Stingers">
+              <h3 class="typo-scroll__h">Stingers</h3>
+              <div class="typo-scroll__media is--1-1">
+                <video class="typo-scroll__img" src="/videos/stingers-archive.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ FÉVRIER 2026 ]</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="typo-scroll__item" data-typo-scroll-item>
+            <a class="typo-scroll__link" aria-label="CutsInnit">
+              <h3 class="typo-scroll__h">CutsInnit</h3>
+              <div class="typo-scroll__media is--3-2">
+                <video class="typo-scroll__img" src="/videos/cutsinnit-archive.mp4" muted loop playsinline preload="metadata"></video>
+                <p class="typo-scroll__p">[ JANVIER 2026 ]</p>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="contact">
+      <div class="contact-bg-logo" aria-hidden="true">
+        <video autoplay loop muted playsinline>
+          <source src="/videos/0001-0250-alpha.mp4" type="video/mp4" />
+          <source src="/videos/0001-0250.webm" type="video/webm" />
+        </video>
+      </div>
+      <div class="contact-inner">
+
+        <div class="contact-eyebrow">
+          <span class="section-eyebrow">04 — Contact</span>
+        </div>
+
+        <div class="contact-main">
+          <h2 class="contact-title">
+            <span class="contact-title-line">Collaborons</span>
+            <span class="contact-title-line contact-title--italic"><em>ensemble.</em></span>
+          </h2>
+
+          <div class="contact-links">
+            <a href="mailto:antoninleclei.pro@gmail.com" class="contact-email magnetic">
+              antoninleclei.pro@gmail.com
+              <span class="contact-email-arrow">↗</span>
+            </a>
+          </div>
+
+          <div class="contact-socials">
+            <a href="https://www.linkedin.com/in/antonin-le-cle%C3%AF-0749b1301/" class="social-link" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-inner">
+            <p>© 2026 Antonin Le Cleï — Tous droits réservés</p>
+            <a href="/fr/documents/" class="footer-docs-link">Plus de documents →</a>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <span class="loader-name">Antonin Le Cleï</span>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+    </div>
+  </div>
+
+  <div id="hero-portal" aria-hidden="true">
+    <div class="portal-about-wrap">
+      <span id="portal-about">À propos</span>
+    </div>
+  </div>
+
+  <script src="/transition.js" defer></script>
+  <script src="/app.js" defer></script>
+  <script src="/typo-scroll.js" defer></script>
+</body>
+</html>

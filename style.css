@@ -10,23 +10,48 @@
 ================================================================ */
 
 /* ────────────────────────────────────────────────────────────────
-   PAGE TRANSITIONS — black overlay
+   PAGE TRANSITIONS — shutter reveal/cover  (driven by transition.js)
 ──────────────────────────────────────────────────────────────── */
-.page-overlay {
+.transition {
   position: fixed;
   inset: 0;
-  background: #000;
-  z-index: 99999;
-  opacity: 1;
+  z-index: 100000;            /* above nav (9999), cursor, everything */
   pointer-events: none;
+  overflow: clip;
 }
-@keyframes overlay-out {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+.transition__panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 100%;
+  opacity: 0;                 /* hidden by default */
 }
-html.entering .page-overlay {
-  animation: overlay-out 0.4s ease forwards;
+.transition__shutter {
+  flex: 1 1 0%;
+  width: 100%;
+  background-color: #b2a4d4;
+  will-change: transform, clip-path;
+  /* default = collapsed at the bottom (invisible) */
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
 }
+
+/* Pre-paint covered state for an incoming navigation.
+   The <html class="t-cover"> flag is set inline in <head> before
+   first paint, so the screen is already covered with no flash. */
+html.t-cover .transition__panel { opacity: 1; }
+html.t-cover .transition__shutter {
+  transform: none;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.t-cover .transition__panel { opacity: 0; }
+}
+
+/* legacy black overlay (kept harmless for any leftover markup) */
+.page-overlay { display: none; }
 
 /* ────────────────────────────────────────────────────────────────
    0. CUSTOM FONTS
@@ -184,6 +209,27 @@ ul, ol { list-style: none; }
   font-variant-numeric: tabular-nums;
 }
 
+/* Language switcher — sits under the clock, same type scale */
+.ui-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.ui-lang a,
+.ui-lang-sep {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.ui-header.on-light .ui-lang a,
+.ui-header.on-light .ui-lang-sep { color: #000000; }
+
 /* ─ LEFT NAV ─────────────────────────────────────────────────── */
 .ui-nav {
   position: fixed;
@@ -263,11 +309,13 @@ ul, ol { list-style: none; }
 .nav-link:hover .nav-char-top,
 .ui-name:hover .nav-char-top,
 .hero-projects-cta:hover .nav-char-top,
+.hero-experiences-cta:hover .nav-char-top,
 .projects-back:hover .nav-char-top { transform: translateY(-110%); }
 
 .nav-link:hover .nav-char-bot,
 .ui-name:hover .nav-char-bot,
 .hero-projects-cta:hover .nav-char-bot,
+.hero-experiences-cta:hover .nav-char-bot,
 .projects-back:hover .nav-char-bot { transform: translateY(0%); }
 
 .nav-char-space {
@@ -376,14 +424,17 @@ ul, ol { list-style: none; }
   padding: 0;
   perspective: 1200px;
   background: #ffffff;
+  /* Full-bleed: break out of .content-layer's left nav inset */
+  margin-left: calc(-1 * var(--nav-w));
+  width: 100vw;
 }
 
-/* Extend white background to cover the nav column (0–140px) */
+/* White background spans the full hero (now full width) */
 #hero::before {
   content: '';
   position: absolute;
   top: 0; bottom: 0;
-  left: calc(-1 * var(--nav-w));
+  left: 0;
   right: 0;
   background: #ffffff;
   z-index: 0;
@@ -444,7 +495,7 @@ ul, ol { list-style: none; }
 .hero-intro {
   position: absolute;
   bottom: var(--edge);
-  left: calc(var(--edge) - var(--nav-w));   /* Δ Aligns with nav left edge */
+  left: var(--edge);   /* hero is now full-bleed → align to viewport edge */
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -474,10 +525,10 @@ ul, ol { list-style: none; }
   align-self: flex-start;
 }
 
-/* → PROJECTS CTA — top right of hero */
-.hero-projects-cta {
+/* → PROJECTS / EXPERIENCES CTA — top right of hero */
+.hero-projects-cta,
+.hero-experiences-cta {
   position: absolute;
-  top: calc(var(--edge) + 270px);
   right: var(--edge);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -488,6 +539,8 @@ ul, ol { list-style: none; }
   white-space: nowrap;
   z-index: 2;
 }
+.hero-projects-cta    { top: calc(var(--edge) + 270px); }
+.hero-experiences-cta { top: calc(var(--edge) + 302px); }
 
 /* Thumbnails */
 .hero-thumbnails {
@@ -496,7 +549,8 @@ ul, ol { list-style: none; }
   right: var(--edge);
   z-index: 2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -1440,3 +1494,111 @@ ul, ol { list-style: none; }
 ::selection { background: var(--accent); color: var(--white); }
 .ui-header, .ui-nav { -webkit-user-select: none; user-select: none; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ────────────────────────────────────────────────────────────────
+   17. ARCHIVE — Big typo + centred video preview (hover / scroll)
+──────────────────────────────────────────────────────────────── */
+.typo-scroll {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  padding: 2vw 0 4vw;
+}
+
+.typo-scroll__list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.typo-scroll__item { width: 100%; }
+
+.typo-scroll__link {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+.typo-scroll__h {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 7.5vw;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  color: #2a2a2a;                      /* ghost on dark bg */
+  transition: color 0.45s var(--ease-out);
+}
+
+[data-typo-scroll-item="active"] .typo-scroll__h {
+  position: relative;
+  z-index: 6;
+  color: #f0f0f0;
+  mix-blend-mode: difference;
+}
+
+.typo-scroll__media {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  width: 40vw;                         /* match the old archive popup size */
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  --po: 1.5em;                         /* path offset for the clip reveal */
+  clip-path: polygon(calc(0% + var(--po)) calc(0% + var(--po)), calc(100% - var(--po)) calc(0% + var(--po)), calc(100% - var(--po)) calc(100% - var(--po)), calc(0% + var(--po)) calc(100% - var(--po)));
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s var(--ease-out);
+}
+
+[data-typo-scroll-item="active"] .typo-scroll__media {
+  opacity: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* keep all previews at the same 16/9 size regardless of the modifier class */
+.typo-scroll__media.is--3-2,
+.typo-scroll__media.is--2-3,
+.typo-scroll__media.is--1-1 { aspect-ratio: 16 / 9; width: 40vw; }
+
+.typo-scroll__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.typo-scroll__p {
+  position: absolute;
+  bottom: 1.2em;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.35em 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: #f4f4f4;
+  white-space: nowrap;
+  background-color: rgba(20, 18, 18, 0.35);
+  -webkit-backdrop-filter: blur(1em);
+  backdrop-filter: blur(1em);
+}
+
+@media (max-width: 991px) {
+  .typo-scroll__h { font-size: 12vw; }
+  .typo-scroll__media,
+  .typo-scroll__media.is--3-2,
+  .typo-scroll__media.is--2-3,
+  .typo-scroll__media.is--1-1 { width: 88vw; aspect-ratio: 16 / 9; }
+}
