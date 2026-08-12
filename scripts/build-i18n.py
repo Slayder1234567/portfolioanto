@@ -658,10 +658,13 @@ def main():
         fr = to_absolute(en, page_dir)
         fr = fr.replace('<html lang="en">', '<html lang="fr">')
         fr = apply_head(fr, page, "fr")
-        fr = apply_switcher(fr, page, "fr")
         fr = translate_common(fr)
         fr = TRANSLATORS[page["en"]](fr)
         fr = map_links(fr)
+        # After map_links: it rewrites every internal link to its French
+        # counterpart, which would also drag the switcher's English link over to
+        # the French URL and leave no way back.
+        fr = apply_switcher(fr, page, "fr")
 
         out = ROOT / page["fr"]
         out.parent.mkdir(parents=True, exist_ok=True)
