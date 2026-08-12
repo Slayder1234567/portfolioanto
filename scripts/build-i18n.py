@@ -134,9 +134,24 @@ def swap_nav_label(html, section, word):
 
 
 def swap_char_run(html, anchor_class, word):
-    """Replace an animated run of .nav-char spans inside an element by class."""
-    pat = re.compile(r'(class="[^"]*' + anchor_class + r'[^"]*"[^>]*>)((?:<span class="nav-char[^>]*>.*?</span>)+)', re.S)
-    out, n = pat.subn(lambda m: m.group(1) + chars(word), html, count=1)
+    """Replace the animated label of a hero CTA, keeping its trailing arrow.
+
+    The label is a run of nested .nav-char spans, so it cannot be matched with a
+    repeated non-greedy group — that only ever consumes the first character and
+    leaves the rest of the English word behind. Rebuild the anchor body instead:
+    everything from the first .nav-char up to the arrow span is the label.
+    """
+    pat = re.compile(r'(<a\b[^>]*class="[^"]*' + anchor_class + r'[^"]*"[^>]*>)(.*?)(</a>)', re.S)
+
+    def rebuild(m):
+        inner = m.group(2)
+        start = inner.find('<span class="nav-char">')
+        arrow = inner.find('<span style="font-size:28px">')
+        if start < 0 or arrow < 0:
+            raise SystemExit(f"char run shape changed: {anchor_class}")
+        return m.group(1) + inner[:start] + chars(word) + " " + inner[arrow:] + m.group(3)
+
+    out, n = pat.subn(rebuild, html, count=1)
     if n != 1:
         raise SystemExit(f"char run miss: {anchor_class}")
     return out
@@ -323,7 +338,7 @@ def fr_home(h):
     h = swap_nav_label(h, "work", "RÉALISATIONS")
     h = swap_nav_label(h, "archive", "ARCHIVES")
     h = swap_nav_label(h, "contact", "CONTACT")
-    h = swap_char_run(h, "hero-projects-cta", "RÉALISATIONS")
+    h = swap_char_run(h, "hero-projects-cta", "PROJETS")
     h = swap_char_run(h, "hero-experiences-cta", "EXPÉRIENCES")
     for a, b in [
         ('<span class="mobile-menu-num">01</span> INFO', '<span class="mobile-menu-num">01</span> INFOS'),
