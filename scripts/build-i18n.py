@@ -610,7 +610,6 @@ def fr_archive(h):
         ("April 2026", "Avril 2026"), ("March 2026", "Mars 2026"),
         ("February 2026", "Février 2026"), ("January 2026", "Janvier 2026"),
         ("Case study</span>", "Étude de cas</span>"),
-        (">Live demo<", ">Démo live<"),
         ("Scroll and click inside the frame — it is the real site. Links and forms that would leave it are disabled.",
          "Fais défiler et clique dans le cadre — c'est le vrai site. Les liens et formulaires qui en sortiraient sont désactivés."),
         ("Open full screen ↗", "Ouvrir en plein écran ↗"),
