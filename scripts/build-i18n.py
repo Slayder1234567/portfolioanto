@@ -344,7 +344,7 @@ on s'en souvient.""")
     h = h.replace('aria-hidden="true">About</h2>', 'aria-hidden="true">À propos</h2>')
     h = h.replace('<span id="portal-about">About</span>', '<span id="portal-about">À propos</span>')
     h = swap_text(h, "p", "Freelance web designer & front-end developer based in Montreal",
-                  "Web designer et développeur front-end freelance basé à Montréal. "
+                  "Web designer et développeur front-end freelance basé à Paris. "
                   "Je conçois, développe et mets en ligne des sites web complets — de l'identité "
                   "de marque au produit optimisé et en production — pour des startups, des agences "
                   "et des marques créatives.")
