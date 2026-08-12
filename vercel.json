@@ -1,3 +1,13 @@
 {
-  "trailingSlash": true
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/demos/cutsinnit/(.*)",
+      "destination": "/demos/cutsinnit/index.html"
+    },
+    {
+      "source": "/demos/stingers/(.*)",
+      "destination": "/demos/stingers/index.html"
+    }
+  ]
 }
