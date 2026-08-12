@@ -44,11 +44,20 @@
   // checkout or newsletter call would hit the portfolio's own origin and 404.
   // Block anything cross-origin or aimed at an API route, and fail with a
   // message the copied site can show in its own error handling.
-  function blocked(url) {
+  // What has to die is anything that would reach a live backend: the API routes
+  // left behind by the copy, and data posted off-site. Everything else a demo
+  // fetches is content it needs to render — inline data: models, blob: objects,
+  // CDN libraries and fonts pulled with GET — and blocking those breaks the
+  // page. A data: URL reports its origin as "null", so an origin comparison
+  // alone would kill an inline 3D model.
+  function blocked(url, method) {
+    var raw = String(url || "");
+    if (/^(data:|blob:|about:|filesystem:)/i.test(raw)) return false;
     try {
-      var u = new URL(url, window.location.href);
-      if (u.origin !== window.location.origin) return true;
-      return /(^|\/)api\//.test(u.pathname);
+      var u = new URL(raw, window.location.href);
+      if (u.protocol === "data:" || u.protocol === "blob:") return false;
+      if (u.origin === window.location.origin) return /(^|\/)api\//.test(u.pathname);
+      return String(method || "GET").toUpperCase() !== "GET";
     } catch (e) {
       return false;
     }
@@ -58,9 +67,10 @@
 
   if (window.fetch) {
     var realFetch = window.fetch;
-    window.fetch = function (input) {
+    window.fetch = function (input, init) {
       var url = typeof input === "string" ? input : (input && input.url) || "";
-      if (blocked(url)) return Promise.reject(new Error(DEMO_ERROR));
+      var method = (init && init.method) || (input && input.method) || "GET";
+      if (blocked(url, method)) return Promise.reject(new Error(DEMO_ERROR));
       return realFetch.apply(this, arguments);
     };
   }
@@ -69,7 +79,7 @@
     var realOpen = XMLHttpRequest.prototype.open;
     var realSend = XMLHttpRequest.prototype.send;
     XMLHttpRequest.prototype.open = function (method, url) {
-      this.__demoBlocked = blocked(url);
+      this.__demoBlocked = blocked(url, method);
       return realOpen.apply(this, arguments);
     };
     XMLHttpRequest.prototype.send = function () {
