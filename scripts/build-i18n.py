@@ -315,15 +315,15 @@ def switcher(page, lang):
     )
 
 
-CLOCK = '<span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>\n'
+CLOCK = re.compile(r'<span class="ui-date" id="clockDate">[^<]*</span>\n')
 
 
 def apply_switcher(html, page, lang):
     html = re.sub(r' *<div class="ui-lang"[^>]*>.*?</div>\n', "", html, flags=re.S)
-    i = html.find(CLOCK)
-    if i < 0:
+    m = CLOCK.search(html)
+    if not m:
         raise SystemExit("no clock block")
-    at = i + len(CLOCK)
+    at = m.end()
     return html[:at] + switcher(page, lang) + html[at:]
 
 

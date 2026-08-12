@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ap   = h >= 12 ? 'PM' : 'AM';
     h = h % 12 || 12;
     timeEl.textContent = `${String(h).padStart(2, '0')}:${m} ${ap}`;
-    dateEl.textContent = `${String(now.getDate()).padStart(2, '0')} ${MONTHS[now.getMonth()]} ${now.getFullYear()} [CA]`;
+    dateEl.textContent = `${String(now.getDate()).padStart(2, '0')} ${MONTHS[now.getMonth()]} ${now.getFullYear()} [FR]`;
   }
 
   updateClock();

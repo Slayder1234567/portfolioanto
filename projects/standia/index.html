@@ -230,7 +230,7 @@
     </div>
     <div class="ui-header-time">
       <span class="ui-time" id="clockTime">--:-- --</span>
-      <span class="ui-date" id="clockDate">-- ------- ---- [CA]</span>
+      <span class="ui-date" id="clockDate">-- ------- ---- [FR]</span>
         <div class="ui-lang" role="group" aria-label="Language">
           <a href="/projects/standia/" aria-current="true" hreflang="en" title="Français">EN</a>
           <span class="ui-lang-sep">/</span>
@@ -342,7 +342,7 @@
         const t = document.getElementById('clockTime');
         const dt = document.getElementById('clockDate');
         if (t) t.textContent = `${h}:${m} ${ampm}`;
-        if (dt) dt.textContent = `${d} ${mon} ${y} [CA]`;
+        if (dt) dt.textContent = `${d} ${mon} ${y} [FR]`;
       }
       updateClock();
       setInterval(updateClock, 1000);
