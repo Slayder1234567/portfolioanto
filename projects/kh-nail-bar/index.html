@@ -228,6 +228,9 @@
       width: min(1400px, calc(100vw - var(--nav-w) - 2 * var(--edge)));
       border: 1px solid #e0e0e0;
       background: #ffffff;
+      /* body sets cursor: none for the custom dot — give the pointer back
+         over the demo, where the framed site is driven normally */
+      cursor: auto;
     }
     .proj-demo-bar {
       display: flex;
@@ -403,6 +406,18 @@
       });
       document.addEventListener('mouseleave', () => gsap.to(cursorDot, { opacity: 0, duration: 0.2 }));
       document.addEventListener('mouseenter', () => gsap.to(cursorDot, { opacity: 1, duration: 0.2 }));
+
+      // ── Hide the dot over the demo ─────────────────────────
+      // The iframe swallows mousemove, so the dot would freeze at the edge
+      // while the real cursor moves around inside the framed site.
+      const demo = document.querySelector('.proj-demo');
+      if (demo) {
+        demo.addEventListener('mouseenter', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        demo.addEventListener('mouseleave', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+        // Clicking inside the iframe moves focus there without firing mouseleave.
+        window.addEventListener('blur', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        window.addEventListener('focus', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+      }
 
       const STATES = {
         dot:  { width: 7,  height: 7,  borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
