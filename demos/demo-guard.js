@@ -1,46 +1,62 @@
 /* Runs inside every hosted client demo.
 
-   The demo is displayed in an iframe on a project page. Two things have to be
-   contained: links that leave the client's site would otherwise replace the
-   demo frame, and any form that reaches a live endpoint would send real data
-   from a portfolio visitor. */
+   The demo is a copy of a real client site shown in an iframe on a project
+   page. It exists to be looked at and clicked through — nothing in it should
+   reach the outside world. Anything that would leave the site (social links,
+   mail and phone links, form submissions, booking confirmations) is made inert
+   here, without touching the client's own markup or styling.
+
+   Everything is handled on the capture phase at document level, so it fires
+   before the page's own listeners and cancels them too — otherwise the contact
+   form would still flash its "Request sent!" confirmation. */
 (function () {
   "use strict";
 
-  var host = window.location.hostname;
+  var EXTERNAL_SCHEME = /^(mailto:|tel:|sms:)/i;
+  var ABSOLUTE_URL = /^https?:/i;
 
-  function containLinks() {
+  function leavesTheSite(a) {
+    var href = a.getAttribute("href") || "";
+    if (!href || href.charAt(0) === "#") return false;
+    if (EXTERNAL_SCHEME.test(href)) return true;
+    if (ABSOLUTE_URL.test(href)) return a.hostname !== window.location.hostname;
+    return false;
+  }
+
+  function stop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+  }
+
+  // Links out of the demo: dead on click, and never opened in a new tab.
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (a && leavesTheSite(a)) stop(e);
+  }, true);
+
+  // Every form — contact, booking, newsletter — stays inert.
+  document.addEventListener("submit", function (e) {
+    if (e.target && e.target.tagName === "FORM") stop(e);
+  }, true);
+
+  // Mark them up front so nothing opens a tab and assistive tech agrees.
+  function markInert() {
     var links = document.querySelectorAll("a[href]");
     for (var i = 0; i < links.length; i++) {
-      var a = links[i];
-      if (!/^https?:/i.test(a.getAttribute("href") || "")) continue;
-      if (a.hostname === host) continue;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      if (!leavesTheSite(links[i])) continue;
+      links[i].removeAttribute("target");
+      links[i].setAttribute("aria-disabled", "true");
+    }
+    var forms = document.querySelectorAll("form");
+    for (var j = 0; j < forms.length; j++) {
+      forms[j].setAttribute("novalidate", "");
     }
   }
 
-  // Belt and braces: this demo's own script already cancels its contact form,
-  // but any form added later must not post from within the portfolio.
-  function neutraliseForms() {
-    document.addEventListener("submit", function (e) {
-      var form = e.target;
-      if (!form || form.tagName !== "FORM") return;
-      var action = form.getAttribute("action");
-      if (!action || action === "#") return; // handled by the site's own JS
-      e.preventDefault();
-      e.stopPropagation();
-    }, true);
-  }
-
-  function init() {
-    containLinks();
-    neutraliseForms();
-  }
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", markInert);
   } else {
-    init();
+    markInert();
   }
 })();
