@@ -220,18 +220,21 @@
       .coming-soon-block { padding: 40px 24px; }
     }
 
+    /* The clips are ~2900px wide and roughly 16:9. Let them keep their own
+       aspect ratio and break out of the 900px text column, instead of being
+       cropped into a square by object-fit. */
     .proj-media {
       margin: 64px 0 0;
-      width: 100%;
-      max-width: 900px;
+      width: min(1400px, calc(100vw - var(--nav-w) - 2 * var(--edge)));
       background: #f0f0f0;
-      overflow: hidden;
     }
     .proj-media video {
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+    }
+    @media (max-width: 1024px) {
+      .proj-media { width: 100%; }
     }
   </style>
 </head>
@@ -305,7 +308,7 @@
 
       </div>
 
-      <div class="proj-media" style="aspect-ratio: 1 / 1;">
+      <div class="proj-media">
         <video src="/videos/stingers-archive.mp4" autoplay loop muted playsinline preload="metadata"></video>
       </div>
 
