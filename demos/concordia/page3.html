@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gender Roles &amp; Society — How the Patriarchy Affects Generations</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Page 3 specific: dark video hero ── */
+    .video-hero {
+      background: #000;
+      padding: 0;
+      position: relative;
+    }
+
+    .video-hero__container {
+      position: relative;
+      width: 100%;
+    }
+
+    .video-hero__video {
+      width: 100%;
+      max-height: 92vh;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Minimal custom controls bar */
+    .video-hero__controls {
+      background: rgba(10,10,10,0.92);
+      padding: 0.8rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .vc-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+    .vc-btn:hover { color: #fff; }
+    .vc-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .vc-timeline {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .vc-progress-track {
+      flex: 1;
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .vc-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0%;
+      pointer-events: none;
+      transition: width 0.1s linear;
+    }
+
+    .vc-time {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .vc-volume {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .vc-volume-slider {
+      -webkit-appearance: none;
+      width: 70px;
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    .vc-volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .vc-caption-bar {
+      background: #000;
+      padding: 0.6rem 1.8rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .vc-caption-bar p {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* Manosphere callout */
+    .callout {
+      margin: 2.5rem 0;
+      padding: 1.8rem 2rem;
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--black);
+      background: #f7f7f7;
+    }
+
+    .callout__label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .callout p {
+      font-family: var(--body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink);
+      font-weight: 300;
+      margin: 0;
+    }
+
+    /* Definition box */
+    .definition {
+      margin: 2.5rem 0;
+      padding: 2rem;
+      background: #fafafa;
+      border-top: 2px solid var(--black);
+    }
+
+    .definition__term {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+
+    .definition p {
+      font-family: var(--body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--mid);
+      font-weight: 300;
+    }
+  </style>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="/demos/demo-guard.js" defer></script>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__link">1&nbsp; Older Men's Loneliness</a>
+      <span class="nav__sep">|</span>
+      <a href="page2.html" class="nav__link">2&nbsp; Student Mental Health</a>
+      <span class="nav__sep">|</span>
+      <a href="page3.html" class="nav__link active">3&nbsp; Gender Roles &amp; Society</a>
+    </div>
+  </nav>
+
+  <!-- Hero text (before video) -->
+  <section class="hero" style="min-height: 70vh; border-bottom: none;">
+    <p class="hero__kicker fade-in">How the Patriarchy Affects Generations — Chapter III</p>
+    <h1 class="hero__title fade-in fade-in-delay-1">
+      The Manosphere<br><em>Pipeline</em>
+    </h1>
+    <p class="hero__deck fade-in fade-in-delay-2">
+      From online forums to mainstream culture, a radicalization pipeline is reshaping how young men think about gender, power, and their place in the world — with consequences that ripple across generations.
+    </p>
+    <p class="hero__byline fade-in fade-in-delay-3">By <span>Yoan Safar</span></p>
+  </section>
+
+  <!-- ════════════════════════════════
+       CINEMATIC VIDEO CENTERPIECE
+  ════════════════════════════════ -->
+  <section class="video-hero">
+    <div class="video-hero__container">
+      <video
+        class="video-hero__video"
+        id="mainVideo"
+        preload="metadata"
+        playsinline
+      >
+        <source src="Video Project.mp4" type="video/mp4" />
+        Your browser does not support the HTML5 video element.
+      </video>
+    </div>
+
+    <!-- Custom minimal controls -->
+    <div class="video-hero__controls">
+      <!-- Play / Pause -->
+      <button class="vc-btn" id="playBtn" aria-label="Play">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <!-- Timeline -->
+      <div class="vc-timeline">
+        <div class="vc-progress-track" id="progressTrack">
+          <div class="vc-progress-fill" id="progressFill"></div>
+        </div>
+        <span class="vc-time" id="timeDisplay">0:00 / 0:00</span>
+      </div>
+
+      <!-- Volume -->
+      <div class="vc-volume">
+        <button class="vc-btn" id="muteBtn" aria-label="Mute">
+          <svg id="volIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          <svg id="muteIcon" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+        <input type="range" class="vc-volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1" aria-label="Volume" />
+      </div>
+
+      <!-- Fullscreen -->
+      <button class="vc-btn" id="fsBtn" aria-label="Fullscreen">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+      </button>
+    </div>
+
+    <div class="vc-caption-bar">
+      <p>Video Report — How the Patriarchy Affects Generations · Yoan Safar</p>
+    </div>
+  </section>
+
+  <!-- Intro after video -->
+  <article class="article" style="padding-top: 5rem;">
+    <div class="article__inner">
+      <p class="article__label fade-in">In Depth</p>
+      <h2 class="article__heading fade-in">What Is the Manosphere — and Why Does It Matter?</h2>
+      <p class="article__subheading fade-in">A radicalization ecosystem is pulling young men toward increasingly extreme views. Understanding how it works is the first step to dismantling it.</p>
+      <div class="article__rule fade-in"></div>
+
+      <div class="article__body">
+        <p class="fade-in">When people hear the word "incel" they often think of fringe online communities, dark subreddits, and isolated acts of violence. But the phenomenon is neither fringe nor isolated. It is the endpoint of a long pipeline — and that pipeline is moving closer to the mainstream every year.</p>
+
+        <div class="definition fade-in">
+          <p class="definition__term">The Manosphere</p>
+          <p>The community of influencers and their followers who are convinced that society is moving in the wrong direction and hold misogynistic, often alt-right views. It encompasses everything from self-help gurus to outright hate communities, united by a shared resentment toward feminism and a belief that men are the true victims of modern society.</p>
+        </div>
+
+        <p class="fade-in">According to an article from the Guardian, Gen-Z men are <strong>twice as likely</strong> to believe that women should obey their husbands than baby boomers. This comes as many young men are fed content from self-proclaimed "pick-up artists" or alpha males who preach very traditional views on women's gender roles — often through recommendation algorithms that have no concept of the damage they do.</p>
+
+        <h3 class="fade-in">The Black Pill Pipeline</h3>
+
+        <p class="fade-in">Incels — or "involuntary celibates" — are young men who believe that their inability to attain a romantic relationship is something ordained at birth, a function of genetics they cannot escape. They are often grouped as a monolith, but there are levels to it, described through a series of increasingly radical "pills."</p>
+
+        <div class="callout fade-in">
+          <p class="callout__label">Research Finding</p>
+          <p>A study by Robert Green and Kurt Fowler of Rutgers University and Allan Palombi of Penn State shows the rigidity of these self-formed social castes. At its core, "masculinity threat" is the perception that an external factor can threaten to expose a man's masculinity as insufficient — causing him to fail at fulfilling the societal expectations of his gender. The entry point for any prospective Incel is their lack of access to sex. This, alongside having an "epiphany" about the negative aspects of feminism, is known as being "redpilled."</p>
+        </div>
+
+        <!-- Blackpill Pipeline Table — recreated from Green, Fowler & Palombi research -->
+        <div class="pipeline-table fade-in">
+          <table>
+            <caption>Table 1 — Blackpill Pipeline Process Trace · Green, Fowler &amp; Palombi</caption>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Cause<br><em>Pipeline Process</em></th>
+                <th>Entity 1<br><em>Redpill</em></th>
+                <th>Entity 2<br><em>Racepill</em></th>
+                <th>Entity 3<br><em>Blackpill</em></th>
+                <th>Outcome<br><em>Radicalization</em></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">Theory</td>
+                <td>Socialization into deterministic factors that reduce agency</td>
+                <td>Recognition of sexual injustice and the discovery of community</td>
+                <td>Perception that hierarchies are natural</td>
+                <td>Acknowledgment that social change is unlikely / impossible</td>
+                <td class="outcome-cell">Advocating for and approval of violence</td>
+              </tr>
+              <tr>
+                <td class="row-label">Empirical</td>
+                <td class="empirical-quote">"I rejected the concept at first, but slowly things started to make sense"</td>
+                <td class="empirical-quote">"It takes someone to have the same experiences in life to truly understand your situation"</td>
+                <td class="empirical-quote">"Lucky for you you're white so you actually have the option to fuck foids"</td>
+                <td class="empirical-quote">"There is no personal solution to systemic problems"</td>
+                <td class="empirical-quote outcome-cell">"They were literally calling you ugly … just fucking kill them already"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="fade-in">Once a member has been "blackpilled" — the final, most radical stage — there is no going back to previous stages. The longer they stay within Inceldom and embrace its contextual "truths," the more extreme they become. In this framework, the hierarchy of "pills" becomes more than labels: they are the empirical fingerprints of a process that filters in the most susceptible members to that level of radicalization.</p>
+
+        <p class="fade-in">People can often perceive a kind of "status inconsistency," where they feel their current position is in conflict with where they believe they should be. If society were constructed as Incels argue it should be, these hierarchies would place them firmly at the top of the social structure. When Incels band together to acknowledge that these changes are not being enacted, this can lead to further radicalization — and eventually violence.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Pull quote: Gen Z stat -->
+  <div class="pull-quote fade-in">
+    <p>Gen-Z men are <strong>twice as likely</strong> to believe that women should obey their husbands than baby boomers.</p>
+    <cite>— The Guardian</cite>
+  </div>
+
+  <!-- Case Study: Elliot Rodger -->
+  <article class="article">
+    <div class="article__inner">
+      <div class="article__body">
+        <h3 class="fade-in">Case Study: Elliot Rodger and the Road to Violence</h3>
+
+        <!-- Minassian Facebook post -->
+        <figure class="social-frame fade-in">
+          <div class="social-frame__header">Facebook · Historical Document</div>
+          <img src="img_minassian.png" alt="Alek Minassian's Facebook post before the 2018 Toronto van attack declaring 'The Incel Rebellion has already begun'" />
+          <figcaption>Alek Minassian's Facebook post, published minutes before the 2018 Toronto van attack that killed 10 people. He cited Elliot Rodger and declared an "Incel Rebellion." The post is preserved as evidence of the pipeline's real-world consequences.</figcaption>
+        </figure>
+
+        <p class="fade-in">The most infamous incel crime in history was committed by Elliot Rodger, who murdered six people and injured 14 others in the Isla Vista shootings of 2014. Before carrying out the attack, he killed two roommates and a friend, then drove to a sorority house at UC Santa Barbara.</p>
+
+        <p class="fade-in">In his final video, Rodger lamented how women had ignored him throughout his college life — and announced his intention to exact "retribution." His manifesto, which ran hundreds of pages, reveals less a monster conjured from nowhere and more a boy failed at every developmental juncture: by absent male mentorship, by a culture that equated masculinity with stoicism and sexual conquest, and ultimately by a radicalization pipeline that confirmed his worst instincts rather than challenging them.</p>
+
+        <!-- Rodger manifesto excerpt 1: early resentment formation -->
+        <figure class="doc-frame fade-in">
+          <div class="doc-frame__label">From Elliot Rodger's manifesto — Early adolescence</div>
+          <img src="img_rodger_1.png" alt="Excerpt from Elliot Rodger's manifesto describing his early resentment of girls after a negative interaction" />
+          <figcaption>One of many passages revealing how Rodger's resentment toward women began in early adolescence — a pattern researchers identify as critical to the radicalization timeline.</figcaption>
+        </figure>
+
+        <!-- Rodger manifesto excerpt 2: isolation -->
+        <figure class="doc-frame fade-in">
+          <div class="doc-frame__label">From Elliot Rodger's manifesto — High school years</div>
+          <img src="img_rodger_2.png" alt="Excerpt from Elliot Rodger's manifesto describing his experience of total social isolation and bullying in high school" />
+          <figcaption>Rodger describes social exclusion and bullying as formative traumas — experiences that, absent any intervention or community, fed directly into his radicalization.</figcaption>
+        </figure>
+
+        <blockquote class="fade-in">
+          <p>"A man who doesn't get any girls is a worthless loser." This was the worldview Rodger had fully internalized — not a personal conclusion, but a lesson absorbed from a culture that had been telling him so for years.</p>
+        </blockquote>
+
+        <p class="fade-in">His story illustrates in tragic, extreme form what happens when the patriarchal values explored throughout this series — emotional repression, the equation of masculinity with dominance, the absence of healthy male community — go entirely unchecked. The same forces that isolate older men in NDG, that overwhelm young students like Dexter, find their most dangerous expression in the radicalization pipeline.</p>
+
+        <h3 class="fade-in">What Research Says About Solutions</h3>
+
+        <p class="fade-in">Many choose to simply ignore these young men or demonize them. But researchers argue that a different approach would be more effective in bringing men out of this cycle — or preventing them from falling down the rabbit hole at all.</p>
+
+        <div class="callout fade-in">
+          <p class="callout__label">Research — William Bukowski, Concordia University</p>
+          <p>A study analyzing previous literature on the subject shows how people who reject certain gender roles are often happier. The rigidity of gender expectations — for both men and women — is not a source of stability. It is a source of harm.</p>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Closing stat -->
+  <div class="stat-block fade-in">
+    <div class="stat-block__number">2<sup>×</sup></div>
+    <div class="stat-block__text">
+      <p>Gen-Z men are <strong>twice as likely</strong> to believe women should obey their husbands compared to baby boomers — a measure of how far mainstream culture has shifted, not just the fringes.</p>
+      <p class="source">Source: The Guardian</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      <strong>How the Patriarchy Affects Generations</strong><br>
+      A three-part investigative series by Yoan Safar<br>
+      Concordia University · 2026<br><br>
+      <a href="index.html" style="color: var(--accent)">1 Older Men's Loneliness</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="page2.html" style="color: var(--accent)">2 Student Mental Health</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="page3.html" style="color: var(--accent)">3 Gender Roles &amp; Society</a><br><br>
+      <span style="font-size: 0.8em; color: var(--muted)">Designed by <a href="https://antoninleclei.com" target="_blank" style="color: var(--muted)">Antonin Le Cleï</a></span>
+    </p>
+  </footer>
+
+  <script>
+    // ── Progress bar ──
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (scrolled / total * 100) + '%';
+    });
+
+    // ── Fade-in ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Custom video player ──
+    const video = document.getElementById('mainVideo');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const progressFill = document.getElementById('progressFill');
+    const progressTrack = document.getElementById('progressTrack');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const muteBtn = document.getElementById('muteBtn');
+    const volIcon = document.getElementById('volIcon');
+    const muteIcon = document.getElementById('muteIcon');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const fsBtn = document.getElementById('fsBtn');
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60).toString().padStart(2, '0');
+      return `${m}:${sec}`;
+    }
+
+    // Play / Pause
+    playBtn.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        video.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    });
+
+    // Click on video also toggles
+    video.addEventListener('click', () => playBtn.click());
+
+    // Time update
+    video.addEventListener('timeupdate', () => {
+      const pct = video.duration ? (video.currentTime / video.duration * 100) : 0;
+      progressFill.style.width = pct + '%';
+      timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+    });
+
+    video.addEventListener('ended', () => {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    });
+
+    // Seek
+    progressTrack.addEventListener('click', (e) => {
+      const rect = progressTrack.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      if (video.duration) video.currentTime = pct * video.duration;
+    });
+
+    // Mute
+    muteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      volIcon.style.display = video.muted ? 'none' : 'block';
+      muteIcon.style.display = video.muted ? 'block' : 'none';
+      volumeSlider.value = video.muted ? 0 : video.volume;
+    });
+
+    // Volume
+    volumeSlider.addEventListener('input', () => {
+      video.volume = volumeSlider.value;
+      video.muted = video.volume === 0;
+      volIcon.style.display = video.muted ? 'none' : 'block';
+      muteIcon.style.display = video.muted ? 'block' : 'none';
+    });
+
+    // Fullscreen
+    fsBtn.addEventListener('click', () => {
+      const container = document.querySelector('.video-hero__container');
+      if (!document.fullscreenElement) {
+        (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
+      } else {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      }
+    });
+  </script>
+
+</body>
+</html>
