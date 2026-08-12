@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="content-language" content="en" />
+  <title>Standings — Concordia Recreation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --c-bg:        #FFFFFF;
+      --c-surface:   #F7F3F4;
+      --c-card:      #FFFFFF;
+      --c-primary:   #912338;
+      --c-primary-l: #B82B45;
+      --c-text:      #1A0A0E;
+      --c-muted:     #6B5A5E;
+      --c-border:    rgba(145, 35, 56, 0.18);
+      --f-display:   'Barlow Condensed', sans-serif;
+      --f-body:      'Inter', sans-serif;
+      --radius: 12px;
+      --transition: 200ms ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--f-body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(145, 35, 56, 0.12);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    }
+    .logo-mark { height: 40px; width: auto; display: block; }
+    .nav__links { display: flex; align-items: center; gap: 4px; list-style: none; justify-content: center; }
+    .nav__links a {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-muted);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav__links a:hover,
+    .nav__links a.active { color: var(--c-text); background: rgba(145, 35, 56, 0.07); }
+    .nav__links .lang-sep { color: var(--c-border); font-size: 11px; padding: 0 2px; }
+    .nav__actions { display: flex; align-items: center; gap: 8px; margin-right: 10px; justify-content: flex-end; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px;
+      font-family: var(--f-body); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all var(--transition); border: none;
+    }
+    .btn--ghost { background: transparent; color: var(--c-text); border: 1px solid rgba(0,0,0,0.15); }
+    .btn--ghost:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.25); }
+    .btn--primary { background: var(--c-primary); color: #fff; }
+    .btn--primary:hover { background: var(--c-primary-l); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 22px; height: 32px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      margin-left: 6px;
+      transition: all var(--transition);
+    }
+    .hamburger:hover { opacity: 0.7; }
+    .hamburger span {
+      display: block; height: 2px;
+      background: var(--c-text);
+      border-radius: 2px;
+      transition: all 250ms ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 40px 80px;
+    }
+
+    .page__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(145, 35, 56, 0.08);
+      border: 1px solid rgba(145, 35, 56, 0.25);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--c-primary);
+      margin-bottom: 24px;
+    }
+
+    .page__title {
+      font-family: var(--f-display);
+      font-weight: 900;
+      font-size: clamp(48px, 8vw, 80px);
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--c-text);
+      margin-bottom: 48px;
+    }
+    .page__title em { font-style: normal; color: var(--c-primary); }
+
+    /* League list */
+    .league-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .league-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--c-card);
+      border-bottom: 1px solid var(--c-border);
+      transition: all var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .league-item:last-child { border-bottom: none; }
+    .league-item:hover { background: rgba(145, 35, 56, 0.04); }
+    .league-item:hover .league-item__arrow { transform: translateX(4px); color: var(--c-primary); }
+
+    .league-item__left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .league-item__icon {
+      width: 40px; height: 40px;
+      background: rgba(145, 35, 56, 0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .league-item__icon img {
+      width: 22px; height: 22px;
+      filter: invert(20%) sepia(60%) saturate(800%) hue-rotate(310deg) brightness(80%);
+    }
+
+    .league-item__name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--c-text);
+    }
+    .league-item__season {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--c-muted);
+      margin-top: 2px;
+    }
+
+    .league-item__arrow {
+      color: var(--c-muted);
+      flex-shrink: 0;
+      transition: transform var(--transition), color var(--transition);
+    }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; display: flex; justify-content: space-between; }
+      .nav__links { display: none; }
+      .hamburger { display: flex; }
+      .page { padding: 88px 16px 60px; }
+      .league-item { padding: 16px 16px; }
+
+      .mobile-menu {
+        display: block;
+        position: fixed; inset: 0;
+        z-index: 99;
+        pointer-events: none;
+      }
+      .mobile-menu.open { pointer-events: all; }
+      .mobile-menu__overlay {
+        position: absolute; inset: 0;
+        background: rgba(0,0,0,0);
+        transition: background 300ms ease;
+      }
+      .mobile-menu.open .mobile-menu__overlay { background: rgba(0,0,0,0.3); }
+      .mobile-menu__panel {
+        position: absolute; top: 0; right: 0;
+        width: 280px; height: 100%;
+        background: #fff;
+        padding: 80px 24px 40px;
+        display: flex; flex-direction: column; gap: 32px;
+        transform: translateX(100%);
+        transition: transform 300ms ease;
+        box-shadow: -8px 0 32px rgba(0,0,0,0.1);
+      }
+      .mobile-menu.open .mobile-menu__panel { transform: translateX(0); }
+      .mobile-menu__panel ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+      .mobile-menu__panel ul a {
+        display: block; padding: 12px 16px;
+        font-size: 15px; font-weight: 500;
+        color: var(--c-text); border-radius: 8px;
+        transition: all var(--transition);
+      }
+      .mobile-menu__panel ul a:hover { background: rgba(145,35,56,0.07); color: var(--c-primary); }
+    }
+  </style>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="/demos/demo-guard.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" aria-label="Concordia Recreation Home">
+      <img class="logo-mark" src="logo.png" alt="Concordia Recreation" />
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Welcome <span class="lang-sep">/</span> Bienvenue</a></li>
+      <li><a href="schedule.html">Schedule <span class="lang-sep">/</span> Horaire</a></li>
+      <li><a href="standings.html" class="active">Standings <span class="lang-sep">/</span> Classement</a></li>
+    </ul>
+    <div class="nav__actions">
+      <button class="btn btn--ghost" onclick="window.location.href='signin.html'">Sign In</button>
+      <button class="btn btn--primary" onclick="window.location.href='create-account.html'">Create Account</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__overlay" id="menuOverlay"></div>
+    <div class="mobile-menu__panel">
+      <ul>
+        <li><a href="index.html">Welcome / Bienvenue</a></li>
+        <li><a href="schedule.html">Schedule / Horaire</a></li>
+        <li><a href="standings.html">Standings / Classement</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="page__label">Standings / Classement</div>
+    <h1 class="page__title">League <em>Standings</em></h1>
+
+    <div class="league-list reveal">
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="le-hockey.png" alt="Hockey" />
+          </div>
+          <div>
+            <div class="league-item__name">Ice Hockey Thursday</div>
+            <div class="league-item__season">F2025 / W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="le-hockey.png" alt="Hockey" />
+          </div>
+          <div>
+            <div class="league-item__name">Ice Hockey Sunday</div>
+            <div class="league-item__season">F2025 / W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="variante-de-ballon-de-football.png" alt="Soccer" />
+          </div>
+          <div>
+            <div class="league-item__name">Dome Soccer Tuesday</div>
+            <div class="league-item__season">F2025 / W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="variante-de-ballon-de-football.png" alt="Soccer" />
+          </div>
+          <div>
+            <div class="league-item__name">Dome Soccer Thursday</div>
+            <div class="league-item__season">F2025 / W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="basketball.png" alt="Basketball" />
+          </div>
+          <div>
+            <div class="league-item__name">Basketball</div>
+            <div class="league-item__season">W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="ballon-de-volleyball.png" alt="Volleyball" />
+          </div>
+          <div>
+            <div class="league-item__name">Adv. Volleyball A/B</div>
+            <div class="league-item__season">W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="ballon-de-volleyball.png" alt="Volleyball" />
+          </div>
+          <div>
+            <div class="league-item__name">Adv. Volleyball C</div>
+            <div class="league-item__season">W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <a href="#" class="league-item">
+        <div class="league-item__left">
+          <div class="league-item__icon">
+            <img src="ballon-de-volleyball.png" alt="Volleyball" />
+          </div>
+          <div>
+            <div class="league-item__name">Int. Volleyball</div>
+            <div class="league-item__season">W2026</div>
+          </div>
+        </div>
+        <svg class="league-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+    </div>
+  </main>
+
+  <footer style="background:#F7F3F4;border-top:1px solid rgba(145,35,56,0.18);padding:48px 40px 32px;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;flex-wrap:wrap;">
+        <div>
+          <img src="logo.png" alt="Concordia Recreation" style="height:56px;width:auto;" />
+        </div>
+      </div>
+      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <p style="font-size:12px;color:#6B5A5E;">
+          &copy; 2026 Concordia Recreation Intramural Sports / Sports et activités intra-muros de Loisirs Concordia.
+          Developed by <a href="https://antoninleclei.com" target="_blank" rel="noopener" style="text-decoration:underline;color:#6B5A5E;">Antonin Le Cleï</a>.
+        </p>
+        <a href="https://www.instagram.com/concordiarecreation/" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;border:1px solid rgba(145,35,56,0.18);background:#fff;transition:all 200ms ease;" onmouseover="this.style.borderColor='#912338';this.style.background='rgba(145,35,56,0.07)'" onmouseout="this.style.borderColor='rgba(145,35,56,0.18)';this.style.background='#fff'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#912338" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="#912338" stroke="none"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('hamburger');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('menuOverlay');
+      function toggle() {
+        const open = menu.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+        menu.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      btn.addEventListener('click', toggle);
+      overlay.addEventListener('click', toggle);
+    })();
+
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      els.forEach((el) => io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
