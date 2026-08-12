@@ -76,6 +76,63 @@ PAGES = [
         "title_fr": "Stage en web design chez Digitad, Montréal | Antonin Le Cleï",
         "desc_fr": "Stage en web design chez Digitad, agence de marketing à Montréal : intégration Webflow et Shopify, wireframes clients et automatisations assistées par IA.",
     },
+    # ── Archive case studies. Copy is still placeholder, so these stay out of
+    # the index until the real write-ups land (flip noindex to False then).
+    {
+        "en": "projects/concordia/index.html", "fr": "fr/realisations/concordia/index.html",
+        "en_url": "/projects/concordia/", "fr_url": "/fr/realisations/concordia/",
+        "name_en": "Concordia Project", "name_fr": "Projet Concordia",
+        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
+        "noindex": True,
+        "title_en": "Concordia Project — Student Web Design | Antonin Le Cleï",
+        "desc_en": "A student web design project built at Concordia University, Montreal (April 2026). Case study by Antonin Le Cleï — full write-up coming soon.",
+        "title_fr": "Projet Concordia — web design étudiant | Antonin Le Cleï",
+        "desc_fr": "Un projet de web design étudiant réalisé à l'Université Concordia, Montréal (avril 2026). Étude de cas d'Antonin Le Cleï — détails à venir.",
+    },
+    {
+        "en": "projects/cincta/index.html", "fr": "fr/realisations/cincta/index.html",
+        "en_url": "/projects/cincta/", "fr_url": "/fr/realisations/cincta/",
+        "name_en": "Cincta", "name_fr": "Cincta",
+        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
+        "noindex": True,
+        "title_en": "Cincta — Brand & Web Design Project | Antonin Le Cleï",
+        "desc_en": "Cincta, a brand and web design project by Antonin Le Cleï (April 2026). Case study and full write-up coming soon.",
+        "title_fr": "Cincta — projet de marque & web design | Antonin Le Cleï",
+        "desc_fr": "Cincta, un projet de marque et de web design signé Antonin Le Cleï (avril 2026). Étude de cas et détails complets à venir.",
+    },
+    {
+        "en": "projects/kh-nail-bar/index.html", "fr": "fr/realisations/kh-nail-bar/index.html",
+        "en_url": "/projects/kh-nail-bar/", "fr_url": "/fr/realisations/kh-nail-bar/",
+        "name_en": "Kh Nail Bar", "name_fr": "Kh Nail Bar",
+        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
+        "noindex": True,
+        "title_en": "Kh Nail Bar — Web Design Project | Antonin Le Cleï",
+        "desc_en": "Kh Nail Bar, a web design project by Antonin Le Cleï (March 2026). Case study and full write-up coming soon.",
+        "title_fr": "Kh Nail Bar — projet de web design | Antonin Le Cleï",
+        "desc_fr": "Kh Nail Bar, un projet de web design signé Antonin Le Cleï (mars 2026). Étude de cas et détails complets à venir.",
+    },
+    {
+        "en": "projects/stingers/index.html", "fr": "fr/realisations/stingers/index.html",
+        "en_url": "/projects/stingers/", "fr_url": "/fr/realisations/stingers/",
+        "name_en": "Stingers", "name_fr": "Stingers",
+        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
+        "noindex": True,
+        "title_en": "Stingers — Web Design Project | Antonin Le Cleï",
+        "desc_en": "Stingers, a web design project by Antonin Le Cleï (February 2026). Case study and full write-up coming soon.",
+        "title_fr": "Stingers — projet de web design | Antonin Le Cleï",
+        "desc_fr": "Stingers, un projet de web design signé Antonin Le Cleï (février 2026). Étude de cas et détails complets à venir.",
+    },
+    {
+        "en": "projects/cutsinnit/index.html", "fr": "fr/realisations/cutsinnit/index.html",
+        "en_url": "/projects/cutsinnit/", "fr_url": "/fr/realisations/cutsinnit/",
+        "name_en": "CutsInnit", "name_fr": "CutsInnit",
+        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
+        "noindex": True,
+        "title_en": "CutsInnit — Web Design Project | Antonin Le Cleï",
+        "desc_en": "CutsInnit, a web design project by Antonin Le Cleï (January 2026). Case study and full write-up coming soon.",
+        "title_fr": "CutsInnit — projet de web design | Antonin Le Cleï",
+        "desc_fr": "CutsInnit, un projet de web design signé Antonin Le Cleï (janvier 2026). Étude de cas et détails complets à venir.",
+    },
     {
         "en": "documents/index.html", "fr": "fr/documents/index.html",
         "en_url": "/documents/", "fr_url": "/fr/documents/",
@@ -206,8 +263,9 @@ def build_head(page, lang):
         f"  <title>{esc(title)}</title>\n"
         f'  <meta name="description" content="{esc(desc)}" />\n'
         '  <meta name="author" content="Antonin Le Cleï" />\n'
-        '  <meta name="robots" content="index, follow" />\n'
-        f'  <link rel="canonical" href="{url}" />\n'
+        + ('  <meta name="robots" content="noindex, follow" />\n' if page.get("noindex")
+           else '  <meta name="robots" content="index, follow" />\n')
+        + f'  <link rel="canonical" href="{url}" />\n'
         f'  <link rel="alternate" hreflang="en-ca" href="{SITE}{page["en_url"]}" />\n'
         f'  <link rel="alternate" hreflang="en" href="{SITE}{page["en_url"]}" />\n'
         f'  <link rel="alternate" hreflang="fr-ca" href="{SITE}{page["fr_url"]}" />\n'
@@ -541,8 +599,40 @@ def fr_documents(h):
     return h
 
 
+def fr_archive(h):
+    """Shared copy of the five archive case studies (still scaffolding)."""
+    for a, b in [
+        (">Type<", ">Type<"), (">Year<", ">Année<"), (">Date<", ">Date<"), (">Role<", ">Rôle<"),
+        (">Web Design<", ">Web design<"), ("Design &amp; Build", "Design & développement"),
+        ("— Student Web Design", "— web design étudiant"), ("— Brand & Web", "— marque & web"),
+        ("— Web Design", "— web design"),
+        ("Concordia Project", "Projet Concordia"),
+        ("April 2026", "Avril 2026"), ("March 2026", "Mars 2026"),
+        ("February 2026", "Février 2026"), ("January 2026", "Janvier 2026"),
+        ("Case study</span>", "Étude de cas</span>"),
+        (">Coming <", ">Bientôt <"), ("<em>Soon</em>", "<em>disponible</em>"),
+        ("Full write-up &amp; project details — launching shortly.",
+         "Article complet & détails du projet — bientôt en ligne."),
+        ("WRITE THE INTRO HERE — what the project is, who it was for, and what\n"
+         "            problem it solved. Replace this paragraph.",
+         "ÉCRIS L'INTRO ICI — ce qu'est le projet, pour qui, et le problème résolu.\n"
+         "            Remplace ce paragraphe."),
+        ("WRITE THE PROCESS HERE — the approach, the tools, the decisions that\n"
+         "            shaped the result. Replace this paragraph.",
+         "ÉCRIS LE PROCESSUS ICI — l'approche, les outils, les décisions qui ont\n"
+         "            façonné le résultat. Remplace ce paragraphe."),
+    ]:
+        h = h.replace(a, b)
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
+    "projects/concordia/index.html": fr_archive,
+    "projects/cincta/index.html": fr_archive,
+    "projects/kh-nail-bar/index.html": fr_archive,
+    "projects/stingers/index.html": fr_archive,
+    "projects/cutsinnit/index.html": fr_archive,
     "projects/index.html": fr_projects,
     "projects/standia/index.html": fr_standia,
     "projects/fin210/index.html": fr_fin210,
@@ -581,6 +671,8 @@ def main():
     # 3. Sitemap with hreflang alternates
     urls = []
     for page in PAGES:
+        if page.get("noindex"):
+            continue  # keep placeholder pages out of the sitemap too
         prio = "1.0" if page["en_url"] == "/" else "0.8"
         for lang in ("en", "fr"):
             loc = SITE + page[f"{lang}_url"]
