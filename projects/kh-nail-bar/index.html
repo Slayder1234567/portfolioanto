@@ -220,21 +220,70 @@
       .coming-soon-block { padding: 40px 24px; }
     }
 
-    /* The clips are ~2900px wide and roughly 16:9. Let them keep their own
-       aspect ratio and break out of the 900px text column, instead of being
-       cropped into a square by object-fit. */
-    .proj-media {
+    /* Live demo: a hosted copy of the client site, framed like a browser
+       window. Breaks out of the 900px text column, bounded by the viewport so
+       it never causes horizontal scroll. */
+    .proj-demo {
       margin: 64px 0 0;
       width: min(1400px, calc(100vw - var(--nav-w) - 2 * var(--edge)));
-      background: #f0f0f0;
+      border: 1px solid #e0e0e0;
+      background: #ffffff;
     }
-    .proj-media video {
+    .proj-demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 40px;
+      padding: 0 16px;
+      background: #f4f4f4;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .proj-demo-dots { display: flex; gap: 6px; flex-shrink: 0; }
+    .proj-demo-dots span {
+      width: 9px; height: 9px; border-radius: 50%; background: #d4d4d4;
+    }
+    .proj-demo-url {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #999;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .proj-demo-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: #1a1a1a;
+      border: 1px solid #d4d4d4;
+      padding: 2px 8px;
+      flex-shrink: 0;
+    }
+    .proj-demo-frame {
+      height: min(78vh, 760px);
+      background: #ffffff;
+    }
+    .proj-demo-frame iframe {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      border: none;
     }
+    .proj-demo-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #999;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .proj-demo-note a { color: #1a1a1a; }
     @media (max-width: 1024px) {
-      .proj-media { width: 100%; }
+      .proj-demo { width: 100%; }
+      .proj-demo-frame { height: 70vh; }
     }
   </style>
 </head>
@@ -308,9 +357,17 @@
 
       </div>
 
-      <div class="proj-media">
-        <video src="/videos/kh-nail-bar.mp4" autoplay loop muted playsinline preload="metadata"></video>
+      <div class="proj-demo">
+        <div class="proj-demo-bar">
+          <div class="proj-demo-dots"><span></span><span></span><span></span></div>
+          <span class="proj-demo-url">khnailbar.com</span>
+          <span class="proj-demo-tag">Live demo</span>
+        </div>
+        <div class="proj-demo-frame">
+          <iframe src="/demos/kh-nail-bar/" title="Kh Nail Bar — interactive site demo" loading="lazy"></iframe>
+        </div>
       </div>
+      <p class="proj-demo-note">Scroll and click inside the frame — it is the real site. <a href="/demos/kh-nail-bar/" target="_blank" rel="noopener">Open full screen ↗</a></p>
 
       <div class="coming-soon-block">
         <span class="cs-label">Case study</span>

@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Hosted copies of client sites, shown as interactive demos on the project
+# pages. Republishing them would be duplicate content and would compete with
+# the clients' own sites.
+Disallow: /demos/
+
 Sitemap: https://www.antoninleclei.com/sitemap.xml
