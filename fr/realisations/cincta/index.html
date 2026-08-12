@@ -220,21 +220,53 @@
       .coming-soon-block { padding: 40px 24px; }
     }
 
-    /* The clips are ~2900px wide and roughly 16:9. Let them keep their own
-       aspect ratio and break out of the 900px text column, instead of being
-       cropped into a square by object-fit. */
-    .proj-media {
+    /* Live demo: a hosted copy of the client site, framed like a browser
+       window. Breaks out of the 900px text column, bounded by the viewport so
+       it never causes horizontal scroll. */
+    .proj-demo {
       margin: 64px 0 0;
       width: min(1400px, calc(100vw - var(--nav-w) - 2 * var(--edge)));
-      background: #f0f0f0;
+      border: 1px solid #e0e0e0;
+      background: #ffffff;
+      /* body sets cursor: none for the custom dot — give the pointer back
+         over the demo, where the framed site is driven normally */
+      cursor: auto;
     }
-    .proj-media video {
+    .proj-demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 40px;
+      padding: 0 16px;
+      background: #f4f4f4;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .proj-demo-dots { display: flex; gap: 6px; flex-shrink: 0; }
+    .proj-demo-dots span {
+      width: 9px; height: 9px; border-radius: 50%; background: #d4d4d4;
+    }
+    .proj-demo-frame {
+      height: min(78vh, 760px);
+      background: #ffffff;
+    }
+    .proj-demo-frame iframe {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      border: none;
     }
+    .proj-demo-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #999;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .proj-demo-note a { color: #1a1a1a; }
     @media (max-width: 1024px) {
-      .proj-media { width: 100%; }
+      .proj-demo { width: 100%; }
+      .proj-demo-frame { height: 70vh; }
     }
   </style>
 </head>
@@ -308,15 +340,16 @@
 
       </div>
 
-      <div class="proj-media">
-        <video src="/videos/videocincta.mp4" autoplay loop muted playsinline preload="metadata"></video>
+      <div class="proj-demo">
+        <div class="proj-demo-bar">
+          <div class="proj-demo-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-demo-frame">
+          <iframe src="/demos/cincta/" title="Cincta — démo interactive du site" loading="lazy"></iframe>
+        </div>
       </div>
+      <p class="proj-demo-note">Fais défiler et clique dans le cadre — c'est le vrai site. Les liens, formulaires et le paiement sont désactivés. <a href="/demos/cincta/" target="_blank" rel="noopener">Ouvrir en plein écran ↗</a></p>
 
-      <div class="coming-soon-block">
-        <span class="cs-label">Étude de cas</span>
-        <h2 class="cs-title">Bientôt <em>disponible</em></h2>
-        <p class="cs-sub">Article complet & détails du projet — bientôt en ligne.</p>
-      </div>
 
     </article>
 
@@ -368,6 +401,18 @@
       });
       document.addEventListener('mouseleave', () => gsap.to(cursorDot, { opacity: 0, duration: 0.2 }));
       document.addEventListener('mouseenter', () => gsap.to(cursorDot, { opacity: 1, duration: 0.2 }));
+
+      // ── Hide the dot over the demo ─────────────────────────
+      // The iframe swallows mousemove, so the dot would freeze at the edge
+      // while the real cursor moves around inside the framed site.
+      const demo = document.querySelector('.proj-demo');
+      if (demo) {
+        demo.addEventListener('mouseenter', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        demo.addEventListener('mouseleave', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+        // Clicking inside the iframe moves focus there without firing mouseleave.
+        window.addEventListener('blur', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        window.addEventListener('focus', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+      }
 
       const STATES = {
         dot:  { width: 7,  height: 7,  borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },

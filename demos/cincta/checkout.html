@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Cincta</title>
+<link rel="icon" type="image/jpeg" href="photos/logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: #0b1425;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+/* ─── NAVBAR ─── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 60px;
+  border-bottom: 1px solid rgba(11,20,37,0.08);
+}
+
+.navbar-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0b1425;
+  text-decoration: none;
+}
+
+.navbar-back {
+  font-size: 12px;
+  color: #0b1425;
+  opacity: 0.4;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.navbar-back:hover { opacity: 0.8; }
+
+/* ─── MAIN ─── */
+.checkout-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 40px 100px;
+}
+
+.checkout-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #0b1425;
+  margin-bottom: 48px;
+}
+
+/* ─── CART ITEMS ─── */
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(11,20,37,0.08);
+}
+
+.cart-item:first-child { border-top: 1px solid rgba(11,20,37,0.08); }
+
+.item-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center 90%;
+  flex-shrink: 0;
+  background: #f4f2ef;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #0b1425;
+  margin-bottom: 6px;
+}
+
+.item-meta {
+  font-size: 13px;
+  color: #0b1425;
+  opacity: 0.45;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: 400;
+  color: #0b1425;
+  margin-top: 12px;
+}
+
+/* Qty controls — Nike style */
+.item-qty {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 20px;
+  border: 1px solid rgba(11,20,37,0.15);
+  border-radius: 40px;
+  width: fit-content;
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b1425;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.qty-btn:hover { background: rgba(11,20,37,0.05); }
+
+.qty-btn svg { width: 16px; height: 16px; }
+
+.qty-value {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0b1425;
+  min-width: 28px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ─── TOTALS ─── */
+.totals {
+  margin-top: 40px;
+  padding-top: 8px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 14px;
+  color: #0b1425;
+  border-bottom: 1px solid rgba(11,20,37,0.06);
+}
+
+.total-line span:first-child { opacity: 0.5; }
+
+.total-line.grand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  border-bottom: none;
+  padding-top: 20px;
+}
+
+.total-line.grand span:first-child { opacity: 0.9; }
+
+/* ─── PAY BUTTON ─── */
+.btn-pay {
+  margin-top: 40px;
+  width: 100%;
+  padding: 22px;
+  background: #0b1425;
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid #0b1425;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-pay:hover { background: transparent; color: #0b1425; }
+.btn-pay:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-pay svg { width: 14px; height: 14px; opacity: 0.7; }
+
+.secure-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 11px;
+  color: #0b1425;
+  opacity: 0.3;
+  letter-spacing: 0.06em;
+}
+.secure-note svg { width: 12px; height: 12px; }
+
+/* ─── EMPTY ─── */
+.empty-msg {
+  text-align: center;
+  padding: 80px 0;
+  font-size: 14px;
+  color: #0b1425;
+  opacity: 0.4;
+  font-style: italic;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .navbar { padding: 20px 24px; }
+  .checkout-main { padding: 40px 24px 80px; }
+  .item-img { width: 88px; height: 88px; }
+}
+</style>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="/demos/demo-guard.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo">Cincta</a>
+</nav>
+
+<main class="checkout-main">
+  <h1 class="checkout-title">Your Cart</h1>
+
+  <div id="cartItems"></div>
+
+  <div class="totals" id="totalsSection" style="display:none;">
+    <div class="total-line">
+      <span>Subtotal</span>
+      <span id="subtotalVal">—</span>
+    </div>
+    <div class="total-line">
+      <span>Shipping</span>
+      <span>Calculated at payment</span>
+    </div>
+    <div class="total-line grand">
+      <span>Total</span>
+      <span id="totalVal">—</span>
+    </div>
+
+    <button class="btn-pay" id="payBtn" onclick="handleCheckout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </svg>
+      <span id="payBtnText">Complete Order</span>
+    </button>
+
+    <p class="secure-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </svg>
+      All transactions are encrypted and secure
+    </p>
+  </div>
+</main>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('sancta_cart') || '[]');
+
+function saveCart() {
+  localStorage.setItem('sancta_cart', JSON.stringify(cart));
+}
+
+function render() {
+  const container = document.getElementById('cartItems');
+  const totalsSection = document.getElementById('totalsSection');
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="empty-msg">Your cart is currently empty.</p>';
+    totalsSection.style.display = 'none';
+    return;
+  }
+
+  container.innerHTML = '';
+  cart.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="${item.img}" class="item-img" alt="${item.name}">
+      <div class="item-details">
+        <p class="item-name">${item.name}</p>
+        <p class="item-meta">Chain: ${item.size}</p>
+        <p class="item-price">$${(item.price * item.qty).toFixed(2)}</p>
+        <div class="item-qty">
+          <button class="qty-btn" onclick="updateQty(${i}, -1)" aria-label="Remove one">
+            ${item.qty === 1
+              ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`
+              : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>`
+            }
+          </button>
+          <span class="qty-value">${item.qty}</span>
+          <button class="qty-btn" onclick="updateQty(${i}, 1)" aria-label="Add one">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('subtotalVal').textContent = '$' + subtotal.toFixed(2);
+  document.getElementById('totalVal').textContent = '$' + subtotal.toFixed(2);
+  totalsSection.style.display = 'block';
+}
+
+function updateQty(i, delta) {
+  if (delta === -1 && cart[i].qty === 1) {
+    cart.splice(i, 1);
+  } else {
+    cart[i].qty = Math.max(1, cart[i].qty + delta);
+  }
+  saveCart();
+  render();
+}
+
+async function handleCheckout() {
+  if (cart.length === 0) return;
+
+  const btn = document.getElementById('payBtn');
+  const btnText = document.getElementById('payBtnText');
+  btn.disabled = true;
+  btnText.textContent = 'Redirecting...';
+
+  try {
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart }),
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch (err) {
+    btnText.textContent = 'Complete Order';
+    btn.disabled = false;
+    alert('Payment error: ' + err.message);
+  }
+}
+
+render();
+</script>
+</body>
+</html>

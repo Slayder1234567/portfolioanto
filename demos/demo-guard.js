@@ -40,6 +40,51 @@
     if (e.target && e.target.tagName === "FORM") stop(e);
   }, true);
 
+  // Network calls. A demo is a static copy — its backend was left behind, so a
+  // checkout or newsletter call would hit the portfolio's own origin and 404.
+  // Block anything cross-origin or aimed at an API route, and fail with a
+  // message the copied site can show in its own error handling.
+  function blocked(url) {
+    try {
+      var u = new URL(url, window.location.href);
+      if (u.origin !== window.location.origin) return true;
+      return /(^|\/)api\//.test(u.pathname);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  var DEMO_ERROR = "this is a demo, the live backend is not connected";
+
+  if (window.fetch) {
+    var realFetch = window.fetch;
+    window.fetch = function (input) {
+      var url = typeof input === "string" ? input : (input && input.url) || "";
+      if (blocked(url)) return Promise.reject(new Error(DEMO_ERROR));
+      return realFetch.apply(this, arguments);
+    };
+  }
+
+  if (window.XMLHttpRequest) {
+    var realOpen = XMLHttpRequest.prototype.open;
+    var realSend = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.open = function (method, url) {
+      this.__demoBlocked = blocked(url);
+      return realOpen.apply(this, arguments);
+    };
+    XMLHttpRequest.prototype.send = function () {
+      if (this.__demoBlocked) {
+        var xhr = this;
+        setTimeout(function () {
+          if (typeof xhr.onerror === "function") xhr.onerror(new Error(DEMO_ERROR));
+          xhr.dispatchEvent(new Event("error"));
+        }, 0);
+        return;
+      }
+      return realSend.apply(this, arguments);
+    };
+  }
+
   // Mark them up front so nothing opens a tab and assistive tech agrees.
   function markInert() {
     var links = document.querySelectorAll("a[href]");

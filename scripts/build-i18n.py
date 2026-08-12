@@ -612,6 +612,8 @@ def fr_archive(h):
         ("Case study</span>", "Étude de cas</span>"),
         ("Scroll and click inside the frame — it is the real site. Links and forms that would leave it are disabled.",
          "Fais défiler et clique dans le cadre — c'est le vrai site. Les liens et formulaires qui en sortiraient sont désactivés."),
+        ("Scroll and click inside the frame — it is the real site. Links, forms and checkout are disabled.",
+         "Fais défiler et clique dans le cadre — c'est le vrai site. Les liens, formulaires et le paiement sont désactivés."),
         ("Open full screen ↗", "Ouvrir en plein écran ↗"),
         ("— interactive site demo", "— démo interactive du site"),
         (">Coming <", ">Bientôt <"), ("<em>Soon</em>", "<em>disponible</em>"),
