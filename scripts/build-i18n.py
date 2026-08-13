@@ -123,11 +123,10 @@ PAGES = [
         "en_url": "/projects/cutsinnit/", "fr_url": "/fr/realisations/cutsinnit/",
         "name_en": "CutsInnit", "name_fr": "CutsInnit",
         "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "noindex": True,
-        "title_en": "CutsInnit — Web Design Project | Antonin Le Cleï",
-        "desc_en": "CutsInnit, a web design project by Antonin Le Cleï (January 2026). Case study and full write-up coming soon.",
-        "title_fr": "CutsInnit — projet de web design | Antonin Le Cleï",
-        "desc_fr": "CutsInnit, un projet de web design signé Antonin Le Cleï (janvier 2026). Étude de cas et détails complets à venir.",
+        "title_en": "CutsInnit — Barber Portfolio & Online Booking Site",
+        "desc_en": "A Montreal barber's portfolio, price list and booking site: clients browse the cuts, then pick a slot from his real availability without picking up the phone.",
+        "title_fr": "CutsInnit — portfolio de barbier et réservation en ligne",
+        "desc_fr": "Le portfolio, les tarifs et la réservation en ligne d'un barbier montréalais : on parcourt les coupes, puis on choisit un créneau sur ses disponibilités réelles.",
     },
     {
         "en": "documents/index.html", "fr": "fr/documents/index.html",
@@ -734,13 +733,37 @@ def fr_stingers(h):
     return h
 
 
+def fr_cutsinnit(h):
+    h = fr_archive(h)
+    h = h.replace(
+        """A friend from my residence ran a barber business out of it, cutting clients from
+            across Montreal. He asked me for a portfolio of his work — somewhere people could
+            see the cuts he offers and the prices, understand exactly what he does, and find
+            him online in the first place.""",
+        """Un ami de ma résidence y tenait son activité de barbier et coupait des clients de
+            tout Montréal. Il m'a demandé un portfolio de son travail — un endroit où l'on
+            puisse voir ses coupes et ses tarifs, comprendre exactement ce qu'il propose, et
+            surtout le trouver sur Internet.""")
+    h = h.replace(
+        """The site answers that in one run: the work first, then the services and their
+            prices, then booking. Rather than send people to a phone number, I built booking
+            into the page against a set schedule — press Book and his actual availability
+            comes up, so a client picks a slot and is done.""",
+        """Le site répond à ça d'une traite : les réalisations d'abord, puis les prestations
+            et leurs tarifs, puis la réservation. Plutôt que de renvoyer vers un numéro de
+            téléphone, j'ai intégré la prise de rendez-vous à la page, adossée à un agenda
+            défini — on appuie sur Book, ses disponibilités réelles s'affichent, le client
+            choisit un créneau et c'est réglé.""")
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
     "projects/concordia/index.html": fr_concordia,
     "projects/cincta/index.html": fr_cincta,
     "projects/kh-nail-bar/index.html": fr_kh_nail_bar,
     "projects/stingers/index.html": fr_stingers,
-    "projects/cutsinnit/index.html": fr_archive,
+    "projects/cutsinnit/index.html": fr_cutsinnit,
     "projects/index.html": fr_projects,
     "projects/standia/index.html": fr_standia,
     "projects/fin210/index.html": fr_fin210,
