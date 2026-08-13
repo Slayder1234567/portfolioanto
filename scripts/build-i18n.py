@@ -93,11 +93,10 @@ PAGES = [
         "en_url": "/projects/cincta/", "fr_url": "/fr/realisations/cincta/",
         "name_en": "Cincta", "name_fr": "Cincta",
         "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "noindex": True,
-        "title_en": "Cincta — Brand & Web Design Project | Antonin Le Cleï",
-        "desc_en": "Cincta, a brand and web design project by Antonin Le Cleï (April 2026). Case study and full write-up coming soon.",
-        "title_fr": "Cincta — projet de marque & web design | Antonin Le Cleï",
-        "desc_fr": "Cincta, un projet de marque et de web design signé Antonin Le Cleï (avril 2026). Étude de cas et détails complets à venir.",
+        "title_en": "Cincta — Jewelry E-commerce Site & 3D Logo | Case Study",
+        "desc_en": "An online jewelry brand's storefront and logo: modelled and animated in 3D in Blender, integrated live in the page, and built from an approved site plan.",
+        "title_fr": "Cincta — boutique de bijoux et logo 3D | Étude de cas",
+        "desc_fr": "La boutique en ligne et le logo d'une marque de bijoux : modélisé et animé en 3D sous Blender, intégré en direct dans la page, à partir d'un plan de site validé.",
     },
     {
         "en": "projects/kh-nail-bar/index.html", "fr": "fr/realisations/kh-nail-bar/index.html",
@@ -656,10 +655,36 @@ def fr_concordia(h):
     return h
 
 
+def fr_cincta(h):
+    h = fr_archive(h)
+    h = h.replace(
+        """Cincta is an online jewelry brand that came to me for two things: their
+            storefront and their logo. I modelled the logo in 3D in Blender and animated it,
+            then integrated that animation straight into the page so it runs live in the
+            browser rather than playing as a video. Listing products stayed on my side —
+            whenever they had pieces to add, one or five at a time, they sent them over and
+            I put them in.""",
+        """Cincta est une marque de bijoux en ligne qui m'a contacté pour deux choses : leur
+            boutique et leur logo. J'ai modélisé le logo en 3D sous Blender et je l'ai animé,
+            puis j'ai intégré cette animation directement dans la page pour qu'elle tourne en
+            direct dans le navigateur plutôt que d'être lue comme une vidéo. La mise en ligne
+            des articles restait de mon côté : dès qu'ils avaient des pièces à ajouter, une ou
+            cinq à la fois, ils me les envoyaient et je les intégrais.""")
+    h = h.replace(
+        """I opened with a site plan I had already built for an earlier e-commerce project.
+            They liked the structure, so I quoted the website and the logo together. Once the
+            plan was approved, I built the store from it.""",
+        """J'ai commencé par leur présenter un plan de site que j'avais déjà réalisé pour un
+            précédent projet e-commerce. La structure leur a plu, j'ai donc chiffré le site et
+            le logo ensemble. Une fois le plan validé, j'ai construit la boutique à partir de
+            celui-ci.""")
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
     "projects/concordia/index.html": fr_concordia,
-    "projects/cincta/index.html": fr_archive,
+    "projects/cincta/index.html": fr_cincta,
     "projects/kh-nail-bar/index.html": fr_archive,
     "projects/stingers/index.html": fr_archive,
     "projects/cutsinnit/index.html": fr_archive,

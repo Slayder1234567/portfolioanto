@@ -114,6 +114,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.antoninleclei.com/projects/cincta/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/cincta/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/cincta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/cincta/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/cincta/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/cincta/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/cincta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/cincta/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.antoninleclei.com/documents/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/documents/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/documents/" />
