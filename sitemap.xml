@@ -146,6 +146,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.antoninleclei.com/projects/stingers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/stingers/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/stingers/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/stingers/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/stingers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/stingers/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/stingers/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/stingers/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.antoninleclei.com/documents/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/documents/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/documents/" />

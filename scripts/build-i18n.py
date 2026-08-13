@@ -113,11 +113,10 @@ PAGES = [
         "en_url": "/projects/stingers/", "fr_url": "/fr/realisations/stingers/",
         "name_en": "Stingers", "name_fr": "Stingers",
         "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "noindex": True,
-        "title_en": "Stingers — Web Design Project | Antonin Le Cleï",
-        "desc_en": "Stingers, a web design project by Antonin Le Cleï (February 2026). Case study and full write-up coming soon.",
-        "title_fr": "Stingers — projet de web design | Antonin Le Cleï",
-        "desc_fr": "Stingers, un projet de web design signé Antonin Le Cleï (février 2026). Étude de cas et détails complets à venir.",
+        "title_en": "Stingers — Concordia Varsity Roster Redesign Concept",
+        "desc_en": "An unsolicited redesign of Concordia's Stingers basketball roster — player listing, positions and team colours, built as a concept and never shipped.",
+        "title_fr": "Stingers — refonte du roster de Concordia (concept)",
+        "desc_fr": "Une refonte spontanée du roster de basketball des Stingers de Concordia : effectif, postes et couleurs de l'équipe, restée à l'état de concept.",
     },
     {
         "en": "projects/cutsinnit/index.html", "fr": "fr/realisations/cutsinnit/index.html",
@@ -708,12 +707,39 @@ def fr_kh_nail_bar(h):
     return h
 
 
+def fr_stingers(h):
+    h = fr_archive(h)
+    h = h.replace(
+        """The Stingers are Concordia's varsity teams, and this one never shipped. While I
+            was studying there I approached them and offered to redesign their sports site.
+            Rather than pitch it in the abstract, I rebuilt the basketball roster first so
+            they could see what I meant. They liked the work but had no time to take it on,
+            so it stayed a concept.""",
+        """Les Stingers sont les équipes universitaires de Concordia, et ce projet n'a jamais
+            vu le jour. Pendant mes études là-bas, je les ai contactés en leur proposant de
+            refondre leur site sportif. Plutôt que de le présenter dans l'abstrait, j'ai
+            d'abord refait le roster de l'équipe de basketball pour montrer concrètement où je
+            voulais aller. Ils ont apprécié le travail mais n'avaient pas le temps de le
+            mettre en place : c'est resté un concept.""")
+    h = h.replace(
+        """I finished it on my own terms anyway. I took the player images from Concordia's
+            existing basketball roster, rebuilt the listing with positions and player
+            details, and set the whole thing in the team's own colours. It is a single page
+            rather than a full site — but the roster was the part I most wanted to rethink.""",
+        """Je l'ai terminé quand même, à ma façon. J'ai repris les photos des joueurs sur le
+            roster de basketball existant de Concordia, reconstruit l'effectif avec les postes
+            et les informations de chaque joueur, et posé le tout dans les couleurs de
+            l'équipe. C'est une page unique plutôt qu'un site complet — mais le roster était
+            la partie que je voulais le plus repenser.""")
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
     "projects/concordia/index.html": fr_concordia,
     "projects/cincta/index.html": fr_cincta,
     "projects/kh-nail-bar/index.html": fr_kh_nail_bar,
-    "projects/stingers/index.html": fr_archive,
+    "projects/stingers/index.html": fr_stingers,
     "projects/cutsinnit/index.html": fr_archive,
     "projects/index.html": fr_projects,
     "projects/standia/index.html": fr_standia,
