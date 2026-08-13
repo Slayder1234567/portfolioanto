@@ -83,11 +83,10 @@ PAGES = [
         "en_url": "/projects/concordia/", "fr_url": "/fr/realisations/concordia/",
         "name_en": "Concordia Project", "name_fr": "Projet Concordia",
         "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "noindex": True,
-        "title_en": "Concordia Project — Student Web Design | Antonin Le Cleï",
-        "desc_en": "A student web design project built at Concordia University, Montreal (April 2026). Case study by Antonin Le Cleï — full write-up coming soon.",
-        "title_fr": "Projet Concordia — web design étudiant | Antonin Le Cleï",
-        "desc_fr": "Un projet de web design étudiant réalisé à l'Université Concordia, Montréal (avril 2026). Étude de cas d'Antonin Le Cleï — détails à venir.",
+        "title_en": "Concordia Journalism Site — Web Design Case Study",
+        "desc_en": "A three-article journalism site built for a fellow Concordia student in Montreal: the brief, the layout plan, and the revisions that shaped the final build.",
+        "title_fr": "Site de journalisme Concordia — étude de cas web design",
+        "desc_fr": "Un site de journalisme à trois articles conçu pour un étudiant de Concordia à Montréal : le brief, le plan de mise en page et les retours jusqu'à la version finale.",
     },
     {
         "en": "projects/cincta/index.html", "fr": "fr/realisations/cincta/index.html",
@@ -632,9 +631,34 @@ def fr_archive(h):
     return h
 
 
+def fr_concordia(h):
+    h = fr_archive(h)
+    h = h.replace(
+        """I was living in residence at Concordia University in Montreal when a friend
+            studying journalism asked me to build him a website for his work. He wanted a
+            proper home for his articles rather than scattered documents, and he came to me
+            to design and build it.""",
+        """Je vivais en résidence à l'Université Concordia, à Montréal, quand un ami étudiant
+            en journalisme m'a demandé de lui créer un site pour son travail. Il voulait un
+            vrai espace pour ses articles plutôt que des documents éparpillés, et il est venu
+            me voir pour le concevoir et le développer.""")
+    h = h.replace(
+        """He set the brief: three pages, one for each of three articles, held together in
+            a single site. I started by showing him a basic plan of the structure and layout
+            so we agreed on the shape before anything was built. He came back with the
+            changes he wanted, and I applied them directly, working through his notes until
+            the site matched what he had in mind.""",
+        """Il a posé le cadre : trois pages, une par article, réunies dans un même site. J'ai
+            commencé par lui présenter un plan de base de la structure et de la mise en page,
+            pour valider la forme avant de construire quoi que ce soit. Il est revenu avec les
+            changements qu'il souhaitait, que j'ai appliqués directement, en reprenant ses
+            retours jusqu'à ce que le site corresponde à ce qu'il avait en tête.""")
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
-    "projects/concordia/index.html": fr_archive,
+    "projects/concordia/index.html": fr_concordia,
     "projects/cincta/index.html": fr_archive,
     "projects/kh-nail-bar/index.html": fr_archive,
     "projects/stingers/index.html": fr_archive,
