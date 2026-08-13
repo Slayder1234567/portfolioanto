@@ -103,11 +103,10 @@ PAGES = [
         "en_url": "/projects/kh-nail-bar/", "fr_url": "/fr/realisations/kh-nail-bar/",
         "name_en": "Kh Nail Bar", "name_fr": "Kh Nail Bar",
         "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "noindex": True,
-        "title_en": "Kh Nail Bar — Web Design Project | Antonin Le Cleï",
-        "desc_en": "Kh Nail Bar, a web design project by Antonin Le Cleï (March 2026). Case study and full write-up coming soon.",
-        "title_fr": "Kh Nail Bar — projet de web design | Antonin Le Cleï",
-        "desc_fr": "Kh Nail Bar, un projet de web design signé Antonin Le Cleï (mars 2026). Étude de cas et détails complets à venir.",
+        "title_en": "Kh Nail Bar — Nail Artist Portfolio & Booking Site",
+        "desc_en": "A Montreal nail artist's portfolio and booking site, designed with no brief: a light palette and a KH logo both drawn from her Instagram.",
+        "title_fr": "Kh Nail Bar — portfolio et prise de rendez-vous",
+        "desc_fr": "Le portfolio et le site de réservation d'une nail artist montréalaise, conçu sans brief : palette claire et logo KH repris de son Instagram.",
     },
     {
         "en": "projects/stingers/index.html", "fr": "fr/realisations/stingers/index.html",
@@ -681,11 +680,39 @@ def fr_cincta(h):
     return h
 
 
+def fr_kh_nail_bar(h):
+    h = fr_archive(h)
+    h = h.replace(
+        """While I was in Montreal, friends put me in touch with a nail artist who wanted a
+            site of her own: somewhere to show her work as a portfolio, and somewhere clients
+            could book an appointment with her directly. I built the site around her pieces,
+            with booking as the thing every page leads to.""",
+        """Pendant que j'étais à Montréal, des amis m'ont mis en contact avec une nail artist
+            qui voulait son propre site : un endroit pour présenter son travail comme un
+            portfolio, et où ses clientes pourraient prendre rendez-vous directement. J'ai
+            construit le site autour de ses créations, la prise de rendez-vous étant le point
+            d'arrivée de chaque page.""")
+    h = h.replace(
+        """There was no site plan and no brief on this one — I designed as I saw fit, and
+            she took it or she didn't. She gave me no colour direction either, so I worked
+            from the one signal I had: her Instagram, which reads clean and pared back. I
+            took that as the palette and kept the site light. Her KH mark came from the same
+            place — I pulled it from her profile, upscaled it, and made it the main logo of
+            the site.""",
+        """Ici, ni plan de site ni brief : j'ai conçu comme je l'entendais, à elle d'adhérer
+            ou non. Elle ne m'avait donné aucune indication de couleurs non plus, alors je
+            suis parti du seul signal disponible : son Instagram, à l'esthétique épurée. J'en
+            ai tiré la palette et gardé un site clair. Son sigle KH vient du même endroit —
+            je l'ai récupéré sur son profil, mis à l'échelle, et j'en ai fait le logo
+            principal du site.""")
+    return h
+
+
 TRANSLATORS = {
     "index.html": fr_home,
     "projects/concordia/index.html": fr_concordia,
     "projects/cincta/index.html": fr_cincta,
-    "projects/kh-nail-bar/index.html": fr_archive,
+    "projects/kh-nail-bar/index.html": fr_kh_nail_bar,
     "projects/stingers/index.html": fr_archive,
     "projects/cutsinnit/index.html": fr_archive,
     "projects/index.html": fr_projects,
